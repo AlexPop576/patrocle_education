@@ -18,13 +18,17 @@ class _ProfileState extends State<Profile> {
         child: ListView(
           physics: const BouncingScrollPhysics(),
           children: [
+            Center(
+              child: Column(children: [
+                Image.asset('assets/Profile.png'),
+                Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
+              ],),
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 17.0),
               child: Center(
                 child: Column(
                   children: [
-                    Container(decoration: BoxDecoration(color: Colors.blue),),
-                    Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
                     SizedBox(height: 8,),
                     Row(children: 
                       [
@@ -71,7 +75,7 @@ class _ProfileState extends State<Profile> {
                         child: TextButton(
                           style: ButtonStyle(backgroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary,),),
                           onPressed: () {
-                            //Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                            Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
                           },
                           child: Center(child: Text("Light mode", style: TextStyle(
                               color: Colors.white,
@@ -79,7 +83,7 @@ class _ProfileState extends State<Profile> {
                               fontSize: 30
                               ))),
                           ),
-                      ),
+                        ),
                       ),
                       SizedBox(height: 12,),
                       SizedBox(
@@ -89,7 +93,6 @@ class _ProfileState extends State<Profile> {
                         child: TextButton(
                           style: ButtonStyle(backgroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary,),),
                           onPressed: () {
-                            //Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
                           },
                           child: Center(child: Text("Language", style: TextStyle(
                               color: Colors.white,
@@ -99,6 +102,7 @@ class _ProfileState extends State<Profile> {
                           ),
                       ),
                       ),
+                      SizedBox(height: 12,),
                     ]
                 ),
               ),
@@ -108,7 +112,4 @@ class _ProfileState extends State<Profile> {
       )
     );
   }
-}
-
-class ThemeProvider {
 }
