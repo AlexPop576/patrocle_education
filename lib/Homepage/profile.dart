@@ -20,7 +20,7 @@ class _ProfileState extends State<Profile> {
           children: [
             Center(
               child: Column(children: [
-                Image.asset('assets/Profile.png'),
+                Image.asset('assets/Profile.png',fit: BoxFit.fill),
                 Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
               ],),
             ),
@@ -29,7 +29,7 @@ class _ProfileState extends State<Profile> {
               child: Center(
                 child: Column(
                   children: [
-                    SizedBox(height: 8,),
+                    const SizedBox(height: 8,),
                     Row(children: 
                       [
                       Text("Username", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 30, fontWeight: FontWeight.bold),),
@@ -37,64 +37,118 @@ class _ProfileState extends State<Profile> {
                       TextButton(child: Text("Edit profile", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontWeight: FontWeight.w400),), onPressed: () {},),
                       ],
                     ),
-                    SizedBox(height: 8,),
+                    const SizedBox(height: 8,),
                     Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
-                    SizedBox(height: 8,),
+                    const SizedBox(height: 8,),
                     Row(
                       children: [
                         Text("Statistics", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),),
                       ],
                     ),
+                    const SizedBox(height: 12,),
                     Row(
                       children: [
-
+                        Expanded(
+                          flex: 1,
+                          child: SizedBox(
+                            height: 85,
+                            child: Container(
+                              margin: const EdgeInsets.fromLTRB(0,0,8.3,0),
+                              padding: const EdgeInsets.all(2.8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Theme.of(context).colorScheme.primary, width: 3.2),
+                                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                              ),
+                              child: Center(child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 9),
+                                child: Column(
+                                  children: [
+                                    const Text('580IQ', style: TextStyle(color: Color.fromARGB(255, 102, 102, 255), fontWeight: FontWeight.bold, fontSize: 27),),
+                                    Text('Total IQ', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),),
+                                  ],
+                                ),
+                              ),
+                              ),
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: SizedBox(
+                            height: 85,
+                            child: Container(
+                              margin: const EdgeInsets.fromLTRB(8.3,0,0,0),
+                              padding: const EdgeInsets.all(2.8),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Theme.of(context).colorScheme.primary, width: 3.2),
+                                borderRadius: const BorderRadius.all(Radius.circular(15)),
+                              ),
+                              child: Center(child: Padding(
+                                padding: const EdgeInsets.symmetric(vertical: 9),
+                                child: Column(
+                                  children: [
+                                    const Text('3/6', style: TextStyle(color: Color.fromARGB(255, 255, 200, 0), fontWeight: FontWeight.bold, fontSize: 27),),
+                                    Text('Trophies', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),),
+                                  ],
+                                ),
+                              ),),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                    SizedBox(height: 8,),
+                    const SizedBox(height: 8,),
                     Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
-                    SizedBox(height: 8,),
+                    const SizedBox(height: 8,),
                     Row(
                       children: [
                         Expanded(flex: 1,child: Center(child: Text("Geography", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),))),
                         Expanded(flex: 1,child: Center(child: Text("History", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),))),
                       ],
-                    ),
-                    SizedBox(height: 8,),
+                    ),         
+                    const SizedBox(height: 8,),
                     Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
-                    SizedBox(height: 8,),
+                    const SizedBox(height: 8,),
                     Row(
                       children: [
                         Text("Settings", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),),
                       ],
                     ),
-                    SizedBox(height: 12,),
+                    const SizedBox(height: 12,),
                     SizedBox(
                       height: 58,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                         child: TextButton(
                           style: ButtonStyle(backgroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary,),),
                           onPressed: () {
                             Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
                           },
-                          child: Center(child: Text("Light mode", style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30
-                              ))),
+                          child: const Center(child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.brightness_7_rounded, size: 30, color: Colors.white,),
+                              SizedBox(width: 10),
+                              Text("Light mode", style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30
+                                  )),
+                            ],
+                          )),
                           ),
                         ),
                       ),
-                      SizedBox(height: 12,),
+                      const SizedBox(height: 12,),
                       SizedBox(
                       height: 58,
                       child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
                         child: TextButton(
                           style: ButtonStyle(backgroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary,),),
                           onPressed: () {
                           },
-                          child: Center(child: Text("Language", style: TextStyle(
+                          child: const Center(child: Text("Language", style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 30
@@ -102,7 +156,7 @@ class _ProfileState extends State<Profile> {
                           ),
                       ),
                       ),
-                      SizedBox(height: 12,),
+                      const SizedBox(height: 12,),
                     ]
                 ),
               ),
