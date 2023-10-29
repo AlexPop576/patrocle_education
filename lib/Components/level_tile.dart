@@ -164,7 +164,7 @@ class _LevelTileState extends State<LevelTile> {
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Column(
                           children: [
-                            Image.asset('assets/Romania.png', height: 100,),
+                            ClipRRect(borderRadius: BorderRadius.all(Radius.circular(15)) ,child: Image.asset('assets/Flags/${country.toString()}.png', height: 100,)),
                             SizedBox(height: 10,),
                             Text(country.toString(), style: TextStyle(
                             shadows: <Shadow>[

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:patrocle_education/Themes/theme.dart';
 import 'package:patrocle_education/Themes/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'Homepage/homepage.dart';

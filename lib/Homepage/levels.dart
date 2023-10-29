@@ -14,14 +14,28 @@ class _LevelsState extends State<Levels> {
 
   int color = 0;
 
-  List<String> Countries = [
-    "Romania",
-    "USA",
-    "Germany",
+  List<String> countries = [
+    "Argentina",
+    "Australia",
+    "Brazil",
+    "Canada",
+    "China",
+    "Egypt",
     "France",
+    "Germany",
+    "Greece",
     "Israel",
-    "Belgium",
+    "Italy",
+    "Japan",
+    "Mexico",
+    "New Zealand",
+    "Romania",
+    "Russia",
+    "South Africa",
     "Spain",
+    "UK",
+    "Ukraine",
+    "USA",
   ];
 
   @override
@@ -45,12 +59,12 @@ class _LevelsState extends State<Levels> {
             const SizedBox(height: 12,),
             Expanded(
               child: ListView.builder(
-                itemCount: Countries.length,
+                itemCount: countries.length,
                 itemBuilder: (BuildContext context, int index) 
               {
                 color++; 
                 if(color==3) color = 0;
-                return LevelTile(country: Countries[index],colorIndex: color,);
+                return LevelTile(country: countries[index],colorIndex: color,);
               }
               ),
             )

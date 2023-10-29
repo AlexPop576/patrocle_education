@@ -60,7 +60,7 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: const BorderRadius.all(Radius.circular(15)),
                               ),
                               child: Center(child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 9),
+                                padding: const EdgeInsets.symmetric(vertical: 2),
                                 child: Column(
                                   children: [
                                     const Text('580IQ', style: TextStyle(color: Color.fromARGB(255, 102, 102, 255), fontWeight: FontWeight.bold, fontSize: 27),),
@@ -84,7 +84,7 @@ class _ProfileState extends State<Profile> {
                                 borderRadius: const BorderRadius.all(Radius.circular(15)),
                               ),
                               child: Center(child: Padding(
-                                padding: const EdgeInsets.symmetric(vertical: 9),
+                                padding: const EdgeInsets.symmetric(vertical: 2),
                                 child: Column(
                                   children: [
                                     const Text('3/6', style: TextStyle(color: Color.fromARGB(255, 255, 200, 0), fontWeight: FontWeight.bold, fontSize: 27),),
@@ -124,16 +124,16 @@ class _ProfileState extends State<Profile> {
                           onPressed: () {
                             Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
                           },
-                          child: const Center(child: Row(
+                          child: Center(child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.brightness_7_rounded, size: 30, color: Colors.white,),
-                              SizedBox(width: 10),
-                              Text("Light mode", style: TextStyle(
+                              Text(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? "Light mode" : "Dark mode", style: const TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 30
                                   )),
+                              const SizedBox(width: 10),
+                              Icon(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? Icons.brightness_7_rounded : Icons.brightness_2, size: 30, color: Colors.white,),
                             ],
                           )),
                           ),
