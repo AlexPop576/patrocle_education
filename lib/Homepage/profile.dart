@@ -10,6 +10,9 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  String username = "Username";
+  final usernameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +35,103 @@ class _ProfileState extends State<Profile> {
                     const SizedBox(height: 8,),
                     Row(children: 
                       [
-                      Text("Username", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 30, fontWeight: FontWeight.bold),),
+                      Text(username, style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 30, fontWeight: FontWeight.bold),),
                       Spacer(),
-                      TextButton(child: Text("Edit profile", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontWeight: FontWeight.w400),), onPressed: () {},),
+                      TextButton(child: Text("Edit profile", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontWeight: FontWeight.w400),),
+                       onPressed: () {
+                        showModalBottomSheet(backgroundColor: Colors.transparent,context: context,
+             builder: (BuildContext context) {
+                return Container(
+                  height: 450,
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.background,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25))
+                  ),
+                  child:  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 17),
+                    child: Column(children: [
+                      const SizedBox(height: 20,),
+                      Text("Edit profile", style: TextStyle(
+                                  color: Theme.of(context).colorScheme.tertiary,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30
+                                  )),
+                      const SizedBox(height: 10,),
+                      Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
+                      const SizedBox(height: 10,),
+                      SizedBox(
+                        height: 58,
+                        child: TextField(
+                          controller: usernameController,
+                          cursorColor: Colors.white,
+                          maxLength: 10,
+                          decoration: InputDecoration(
+                            focusedBorder: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              borderSide: BorderSide(color: Colors.white, width: 2.0), // Color and thickness when the TextField is selected
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(15)),
+                              borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.0), // Default color and thickness
+                            ),
+                            labelText: 'New username',
+                            labelStyle: TextStyle(color: Colors.white), // Color of the label text
+                            counterText: '',
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20,),
+                      SizedBox(
+                        height: 58,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                          child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            username = usernameController.text;
+                          });
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 102, 102, 255),
+                        ),
+                        child: const Center(child: Text("Save", style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30
+                              ))),
+                        ),
+                      ),
+                      ),
+                      const SizedBox(height: 12,),
+                      SizedBox(
+                        height: 58,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                          child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 219, 64, 64),
+                        ),
+                        child: const Center(child: Text("Cancel", style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30
+                              ))),
+                        ),
+                      ),
+                      ),
+                      const SizedBox(height: 20,),
+                    ]),
+                  ),
+                );
+             }
+            );
+                       },),
                       ],
                     ),
                     const SizedBox(height: 8,),

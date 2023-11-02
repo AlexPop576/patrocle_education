@@ -19,10 +19,35 @@ class _QuizpageState extends State<Quizpage> {
   _QuizpageState({this.country, this.subject});
   int pageIndex = 0;
 
+  void correct() {
+    setState(() {
+      sections.add(createSection(Colors.green));
+    });
+  }
+
+  void wrong() {
+    setState(() {
+      sections.add(createSection(Colors.red));
+    });
+  }
+
+  List<Widget> sections = [
+    
+  ];
+
   final List<Widget> pages = [
-    Lesson(),
+    const Lesson(),
     const Test1(),
-    const Test2(),
+    const Test1(),
+    const Test1(),
+    const Test1(),
+    const Test1(),
+    const Test1(),
+    const Test1(),
+    const Test1(),
+    const Test1(),
+    const Test1(),
+    const Test1(),
   ];
 
   @override
@@ -48,10 +73,10 @@ class _QuizpageState extends State<Quizpage> {
                       const SizedBox(height: 20,),
                       Lottie.network('https://lottie.host/491f2840-4c44-425a-924e-4fbc86237dfc/s8x6EccXsD.json', frameRate: FrameRate.max, height: 100),
                       const SizedBox(height: 30,),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 40),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 40),
                         child: Text("Do you want to end your learning session? If you quit, you`ll lose your progress.", style: TextStyle(
-                          color: Colors.white,
+                          color: Theme.of(context).colorScheme.tertiary,
                           fontWeight: FontWeight.bold,
                           fontSize: 20,
                         ), textAlign: TextAlign.center,),
@@ -67,7 +92,7 @@ class _QuizpageState extends State<Quizpage> {
                           Navigator.pop(context);
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 64, 219, 79),
+                          backgroundColor: const Color.fromARGB(255, 102, 102, 255),
                         ),
                         child: const Center(child: Text("Continue", style: TextStyle(
                               color: Colors.white,
@@ -108,7 +133,24 @@ class _QuizpageState extends State<Quizpage> {
           }
         ),
         title: pageIndex == 0 ? Text(country.toString(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 35),) 
-        : Container(),
+        : Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: Row(
+                children: [
+                  ...sections,
+                  Expanded(
+                    flex: 11-pageIndex,
+                    child: Container(
+                      height: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+                )
+                ),
+              ),
         centerTitle: true,
         elevation: 0,      
       ),
@@ -128,14 +170,21 @@ class _QuizpageState extends State<Quizpage> {
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
                   child: ElevatedButton(
                 onPressed: () {
+                  if(pageIndex>0&&pageIndex<11){
+                    if(pageIndex%2==0){
+                      correct();
+                    }else{
+                      wrong();
+                    }
+                  }
                   setState(() {
-                    if(pageIndex<2){
+                    if(pageIndex<11){
                       pageIndex++;
                     }
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Color.fromARGB(255, 102, 102, 255),
+                  backgroundColor: Color.fromARGB(255, 102, 102, 255),
                 ),
                 child: Text(pageIndex == 0 ? "Continue" : "Check", style: const TextStyle(
                               color: Colors.white,
@@ -152,4 +201,14 @@ class _QuizpageState extends State<Quizpage> {
       ),
     );
   }
+}
+
+Widget createSection(Color color) {
+  return Expanded(
+    flex: 1,
+    child: Container(
+      height: 20,
+      color: color,
+    ),
+  );
 }

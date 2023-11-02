@@ -8,6 +8,8 @@ class Test1 extends StatefulWidget {
   State<Test1> createState() => _Test1State();
 }
 class _Test1State extends State<Test1> {
+  int answer = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,44 +31,59 @@ class _Test1State extends State<Test1> {
               ),
               const SizedBox(height: 12),
               Divider(color: Theme.of(context).colorScheme.primary, thickness: 3),
-               Text("Question"),
-               const SizedBox(width: 12),
-             Container(
-  margin: EdgeInsets.symmetric(vertical: 10),
-  child: ClipRRect(
-    borderRadius: BorderRadius.circular(10),
-    child: Row(
-  children: [
-    createSection(Colors.green),
-    createSection(Colors.red), // Add as many sections as you want
-    Expanded(
-      flex: 7, // Remaining 70% of the bar
-      child: Container(
-        height: 20, // Altura de la barra
-        color: Colors.white, // Transparent color
-      ),
-    ),
-  ],
-)
-  ),
-)
-
-             
+              const Text("Question"),
+              const SizedBox(height: 12,),
+                      SizedBox(
+                        height: 58,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                          child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            answer = 1;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 219, 64, 64),
+                        ),
+                        child: const Center(child: Text("Answer 1", style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30
+                              ))),
+                        ),
+                      ),
+                      ),
+              const SizedBox(height: 12,),
+                      SizedBox(
+                        height: 58,
+                        width: double.infinity,
+                        child: ClipRRect(
+                          borderRadius: const BorderRadius.all(Radius.circular(15)),
+                          child: ElevatedButton(
+                        onPressed: () {
+                          setState(() {
+                            answer = 2;
+                          });
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color.fromARGB(255, 219, 64, 64),
+                        ),
+                        child: const Center(child: Text("Answer 2", style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 30
+                              ))),
+                        ),
+                      ),
+                      ),      
             ],
           ),
         ),
       ),
     );
   }
-}
-Widget createSection(Color color) {
-  return Expanded(
-    flex: 1, // 10% of the entire bar
-    child: Container(
-      height: 20, // Altura de la barra
-      color: color,
-    ),
-  );
 }
 // class _Test1State extends State<Test1> {
 //   List<Widget> sections = [
