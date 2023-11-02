@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patrocle_education/Quizpage/quizpage.dart';
+import '../Homepage/levels.dart';
 
 class LevelTile extends StatefulWidget {
   String? country;
@@ -29,17 +30,10 @@ class _LevelTileState extends State<LevelTile> {
   }
 
   void setPlayButton(){
-    playButtonGeo = false;
-    playButtonHst = false;
-  }
-
-  void verify(){
-    for(int i=0; i<playButtons!.length;i++)
-    {
-      if(playButtons!["a"]==true){
-        found=true;
-      }
-    }
+    setState(() {
+      playButtonGeo = false;
+      playButtonHst = false;
+    });
   }
 
   @override
@@ -52,6 +46,7 @@ class _LevelTileState extends State<LevelTile> {
             height: 190,
             width: double.infinity,
             child: Container(
+              decoration: BoxDecoration(color: colorIndex == 0 ? Color.fromARGB(255, 253, 40, 40) : colorIndex == 1 ? Color.fromARGB(255, 40, 86, 253) : Color.fromARGB(255, 253, 161, 40), borderRadius: playButtonGeo == true || playButtonHst == true ? BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15),) : BorderRadius.all(Radius.circular(15))),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Row(
@@ -108,11 +103,22 @@ class _LevelTileState extends State<LevelTile> {
                             height: 90,
                             width: 90,
                             child: IconButton(onPressed: (){setState(() {
-                              if(playButtonHst==false){
-                                if(playButtonGeo == true) playButtonGeo = false;
-                                playButtonHst = true;
+                              if(selected == false){
+                                if(playButtonHst==false){
+                                  if(playButtonGeo == true) playButtonGeo = false;
+                                  playButtonHst = true;
+                                  }else{
+                                  playButtonHst = false;
+                                }
+                                selected == true;
                               }else{
-                                playButtonHst = false;
+                                  selected = false;
+                                  if(playButtonHst==false){
+                                  if(playButtonGeo == true) playButtonGeo = false;
+                                  playButtonHst = true;
+                                  }else{
+                                  playButtonHst = false;
+                                }
                               }
                             });}, icon: playButtonHst == false ? Image.asset('assets/History.png') : Image.asset('assets/HistorySelected.png')),
                           ),
@@ -122,7 +128,6 @@ class _LevelTileState extends State<LevelTile> {
                   ],
                 ),
               ),
-              decoration: BoxDecoration(color: colorIndex == 0 ? Color.fromARGB(255, 253, 40, 40) : colorIndex == 1 ? Color.fromARGB(255, 40, 86, 253) : Color.fromARGB(255, 253, 161, 40), borderRadius: playButtonGeo == true || playButtonHst == true ? BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15),) : BorderRadius.all(Radius.circular(15))),
             ),
           ),
           Visibility(
