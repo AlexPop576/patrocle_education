@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patrocle_education/Quizpage/quizpage.dart';
+import 'package:patrocle_education/Homepage/levels.dart';
 
 class LevelTile extends StatefulWidget {
   String? country;
@@ -18,7 +19,7 @@ class _LevelTileState extends State<LevelTile> {
   bool playButtonGeo = false;
   bool playButtonHst = false;
   bool found = false;
-
+   
   bool getPlayButton(){
     if(playButtonGeo == true || playButtonHst == true)
     {
@@ -26,11 +27,6 @@ class _LevelTileState extends State<LevelTile> {
     }else{
     return false;
     }
-  }
-
-  void setPlayButton(){
-    playButtonGeo = false;
-    playButtonHst = false;
   }
 
   void verify(){
@@ -42,6 +38,7 @@ class _LevelTileState extends State<LevelTile> {
     }
   }
 
+   
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -125,6 +122,7 @@ class _LevelTileState extends State<LevelTile> {
               decoration: BoxDecoration(color: colorIndex == 0 ? Color.fromARGB(255, 253, 40, 40) : colorIndex == 1 ? Color.fromARGB(255, 40, 86, 253) : Color.fromARGB(255, 253, 161, 40), borderRadius: playButtonGeo == true || playButtonHst == true ? BorderRadius.only(topRight: Radius.circular(15), topLeft: Radius.circular(15),) : BorderRadius.all(Radius.circular(15))),
             ),
           ),
+          
           Visibility(
               visible: playButtonGeo,
               child: SizedBox(
@@ -151,6 +149,7 @@ class _LevelTileState extends State<LevelTile> {
                   ),
                 ),
               ),
+              
             Visibility(
               visible: playButtonHst,
               child: SizedBox(
@@ -182,6 +181,5 @@ class _LevelTileState extends State<LevelTile> {
     );
   }
 }
-
 
 

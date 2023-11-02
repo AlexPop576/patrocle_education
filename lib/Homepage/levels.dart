@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:patrocle_education/Components/level_divider.dart';
+import 'package:patrocle_education/Components/level_tile.dart';
 
-import '../Components/level_tile.dart';
+
 
 class Levels extends StatefulWidget {
   const Levels({super.key});

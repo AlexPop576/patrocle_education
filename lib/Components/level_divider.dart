@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class LevelDivider extends StatefulWidget {
   String? continent;
   LevelDivider({super.key, this.continent});
