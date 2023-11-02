@@ -24,7 +24,7 @@ class _TrophiesState extends State<Trophies> {
               SizedBox(width: 12,),
               Lottie.network('https://lottie.host/491f2840-4c44-425a-924e-4fbc86237dfc/s8x6EccXsD.json', frameRate: FrameRate.max, height: 100),
               SizedBox(width: 20,),
-              Text("Your trophies", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontWeight: FontWeight.bold, fontSize: 40),)
+              Expanded(child: Text("Your trophies", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontWeight: FontWeight.bold, fontSize: 40),))
               ]
               ),
               SizedBox(height: 12,),

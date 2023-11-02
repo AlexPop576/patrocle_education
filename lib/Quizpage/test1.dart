@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class Lesson extends StatefulWidget {
-  const Lesson({super.key});
+class Test1 extends StatefulWidget {
+  const Test1({super.key});
 
   @override
-  State<Lesson> createState() => _LessonState();
+  State<Test1> createState() => _Test1State();
 }
 
-class _LessonState extends State<Lesson> {
+class _Test1State extends State<Test1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +28,7 @@ class _LessonState extends State<Lesson> {
                 ),
                 const SizedBox(height: 12,),
                 Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
-                Text("Lesson"),
+                Text("Question"),
               ]
             ),
         ),

@@ -114,49 +114,56 @@ class _ProfileState extends State<Profile> {
                         Text("Settings", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),),
                       ],
                     ),
+                    const SizedBox(height: 24,),
+                    SizedBox(
+                      height: 58,
+                      width: double.infinity,
+                      child: ClipRRect(
+                        borderRadius: const BorderRadius.all(Radius.circular(10)),
+                        child: ElevatedButton(
+                      onPressed: () {
+                        Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).colorScheme.primary,
+                      ),
+                      child: Center(child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? "Light mode" : "Dark mode", style: const TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 30
+                                )),
+                            const SizedBox(width: 10),
+                            Icon(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? Icons.brightness_7_rounded : Icons.brightness_2, size: 30, color: Colors.white,),
+                          ],
+                        )),
+                      ),
+                      ),
+                    ),
                     const SizedBox(height: 12,),
                     SizedBox(
                       height: 58,
+                      width: double.infinity,
                       child: ClipRRect(
                         borderRadius: const BorderRadius.all(Radius.circular(10)),
-                        child: TextButton(
-                          style: ButtonStyle(backgroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary,),),
-                          onPressed: () {
-                            Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-                          },
-                          child: Center(child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? "Light mode" : "Dark mode", style: const TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30
-                                  )),
-                              const SizedBox(width: 10),
-                              Icon(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? Icons.brightness_7_rounded : Icons.brightness_2, size: 30, color: Colors.white,),
-                            ],
-                          )),
-                          ),
-                        ),
+                        child: ElevatedButton(
+                      onPressed: () {
+                        
+                      },
+                      style: ElevatedButton.styleFrom(
+                        primary: Theme.of(context).colorScheme.primary,
                       ),
-                      const SizedBox(height: 12,),
-                      SizedBox(
-                      height: 58,
-                      child: ClipRRect(
-                        borderRadius: const BorderRadius.all(Radius.circular(10)),
-                        child: TextButton(
-                          style: ButtonStyle(backgroundColor:  MaterialStateProperty.all<Color>(Theme.of(context).colorScheme.primary,),),
-                          onPressed: () {
-                          },
-                          child: const Center(child: Text("Language", style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30
-                              ))),
-                          ),
+                      child: const Center(child: Text("Language", style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 30
+                            ))),
                       ),
-                      ),
-                      const SizedBox(height: 12,),
+                    ),
+                    ),
+                    const SizedBox(height: 12,),
                     ]
                 ),
               ),
