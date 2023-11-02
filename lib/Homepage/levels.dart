@@ -4,6 +4,7 @@ import 'package:patrocle_education/Components/level_divider.dart';
 import 'package:patrocle_education/Components/level_tile.dart';
 
 
+bool selected = false;
 
 class Levels extends StatefulWidget {
   const Levels({super.key});
@@ -75,6 +76,20 @@ class _LevelsState extends State<Levels> {
     "New Zealand",
   ];
 
+  void disableAll(){
+    for(int index=0;index<europeCountries.length;index++){
+      LevelTile(
+        country: europeCountries[index],
+        colorIndex: color,
+      );//.setPlayButton();
+      LevelTile(
+        country: europeCountries[index],
+        colorIndex: color,
+      );//.setPlayButton();
+      LevelTile();//.setPlayButton();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,10 +120,17 @@ class _LevelsState extends State<Levels> {
                 (BuildContext context, int index) {
                   color++;
                   if (color == 3) color = 0;
-                  return LevelTile(
-                    country: europeCountries[index],
-                    colorIndex: color,
-                  );
+                  if(selected == false){
+                    return LevelTile(
+                      country: europeCountries[index],
+                      colorIndex: color,
+                    );
+                  }else{
+                    return LevelTile(
+                      country: europeCountries[index],
+                      colorIndex: color,
+                    );
+                  }
                 },
                 childCount: europeCountries.length,
               ),
