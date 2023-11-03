@@ -45,7 +45,7 @@ class _Test1State extends State<Test1> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 219, 64, 64),
+                          backgroundColor: Theme.of(context).colorScheme.primary,
                         ),
                         child: const Center(child: Text("Answer 1", style: TextStyle(
                               color: Colors.white,
@@ -68,7 +68,7 @@ class _Test1State extends State<Test1> {
                           });
                         },
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 219, 64, 64),
+                          backgroundColor: Theme.of(context).colorScheme.primary
                         ),
                         child: const Center(child: Text("Answer 2", style: TextStyle(
                               color: Colors.white,
