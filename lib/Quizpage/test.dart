@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
-class Test2 extends StatefulWidget {
+class Test extends StatefulWidget {
   final Function getAnswerFunction;
   int? selected = 0;
   String? questionText, answer1, answer2, answer3, answer4;
-  Test2({super.key, required this.getAnswerFunction, this.selected,this.questionText, this.answer1, this.answer2, this.answer3, this.answer4});
+  Test({super.key, required this.getAnswerFunction, this.selected,this.questionText, this.answer1, this.answer2, this.answer3, this.answer4});
 
   @override
-  State<Test2> createState() => _Test2State(getAnswerFunction: getAnswerFunction, selected: selected, questionText: questionText, answer1: answer1, answer2: answer2, answer3: answer3, answer4: answer4);
+  State<Test> createState() => _TestState(getAnswerFunction: getAnswerFunction, selected: selected, questionText: questionText, answer1: answer1, answer2: answer2, answer3: answer3, answer4: answer4);
 }
 
-class _Test2State extends State<Test2> {
+class _TestState extends State<Test> {
   int? questionAnswer = 1, selected;
   String? questionText, answer1, answer2, answer3, answer4;
   final Function getAnswerFunction;
-  _Test2State({required this.getAnswerFunction, this.selected, this.questionText, this.answer1, this.answer2, this.answer3, this.answer4});
+  _TestState({required this.getAnswerFunction, this.selected, this.questionText, this.answer1, this.answer2, this.answer3, this.answer4});
   
   @override
   Widget build(BuildContext context) {

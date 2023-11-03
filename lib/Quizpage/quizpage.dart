@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:patrocle_education/Quizpage/lesson.dart';
-import 'package:patrocle_education/Quizpage/test1.dart';
+import 'package:patrocle_education/Quizpage/test.dart';
 import 'package:patrocle_education/Quizpage/test2.dart';
 
 class Quizpage extends StatefulWidget {
@@ -17,7 +17,14 @@ class _QuizpageState extends State<Quizpage> {
   String? country;
   String? subject;
   _QuizpageState({this.country, this.subject});
-  int pageIndex = 0;
+  int pageIndex = 0, correctAnswers = 0;
+  int? givenAnswer = 1;
+
+  getAnswer(int answer){
+    setState(() {
+      givenAnswer = answer;
+    });
+  }
 
   void correct() {
     setState(() {
@@ -31,24 +38,109 @@ class _QuizpageState extends State<Quizpage> {
     });
   }
 
-  List<Widget> sections = [
-    
-  ];
+  Map<String, Map<String, List<int>>> answersQuiz = {
+    "France" :  {
+                "Geography" : [1,2,3,4,1,2,3,4,1,2],
+                "History" : [4,4,4,4,4,4,4,4,4,4]
+                },
+    "Germany" : {
+                "Geography" : [1,2,3,4,1,2,3,4,1,2],
+                "History" : [4,4,4,4,4,4,4,4,4,4]
+                },
+    "Spain" : {
+                "Geography" : [1,2,3,4,1,2,3,4,1,2],
+                "History" : [4,4,4,4,4,4,4,4,4,4]
+                },
+  };
 
-  final List<Widget> pages = [
-    const Lesson(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-    const Test1(),
-  ];
+  Map<String, Map<String, Map<String, String>>> countryQuiz = {
+    "France" : {
+                "Geography" : 
+                {"Lesson" : "Lectie geografie Franta",
+                "Question1" : "Cati ani are Patrocle?",
+                "Question2" : "Ce mai face Patrocle?",
+                "Question3" : "Cati frati are Patrocle?",
+                "Question4" : "Iti place de Patrocle?",
+                "Question5" : "La ce instrument stie sa cante Patrocle?",
+                "Question6" : "Ce este Patrocle?",
+                "Question7" : "Cat de frumos e Patrocle?",
+                "Question8" : "Ce culoare are Patrocle?",
+                "Question9" : "Ce IQ are Patrocle?",
+                "Question10" : "Ce IQ NU are Patrocle?"
+                },
+                "History" : 
+                {"Lesson" : "Lectie istorie Franta",
+                "Question1" : "France1",
+                "Question2" : "France2",
+                "Question3" : "France3",
+                "Question4" : "France4",
+                "Question5" : "France5",
+                "Question6" : "France6",
+                "Question7" : "France7",
+                "Question8" : "France8",
+                "Question9" : "France9",
+                "Question10" : "France10"
+                },
+              },
+    "Germany" : {
+                "Geography" :
+                {"Lesson" : "Lectie geografie Germania",
+                "Question1" : "1",
+                "Question2" : "2",
+                "Question3" : "3",
+                "Question4" : "4",
+                "Question5" : "5",
+                "Question6" : "6",
+                "Question7" : "7",
+                "Question8" : "8",
+                "Question9" : "9",
+                "Question10" : "10"
+                },
+                "History" :
+                {"Lesson" : "Lectie istorie Germania",
+                "Question1" : "Germany1",
+                "Question2" : "Germany2",
+                "Question3" : "Germany3",
+                "Question4" : "Germany4",
+                "Question5" : "Germany5",
+                "Question6" : "Germany6",
+                "Question7" : "Germany7",
+                "Question8" : "Germany8",
+                "Question9" : "Germany9",
+                "Question10" : "Germany10"
+                },
+              },
+    "Spain" : {
+                "Geography" :
+                {"Lesson" : "Lectie geografie Spania",
+                "Question1" : "1",
+                "Question2" : "2",
+                "Question3" : "3",
+                "Question4" : "4",
+                "Question5" : "5",
+                "Question6" : "6",
+                "Question7" : "7",
+                "Question8" : "8",
+                "Question9" : "9",
+                "Question10" : "10"
+                },
+                "History" :
+                {"Lesson" : "Această lecție vă va purta prin momentele semnificative ale istoriei Spaniei, dezvăluind transformările și evenimentele cheie care au modelat această țară de-a lungul secolelor. Iberii au fost locuitorii indigeni ai Peninsulei Iberice înaintea veniri romane. Acești oameni erau cunoscuți pentru agricultura lor și abilitățile în comerț. Peninsula Iberică avea o geografie variată, cu munți, râuri și un climat variabil, ceea ce a favorizat dezvoltarea unor culturi distincte în diferite regiuni. Romanii au cucerit Peninsula Iberică începând din secolul III î.Hr. Acest proces a dus la o puternică influență asupra culturii, limbii și infrastructurii zonei. Romanizarea a adus cu ea limba latină, care a stat la baza limbii spaniole moderne. De asemenea, romanii au construit o rețea de drumuri și poduri care au facilitat comerțul și mișcarea trupelor. Romanizarea a provocat o serie de schimbări culturale în rândul populației iberice. Aceasta a dus la amestecul culturilor și la adoptarea elementelor romane în viața de zi cu zi. Religia romană a fost răspândită, iar arhitectura romană a fost folosită în construcții civile și militare. Literatura și arta romană au avut, de asemenea, un impact semnificativ asupra societății spaniole. În cele din urmă, Imperiul Roman a intrat într-o perioadă de declin, iar Peninsula Iberică nu a fost o excepție. Invaziile barbarilor, precum vandalii, vizigoții și suebii, au perturbat viața în regiune și au marcat sfârșitul dominației romane în Spania. Aceste evenimente au pregătit terenul pentru următoarele etape ale istoriei spaniole.",
+                "Question1" : "Spain1",
+                "Question2" : "Spain2",
+                "Question3" : "Spain3",
+                "Question4" : "Spain4",
+                "Question5" : "Spain5",
+                "Question6" : "Spain6",
+                "Question7" : "Spain7",
+                "Question8" : "Spain8",
+                "Question9" : "Spain9",
+                "Question10" : "Spain10",
+                },
+              },
+  };
+
+  List<Widget> sections = [];
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +154,7 @@ class _QuizpageState extends State<Quizpage> {
             showModalBottomSheet(backgroundColor: Colors.transparent,context: context,
              builder: (BuildContext context) {
                 return Container(
-                  height: 450,
+                  height: MediaQuery.of(context).size.height * 0.49,
                   decoration: BoxDecoration(
                     color: Theme.of(context).colorScheme.background,
                     borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25))
@@ -154,7 +246,57 @@ class _QuizpageState extends State<Quizpage> {
         centerTitle: true,
         elevation: 0,      
       ),
-      body: pages[pageIndex],
+      body: pageIndex == 0 ? Lesson(lesson: countryQuiz["$country"]?["$subject"]?["Lesson"]) :
+            pageIndex == 1 ? Test(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question1"],
+              answer1: "1", answer2: "2", answer3: "14", answer4: "100",
+            ) :
+            pageIndex == 2 ? Test2(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question2"],
+              answer1: "Rau", answer2: "Potrivit", answer3: "Decent", answer4: "Bine",
+            ) :
+            pageIndex == 3 ? Test(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question3"],
+              answer1: "1", answer2: "2", answer3: "14", answer4: "100",
+            ) :
+            pageIndex == 4 ? Test2(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question4"],
+              answer1: "Meh", answer2: "Nu prea", answer3: "Nu", answer4: "Normal",
+            ) :
+            pageIndex == 5 ? Test(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question5"],
+              answer1: "Flexaton", answer2: "Chitara", answer3: "Flaut", answer4: "Pian",
+            ) :
+            pageIndex == 6 ? Test2(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question6"],
+              answer1: "Veverita", answer2: "Caine", answer3: "Pinguin", answer4: "Girafa",
+            ) :
+            pageIndex == 7 ? Test(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question7"],
+              answer1: "1/10", answer2: "7/10", answer3: "10/10", answer4: "4/10",
+            ) :
+            pageIndex == 8 ? Test2(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question8"],
+              answer1: "Rosu", answer2: "Verde", answer3: "Alb", answer4: "NEGRU",
+            ) :
+            pageIndex == 9 ? Test(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question9"],
+              answer1: "1", answer2: "385", answer3: "2", answer4: "100",
+            ) : 
+            pageIndex == 10 ? Test2(
+              getAnswerFunction: getAnswer, selected: 0,
+              questionText: countryQuiz["$country"]?["$subject"]?["Question10"],
+              answer1: "1", answer2: "385", answer3: "2", answer4: "100",
+            ) : Container(child: Text("$correctAnswers/10"),),
       bottomNavigationBar: SizedBox(
         height: 100,
         child: Padding(
@@ -170,23 +312,29 @@ class _QuizpageState extends State<Quizpage> {
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
                   child: ElevatedButton(
                 onPressed: () {
-                  if(pageIndex>0&&pageIndex<11){
-                    if(pageIndex%2==0){
-                      correct();
-                    }else{
-                      wrong();
+                  if(givenAnswer!=0&& pageIndex != 11){
+                    if(pageIndex>0&&pageIndex<11){
+                      if(answersQuiz[country]?[pageIndex-1]==givenAnswer){
+                        correct();
+                        correctAnswers++;
+                      }else{
+                        wrong();
+                      }
                     }
+                    setState(() {
+                      if(pageIndex<11){
+                        pageIndex++;
+                        givenAnswer = 0;
+                      }
+                    });
+                  }else if(pageIndex==11){
+                    Navigator.pop(context);
                   }
-                  setState(() {
-                    if(pageIndex<11){
-                      pageIndex++;
-                    }
-                  });
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color.fromARGB(255, 102, 102, 255),
+                  backgroundColor: givenAnswer==0 && pageIndex != 11 ? Color.fromARGB(255, 59, 59, 73) : Color.fromARGB(255, 102, 102, 255),
                 ),
-                child: Text(pageIndex == 0 ? "Continue" : "Check", style: const TextStyle(
+                child: Text(pageIndex == 0 || pageIndex == 11 ? "Continue" : "Check", style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 35
