@@ -146,7 +146,7 @@ class _QuizpageState extends State<Quizpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).colorScheme.background,
-      appBar: AppBar(
+      appBar: pageIndex != 11 ? AppBar(
         backgroundColor: Theme.of(context).colorScheme.primary,
         leading: IconButton(
           icon: Icon(Icons.close, color: Colors.white, size: 29,),
@@ -245,7 +245,7 @@ class _QuizpageState extends State<Quizpage> {
               ),
         centerTitle: true,
         elevation: 0,      
-      ),
+      ) : null,
       body: pageIndex == 0 ? Lesson(lesson: countryQuiz["$country"]?["$subject"]?["Lesson"]) :
             pageIndex == 1 ? Test(
               getAnswerFunction: getAnswer, selected: 0,
@@ -296,7 +296,137 @@ class _QuizpageState extends State<Quizpage> {
               getAnswerFunction: getAnswer, selected: 0,
               questionText: countryQuiz["$country"]?["$subject"]?["Question10"],
               answer1: "1", answer2: "385", answer3: "2", answer4: "100",
-            ) : Container(child: Text("$correctAnswers/10"),),
+            ) : 
+            Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 17),
+          child: Column(
+            children: [
+              SizedBox(height: MediaQuery.of(context).size.height*0.07,),
+              SizedBox(height: 290,child: Lottie.network('https://lottie.host/491f2840-4c44-425a-924e-4fbc86237dfc/s8x6EccXsD.json', frameRate: FrameRate.max, fit: BoxFit.contain)),
+              SizedBox(height: MediaQuery.of(context).size.height*0.06,),
+              correctAnswers == 0 || correctAnswers == 1 || correctAnswers == 2 ?
+              const Text(
+                "Try again", style: TextStyle(
+                  fontSize: 60, fontWeight: FontWeight.w900,
+                  color: Color.fromARGB(255, 219, 64, 64),
+                ),
+              ) : correctAnswers == 3 || correctAnswers == 4 ?
+              const Text(
+                "Almost there!", style: TextStyle(
+                  fontSize: 60, fontWeight: FontWeight.w900,
+                  color: Color.fromARGB(255, 219, 121, 64),
+                ),
+              ) : correctAnswers == 5 || correctAnswers == 6 ?
+              const Text(
+                "Good job!", style: TextStyle(
+                  fontSize: 60, fontWeight: FontWeight.w900,
+                  color: Color.fromARGB(255, 216, 219, 64),
+                ),
+              ) : correctAnswers == 7 || correctAnswers == 8 ?
+              const Text(
+                "Fantastic!", style: TextStyle(
+                  fontSize: 60, fontWeight: FontWeight.w900,
+                  color: Color.fromARGB(255, 196, 219, 64),
+                ),
+              ) : correctAnswers == 9 ?
+              const Text(
+                "Almost perfect!", style: TextStyle(
+                  fontSize: 60, fontWeight: FontWeight.w900,
+                  color: Color.fromARGB(255, 131, 219, 64),
+                ),
+              ) :
+              const Text(
+                "Perfect!", style: TextStyle(
+                  fontSize: 60, fontWeight: FontWeight.w900,
+                  color: Color.fromARGB(255, 77, 219, 64),
+                ),
+              ),
+              const SizedBox(height: 10,),
+              Text("You`ve got $correctAnswers correct answers!", style: TextStyle(fontSize: 30),),
+              SizedBox(height: MediaQuery.of(context).size.height*0.07,),
+              Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: SizedBox(
+                          height: 100,
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(0,0,8.3,0),
+                            //padding: const EdgeInsets.all(2.8),
+                            decoration: const BoxDecoration(
+                              borderRadius: const BorderRadius.all(Radius.circular(15)),
+                              color:  Color.fromARGB(255, 102, 102, 255),
+                            ),
+                            child: Center(child: Column(
+                              children: [
+                                SizedBox(height: 4,),
+                                Text("TOTAL IQ", style: TextStyle(color: Theme.of(context).colorScheme.background, fontWeight: FontWeight.w900, fontSize: 17)),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Container(
+                                    height: 68,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                      color:  Theme.of(context).colorScheme.background,
+                                    ),
+                                    child: Center(child: Text("+${correctAnswers*10} IQ", style: TextStyle(color: Color.fromARGB(255, 102, 102, 255), fontWeight: FontWeight.bold, fontSize: 27),))),
+                                ),
+                              ],
+                            ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: SizedBox(
+                          height: 100,
+                          child: Container(
+                            margin: const EdgeInsets.fromLTRB(8.3,0,0,0),
+                            //padding: const EdgeInsets.all(2.8),
+                            decoration: BoxDecoration(
+                              borderRadius: const BorderRadius.all(Radius.circular(15)),
+                              color: correctAnswers == 0 || correctAnswers == 1 || correctAnswers == 2 ?Color.fromARGB(255, 219, 64, 64) :
+                              correctAnswers == 3 || correctAnswers == 4 ?const Color.fromARGB(255, 219, 121, 64) :
+                              correctAnswers == 5 || correctAnswers == 6 ?const Color.fromARGB(255, 216, 219, 64) :
+                              correctAnswers == 7 || correctAnswers == 8 ?const Color.fromARGB(255, 196, 219, 64) :
+                              correctAnswers == 9 ?const Color.fromARGB(255, 131, 219, 64) :const Color.fromARGB(255, 77, 219, 64),
+                            ),
+                            child: Center(child: Column(
+                              children: [
+                                SizedBox(height: 4,),
+                                Text("SCORE", style: TextStyle(color: Theme.of(context).colorScheme.background, fontWeight: FontWeight.w900, fontSize: 17)),
+                                Padding(
+                                  padding: const EdgeInsets.all(4.0),
+                                  child: Container(
+                                    height: 68,
+                                    width: double.infinity,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                      color:  Theme.of(context).colorScheme.background,
+                                    ),
+                                    child: Center(child: Text("$correctAnswers/10", style: TextStyle(color: correctAnswers == 0 || correctAnswers == 1 || correctAnswers == 2 ?Color.fromARGB(255, 219, 64, 64) :
+                                      correctAnswers == 3 || correctAnswers == 4 ?const Color.fromARGB(255, 219, 121, 64) :
+                                      correctAnswers == 5 || correctAnswers == 6 ?const Color.fromARGB(255, 216, 219, 64) :
+                                      correctAnswers == 7 || correctAnswers == 8 ?const Color.fromARGB(255, 196, 219, 64) :
+                                      correctAnswers == 9 ?const Color.fromARGB(255, 131, 219, 64) :const Color.fromARGB(255, 77, 219, 64),
+                                      fontWeight: FontWeight.bold, fontSize: 27),))
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+            ]
+          ),
+        ),
+      ),
       bottomNavigationBar: SizedBox(
         height: 100,
         child: Padding(
@@ -314,7 +444,7 @@ class _QuizpageState extends State<Quizpage> {
                 onPressed: () {
                   if(givenAnswer!=0&& pageIndex != 11){
                     if(pageIndex>0&&pageIndex<11){
-                      if(answersQuiz[country]?[pageIndex-1]==givenAnswer){
+                      if(answersQuiz[country]?[subject]?[pageIndex-1]==givenAnswer){
                         correct();
                         correctAnswers++;
                       }else{

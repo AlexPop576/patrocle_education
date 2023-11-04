@@ -24,8 +24,12 @@ class _ProfileState extends State<Profile> {
           children: [
             Center(
               child: Column(children: [
-                Image.asset('assets/Profile.png',fit: BoxFit.fill),
-                Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
+                Container(decoration: BoxDecoration(color: Colors.blue), width: double.infinity, height: 280,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(0,30,0,0),
+                  child: Image.asset('assets/Face.png',fit: BoxFit.contain),
+                ),),
+                Divider(color: Theme.of(context).colorScheme.primary, thickness: 3, height: 0,),
               ],),
             ),
             Padding(
@@ -33,7 +37,7 @@ class _ProfileState extends State<Profile> {
               child: Center(
                 child: Column(
                   children: [
-                    const SizedBox(height: 8,),
+                    const SizedBox(height: 12,),
                     Row(children: 
                       [
                       Text(username, style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 30, fontWeight: FontWeight.bold),),
@@ -127,11 +131,11 @@ class _ProfileState extends State<Profile> {
                       ),
                       ),
                       const SizedBox(height: 20,),
-                    ]),
-                  ),
-                );
-             }
-            );
+                      ]),
+                      ),
+                      );
+                      }
+                      );
                       },),
                     ],
                   ),
