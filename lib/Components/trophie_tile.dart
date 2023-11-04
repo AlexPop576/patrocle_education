@@ -11,16 +11,16 @@ class TrophieTile extends StatefulWidget {
 
 class _TrophieTileState extends State<TrophieTile> {
   String? trophy;
-  Color color1 = Colors.white, color2 = Colors.white;  
+  Color color1 = Colors.white, color2 = Color.fromARGB(255, 255, 255, 255);  
   _TrophieTileState({required this.trophy, required this.color1, required this.color2});
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(5.5),
+      padding: const EdgeInsets.all(6.5),
       child: Container(
-        height: MediaQuery.of(context).size.width * 0.6,
-        width: MediaQuery.of(context).size.width * 0.42,
+        height: MediaQuery.of(context).size.width * 0.4,
+        width: MediaQuery.of(context).size.width * 0.4,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,

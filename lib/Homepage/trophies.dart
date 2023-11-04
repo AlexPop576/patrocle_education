@@ -52,6 +52,12 @@ class _TrophiesState extends State<Trophies> {
                   TrophieTile(trophy: "Champion", color1: Color.fromARGB(255, 129, 129, 129),color2: Color.fromARGB(120, 129, 129, 129)),
                 ],
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TrophieTile(trophy: "Untouchable", color1: Color.fromARGB(255, 238, 255, 0),color2: Color.fromARGB(120, 255, 221, 0)),
+                  TrophieTile(trophy: "Legend", color1: Color.fromARGB(255, 198, 21, 21),color2: Color.fromARGB(120, 255, 85, 0)),],
+              ),
               const SizedBox(height: 24,),
             ]
           ),
