@@ -52,6 +52,7 @@ class _TrophiesState extends State<Trophies> {
                   TrophieTile(trophy: "Champion", color1: Color.fromARGB(255, 129, 129, 129),color2: Color.fromARGB(120, 129, 129, 129)),
                 ],
               ),
+              const SizedBox(height: 24,),
             ]
           ),
         ),

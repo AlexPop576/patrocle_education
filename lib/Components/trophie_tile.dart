@@ -17,10 +17,10 @@ class _TrophieTileState extends State<TrophieTile> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.5),
+      padding: const EdgeInsets.all(5.5),
       child: Container(
-        height: 190,
-        width: 190,
+        height: MediaQuery.of(context).size.width * 0.6,
+        width: MediaQuery.of(context).size.width * 0.42,
         decoration: BoxDecoration(
           gradient: LinearGradient(
               begin: Alignment.topLeft,
