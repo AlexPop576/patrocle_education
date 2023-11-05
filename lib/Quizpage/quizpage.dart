@@ -5,18 +5,24 @@ import 'package:patrocle_education/Quizpage/test.dart';
 import 'package:patrocle_education/Quizpage/test2.dart';
 
 class Quizpage extends StatefulWidget {
+  final Function getDone;
+  final Function setDone;
+  String? continent;
   String? country;
   String? subject;
-  Quizpage({super.key, this.country, this.subject});
+  Quizpage({super.key, this.country, this.subject, required this.getDone, required this.setDone, this.continent});
 
   @override
-  State<Quizpage> createState() => _QuizpageState(country: country, subject: subject);
+  State<Quizpage> createState() => _QuizpageState(country: country, subject: subject, getDone: getDone, setDone: setDone, continent: continent);
 }
 
 class _QuizpageState extends State<Quizpage> {
+  final Function getDone;
+  final Function setDone;
+  String? continent;
   String? country;
   String? subject;
-  _QuizpageState({this.country, this.subject});
+  _QuizpageState({this.country, this.subject, required this.getDone, required this.setDone, this.continent});
   int pageIndex = 0, correctAnswers = 0;
   int? givenAnswer = 1;
 
@@ -459,10 +465,12 @@ class _QuizpageState extends State<Quizpage> {
                     });
                   }else if(pageIndex==11){
                     Navigator.pop(context);
+                    if(subject == "Geography"){getDone(true, false); setDone(continent,country,"geoDone",true);};
+                    if(subject == "History"){getDone(false, true); setDone(continent,country,"geoDone",true);};
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: givenAnswer==0 && pageIndex != 11 ? Color.fromARGB(255, 59, 59, 73) : Color.fromARGB(255, 102, 102, 255),
+                  backgroundColor: givenAnswer==0 && pageIndex != 11 ? const Color.fromARGB(255, 59, 59, 73) : const Color.fromARGB(255, 102, 102, 255),
                 ),
                 child: Text(pageIndex == 0 || pageIndex == 11 ? "Continue" : "Check", style: const TextStyle(
                               color: Colors.white,

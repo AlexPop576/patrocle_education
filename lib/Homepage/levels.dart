@@ -14,7 +14,7 @@ class Levels extends StatefulWidget {
 }
 
 class _LevelsState extends State<Levels> {
-  int color = 0;
+  int color = 0, a = 0;
 
   Map<String, bool> countries = {
     "Argentina": false,
@@ -38,6 +38,103 @@ class _LevelsState extends State<Levels> {
     "UK": false,
     "Ukraine": false,
     "USA": false,
+  };
+
+  Map<String, Map<String, Map<String, bool>>> countriesList = {
+    "Europe" : {
+                "France" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Germany" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Greece" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Italy" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Romania" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Russia" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Spain" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "UK" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Ukraine" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+               },
+    "America" : {
+                "Argentina" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Brazil" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Canada" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Mexico" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "USA" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                },
+    "Asia" : {
+                "China" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Israel" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "Japan" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+             },
+    "Africa" : {
+                "Egypt" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "South Africa" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+               },
+    "Australia" : {
+                "Australia" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                "New Zealand" : {
+                  "geoDone": false,
+                  "hstDone": false, 
+                },
+                  }
   };
 
   List<String> europeCountries = [
@@ -76,18 +173,10 @@ class _LevelsState extends State<Levels> {
     "New Zealand",
   ];
 
-  void disableAll(){
-    for(int index=0;index<europeCountries.length;index++){
-      LevelTile(
-        country: europeCountries[index],
-        colorIndex: color,
-      );//.setPlayButton();
-      LevelTile(
-        country: europeCountries[index],
-        colorIndex: color,
-      );//.setPlayButton();
-      LevelTile();//.setPlayButton();
-    }
+  void setDone(String? continent, String? country, String done, bool value){
+    setState(() {
+      countriesList[continent]?[country]?[done] = value;
+    });
   }
 
   @override
@@ -118,80 +207,98 @@ class _LevelsState extends State<Levels> {
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  color++;
-                  if (color == 3) color = 0;
-                  if(selected == false){
+                  color = 0;
+                  color = (index + 1) % 3;
+                  String? countryName = countriesList["Europe"]?[index].toString() ?? "Romania"; 
                     return LevelTile(
                       country: europeCountries[index],
                       colorIndex: color,
+                      geoDone: countriesList["Europe"]?[countryName]?["geoDone"] == false ? true : false,
+                      hstDone: countriesList["Europe"]?[countryName]?["hstDone"] == false ? true : false,
+                      setDone: setDone,
+                      continent: "Europe",
                     );
-                  }else{
-                    return LevelTile(
-                      country: europeCountries[index],
-                      colorIndex: color,
-                    );
-                  }
                 },
-                childCount: europeCountries.length,
+                childCount: countriesList["Europe"]?.length,
               ),
             ),
             LevelDivider(continent: "America"),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  color++;
-                  if (color == 3) color = 0;
-                  return LevelTile(
-                    country: americaCountries[index],
-                    colorIndex: color,
-                  );
+                  color = 0;
+                  color = (index + 1) % 3;
+                  String? countryName = countriesList["America"]?[index].toString(); 
+                    return LevelTile(
+                      country: americaCountries[index],
+                      colorIndex: color,
+                      geoDone: countriesList["America"]?[countryName]?["geoDone"] == false ? true : false,
+                      hstDone: countriesList["America"]?[countryName]?["hstDone"] == false ? true : false,
+                      setDone: setDone,
+                      continent: "America",
+                    );
                 },
-                childCount: americaCountries.length,
+                childCount: countriesList["America"]?.length,
               ),
             ),
             LevelDivider(continent: "Asia"),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  color++;
-                  if (color == 3) color = 0;
-                  return LevelTile(
-                    country: asiaCountries[index],
-                    colorIndex: color,
-                  );
+                  color = 0;
+                  color = (index + 1) % 3;
+                  String? countryName = countriesList["Asia"]?[index].toString(); 
+                    return LevelTile(
+                      country: asiaCountries[index],
+                      colorIndex: color,
+                      geoDone: countriesList["Asia"]?[countryName]?["geoDone"] == false ? true : false,
+                      hstDone: countriesList["Asia"]?[countryName]?["hstDone"] == false ? true : false,
+                      setDone: setDone,
+                      continent: "Asia",
+                    );
                 },
-                childCount: asiaCountries.length,
+                childCount: countriesList["Asia"]?.length,
               ),
             ),
             LevelDivider(continent: "Africa"),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  color++;
-                  if (color == 3) color = 0;
-                  return LevelTile(
-                    country: africaCountries[index],
-                    colorIndex: color,
-                  );
+                  color = 0;
+                  color = (index + 1) % 3;
+                  String? countryName = countriesList["Africa"]?[index].toString(); 
+                    return LevelTile(
+                      country: africaCountries[index],
+                      colorIndex: color,
+                      geoDone: countriesList["Africa"]?[countryName]?["geoDone"] == false ? true : false,
+                      hstDone: countriesList["Africa"]?[countryName]?["hstDone"] == false ? true : false,
+                      setDone: setDone,
+                      continent: "Africa",
+                    );
                 },
-                childCount: africaCountries.length,
+                childCount: countriesList["Africa"]?.length,
               ),
             ),
             LevelDivider(continent: "Australia"),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  color++;
-                  if (color == 3) color = 0;
-                  return LevelTile(
-                    country: australiaCountries[index],
-                    colorIndex: color,
-                  );
+                  color = 0;
+                  color = index % 3;
+                  String? countryName = countriesList["Australia"]?[index].toString(); 
+                    return LevelTile(
+                      country: australiaCountries[index],
+                      colorIndex: color,
+                      geoDone: countriesList["Australia"]?[countryName]?["geoDone"] == false ? true : false,
+                      hstDone: countriesList["Australia"]?[countryName]?["hstDone"] == false ? true : false,
+                      setDone: setDone,
+                      continent: "Australia",
+                    );
                 },
-                childCount: australiaCountries.length,
+                childCount: countriesList["Australia"]?.length,
               ),
             ),
-            SliverToBoxAdapter(child: SizedBox(height: 65,))
+            const SliverToBoxAdapter(child: SizedBox(height: 65,))
           ],
         ),
       ),
