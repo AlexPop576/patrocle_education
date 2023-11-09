@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:patrocle_education/Themes/theme_provider.dart';
 
+import '../Components/trophie_tile.dart';
+
 class Profile extends StatefulWidget {
   const Profile({super.key});
 
@@ -11,268 +13,427 @@ class Profile extends StatefulWidget {
 
 class _ProfileState extends State<Profile> {
   String username = "Username";
-  int iq = 576, trophies = 4;
+  Color backgroundColor = Colors.blue;
+  int iq = 576, trophies = 4, selectedProfile = 0;
   final usernameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      extendBody: true,
       backgroundColor: Theme.of(context).colorScheme.background,
       body: SafeArea(
-        child: ListView(
-          physics: const BouncingScrollPhysics(),
-          children: [
-            Center(
-              child: Column(children: [
-                Container(decoration: BoxDecoration(color: Colors.blue), width: double.infinity, height: 280,
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(0,30,0,0),
-                  child: Image.asset('assets/Face.png',fit: BoxFit.contain),
-                ),),
-                Divider(color: Theme.of(context).colorScheme.primary, thickness: 3, height: 0,),
-              ],),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 17.0),
-              child: Center(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 12,),
-                    Row(children: 
-                      [
-                      Text(username, style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 30, fontWeight: FontWeight.bold),),
-                      Spacer(),
-                      TextButton(child: Text("Edit profile", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontWeight: FontWeight.w400),),
-                       onPressed: () {
-                        showModalBottomSheet(backgroundColor: Colors.transparent,context: context,
-             builder: (BuildContext context) {
-                return Container(
-                  height: 450,
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).colorScheme.background,
-                    borderRadius: BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25))
-                  ),
-                  child:  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 17),
-                    child: Column(children: [
-                      const SizedBox(height: 20,),
-                      Text("Edit profile", style: TextStyle(
-                                  color: Theme.of(context).colorScheme.tertiary,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 30
-                                  )),
-                      const SizedBox(height: 10,),
-                      Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
-                      const SizedBox(height: 10,),
-                      SizedBox(
-                        height: 58,
-                        child: TextField(
-                          controller: usernameController,
-                          cursorColor: Colors.white,
-                          maxLength: 10,
-                          decoration: InputDecoration(
-                            focusedBorder: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Colors.white, width: 2.0), // Color and thickness when the TextField is selected
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15)),
-                              borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.0), // Default color and thickness
-                            ),
-                            labelText: 'New username',
-                            labelStyle: TextStyle(color: Colors.white), // Color of the label text
-                            counterText: '',
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: Column(
+                children: [
+                  Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          decoration: BoxDecoration(color: backgroundColor),
+                          width: double.infinity,
+                          height: 280,
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0, 30, 0, 0),
+                            child: Image.asset('assets/Face.png', fit: BoxFit.contain),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20,),
-                      SizedBox(
-                        height: 58,
-                        width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(15)),
-                          child: ElevatedButton(
-                        onPressed: () {
-                          setState(() {
-                            username = usernameController.text;
-                          });
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 102, 102, 255),
-                        ),
-                        child: const Center(child: Text("Save", style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30
-                              ))),
-                        ),
-                      ),
-                      ),
-                      const SizedBox(height: 12,),
-                      SizedBox(
-                        height: 58,
-                        width: double.infinity,
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.all(Radius.circular(15)),
-                          child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color.fromARGB(255, 219, 64, 64),
-                        ),
-                        child: const Center(child: Text("Cancel", style: TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30
-                              ))),
-                        ),
-                      ),
-                      ),
-                      const SizedBox(height: 20,),
-                      ]),
-                      ),
-                      );
-                      }
-                      );
-                      },),
-                    ],
-                  ),
-                  const SizedBox(height: 8,),
-                  Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
-                  const SizedBox(height: 8,),
-                  Row(
-                    children: [
-                      Text("Statistics", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),),
-                    ],
-                  ),
-                  const SizedBox(height: 12,),
-                  Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: SizedBox(
-                          height: 85,
-                          child: Container(
-                            margin: const EdgeInsets.fromLTRB(0,0,8.3,0),
-                            padding: const EdgeInsets.all(2.8),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Theme.of(context).colorScheme.primary, width: 3.2),
-                              borderRadius: const BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child: Center(child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2),
-                              child: Column(
-                                children: [
-                                  Text("$iq IQ", style: TextStyle(color: Color.fromARGB(255, 102, 102, 255), fontWeight: FontWeight.bold, fontSize: 27),),
-                                  Text('Total IQ', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),),
-                                ],
-                              ),
-                            ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 1,
-                        child: SizedBox(
-                          height: 85,
-                          child: Container(
-                            margin: const EdgeInsets.fromLTRB(8.3,0,0,0),
-                            padding: const EdgeInsets.all(2.8),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Theme.of(context).colorScheme.primary, width: 3.2),
-                              borderRadius: const BorderRadius.all(Radius.circular(15)),
-                            ),
-                            child: Center(child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 2),
-                              child: Column(
-                                children: [
-                                  Text('$trophies/6', style: TextStyle(color: Color.fromARGB(255, 255, 200, 0), fontWeight: FontWeight.bold, fontSize: 27),),
-                                  Text('Trophies', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),),
-                                ],
-                              ),
-                            ),),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 8,),
-                  Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
-                  const SizedBox(height: 8,),
-                  Row(
-                    children: [
-                      Expanded(flex: 1,child: Center(child: Text("Geography", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),))),
-                      Expanded(flex: 1,child: Center(child: Text("History", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),))),
-                    ],
-                  ),         
-                  const SizedBox(height: 8,),
-                  Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
-                  const SizedBox(height: 8,),
-                  Row(
-                    children: [
-                      Text("Settings", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),),
-                    ],
-                  ),
-                  const SizedBox(height: 24,),
-                  SizedBox(
-                    height: 58,
-                    width: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: ElevatedButton(
-                    onPressed: () {
-                      Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).colorScheme.primary,
+                        Divider(color: Theme.of(context).colorScheme.primary, thickness: 3, height: 0),
+                      ],
                     ),
-                    child: Center(child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 17.0),
+                    child: Center(
+                      child: Column(
                         children: [
-                          Text(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? "Light mode" : "Dark mode", style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 30
-                              )),
-                          const SizedBox(width: 10),
-                          Icon(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? Icons.brightness_7_rounded : Icons.brightness_2, size: 30, color: Colors.white,),
+                          const SizedBox(height: 12,),
+                          Row(
+                            children: [
+                              Text(username, style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 30, fontWeight: FontWeight.bold),),
+                              const Spacer(),
+                              TextButton(
+                                child: Text("Edit profile", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontWeight: FontWeight.w400),),
+                                onPressed: () {
+                                  showModalBottomSheet(
+                                    backgroundColor: Colors.transparent,
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Container(
+                                        height: 650,
+                                        decoration: BoxDecoration(
+                                          color: Theme.of(context).colorScheme.background,
+                                          borderRadius: const BorderRadius.only(topLeft: Radius.circular(25), topRight: Radius.circular(25)),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 17),
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(height: 20,),
+                                              Text("Edit profile", style: TextStyle(
+                                                color: Theme.of(context).colorScheme.tertiary,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 30,
+                                              )),
+                                              const SizedBox(height: 10,),
+                                              Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
+                                              const SizedBox(height: 10,),
+                                              SizedBox(
+                                                height: 58,
+                                                child: TextField(
+                                                  controller: usernameController,
+                                                  cursorColor: Colors.white,
+                                                  maxLength: 10,
+                                                  decoration: InputDecoration(
+                                                    focusedBorder: const OutlineInputBorder(
+                                                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                                                      borderSide: BorderSide(color: Colors.white, width: 2.0),
+                                                    ),
+                                                    enabledBorder: OutlineInputBorder(
+                                                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                                      borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.0),
+                                                    ),
+                                                    labelText: 'New username',
+                                                    labelStyle: const TextStyle(color: Colors.white),
+                                                    counterText: '',
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 10,),
+                                              Row(
+                                                children: [
+                                                  Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                    child: SizedBox(height: 150, width:130, child:
+                                                     ElevatedButton(style: ElevatedButton.styleFrom(
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(15),
+                                                      ),
+                                                      backgroundColor: Colors.blue,
+                                                      side: selectedProfile == 0 ? const BorderSide(color: Color.fromARGB(255, 102, 102, 255), width: 3) : const BorderSide(color: Colors.blue, width: 3),),
+                                                      onPressed: (){setState(() {
+                                                        selectedProfile = 0;
+                                                      });},
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.fromLTRB(0,35,0,0),
+                                                        child: Image.asset("assets/Face.png"),
+                                                      ),
+                                                     )),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                    child: SizedBox(height: 150, width:130, child:
+                                                     ElevatedButton(style: ElevatedButton.styleFrom(
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(15),
+                                                      ),
+                                                      backgroundColor: Colors.red,
+                                                      side: selectedProfile == 1 ? const BorderSide(color: Color.fromARGB(255, 102, 102, 255), width: 3) : const BorderSide(color: Colors.red, width: 3),),
+                                                      onPressed: (){setState(() {
+                                                        selectedProfile = 1;
+                                                      });},
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.fromLTRB(0,35,0,0),
+                                                        child: Image.asset("assets/Face.png"),
+                                                      ),
+                                                     )),
+                                                  ),
+                                                  Padding(
+                                                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                    child: SizedBox(height: 150, width:130, child:
+                                                     ElevatedButton(style: ElevatedButton.styleFrom(
+                                                      shape: RoundedRectangleBorder(
+                                                        borderRadius: BorderRadius.circular(15),
+                                                      ),
+                                                      backgroundColor: Colors.green,
+                                                      side: selectedProfile == 2 ? const BorderSide(color: Color.fromARGB(255, 102, 102, 255), width: 3) : const BorderSide(color: Colors.green, width: 3),),
+                                                      onPressed: (){setState(() {
+                                                        selectedProfile = 2;
+                                                      });},
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.fromLTRB(0,35,0,0),
+                                                        child: Image.asset("assets/Face.png"),
+                                                      ),
+                                                     )),
+                                                  ),
+                                                ]
+                                              ),
+                                              const SizedBox(height: 30,),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        username = usernameController.text;
+                                                        if(selectedProfile == 0){
+                                                          backgroundColor = Colors.blue;
+                                                        }else if(selectedProfile == 1){
+                                                          backgroundColor = Colors.red;
+                                                        }else if(selectedProfile == 2){
+                                                          backgroundColor = Colors.green;
+                                                        }
+                                                      });
+                                                      Navigator.pop(context);
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                      backgroundColor: const Color.fromARGB(255, 102, 102, 255),
+                                                    ),
+                                                    child: const Center(child: Text("Save", style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 30,
+                                                    ))),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 12,),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                      backgroundColor: const Color.fromARGB(255, 219, 64, 64),
+                                                    ),
+                                                    child: const Center(child: Text("Cancel", style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontWeight: FontWeight.bold,
+                                                      fontSize: 30,
+                                                    ))),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(height: 20,),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  );
+                                },
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8,),
+                          Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
+                          const SizedBox(height: 8,),
+                          Row(
+                            children: [
+                              Text("Statistics", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),),
+                            ],
+                          ),
+                          const SizedBox(height: 12,),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: SizedBox(
+                                  height: 85,
+                                  child: Container(
+                                    margin: const EdgeInsets.fromLTRB(0, 0, 8.3, 0),
+                                    padding: const EdgeInsets.all(2.8),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Theme.of(context).colorScheme.primary, width: 3.2),
+                                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 2),
+                                        child: Column(
+                                          children: [
+                                            Text("$iq IQ", style: const TextStyle(color: Color.fromARGB(255, 102, 102, 255), fontWeight: FontWeight.bold, fontSize: 27),),
+                                            Text('Total IQ', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: SizedBox(
+                                  height: 85,
+                                  child: Container(
+                                    margin: const EdgeInsets.fromLTRB(8.3, 0, 0, 0),
+                                    padding: const EdgeInsets.all(2.8),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(color: Theme.of(context).colorScheme.primary, width: 3.2),
+                                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.symmetric(vertical: 2),
+                                        child: Column(
+                                          children: [
+                                            Text('$trophies/6', style: const TextStyle(color: Color.fromARGB(255, 255, 200, 0), fontWeight: FontWeight.bold, fontSize: 27),),
+                                            Text('Trophies', style: TextStyle(color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold, fontSize: 20),),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 8,),
+                          Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
+                          const SizedBox(height: 8,),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  children: [
+                                    Center(child: Text("Geography", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),)),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  children: [
+                                    Center(child: Text("History", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),)),
+                                    //ListView.builder(itemCount: 10,itemBuilder: (BuildContext context, int index){
+
+                                    //})
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 20),
+                                      child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(10)), child: Center(child: Image.asset("assets/flags/Romania.png"))),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 20),
+                                      child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(10)), child: Center(child: Image.asset("assets/flags/Romania.png"))),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 20),
+                                      child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(10)), child: Center(child: Image.asset("assets/flags/Spain.png"))),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 70.0, vertical: 5),
+                                      child: ClipRRect(borderRadius: const BorderRadius.all(Radius.circular(10)), child: Center(child: Image.asset("assets/flags/Germany.png"))),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          //End the sliver list here and start a new one
+                          const SizedBox(height: 8,),
+                          Divider(color: Theme.of(context).colorScheme.primary, thickness: 3,),
+                          const SizedBox(height: 8,),
+                          Row(
+                            children: [
+                              Text("Settings", style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 27, fontWeight: FontWeight.w500),),
+                            ],
+                          ),
+                          const SizedBox(height: 24,),
+                          SizedBox(
+                            height: 58,
+                            width: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(Radius.circular(10)),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Theme.of(context).colorScheme.primary,
+                                ),
+                                child: Center(child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? "Light mode" : "Dark mode", style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 30,
+                                    )),
+                                    const SizedBox(width: 10),
+                                    Icon(Provider.of<ThemeProvider>(context, listen: false).getTheme() == 1 ? Icons.brightness_7_rounded : Icons.brightness_2, size: 30, color: Colors.white,),
+                                  ],
+                                )),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12,),
+                          SizedBox(
+                            height: 58,
+                            width: double.infinity,
+                            child: ClipRRect(
+                              borderRadius: const BorderRadius.all(Radius.circular(10)),
+                              child: ElevatedButton(
+                                onPressed: () {
+
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Theme.of(context).colorScheme.primary,
+                                ),
+                                child: const Center(child: Text("Language", style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 30,
+                                ))),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 12,),
+                          TrophieTile(trophy: "Champion", color1: Colors.red,color2: Colors.blue),
                         ],
-                      )),
-                    ),
-                    ),
-                  ),
-                  const SizedBox(height: 12,),
-                  SizedBox(
-                    height: 58,
-                    width: double.infinity,
-                    child: ClipRRect(
-                      borderRadius: const BorderRadius.all(Radius.circular(10)),
-                      child: ElevatedButton(
-                    onPressed: () {
-                      
-                    },
-                    style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).colorScheme.primary,
-                    ),
-                    child: const Center(child: Text("Language", style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 30
-                          ))),
+                      ),
                     ),
                   ),
-                  ),
-                  const SizedBox(height: 12,),
-                  ]
+                ],
               ),
             ),
-          ),
           ],
         ),
-      )
+      ),
     );
   }
 }

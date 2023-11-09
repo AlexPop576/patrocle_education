@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:patrocle_education/Quizpage/quizpage.dart';
 import '../Homepage/levels.dart';
 
@@ -95,7 +96,7 @@ class _LevelTileState extends State<LevelTile> {
                               Shadow(
                                 offset: Offset(3.0, 3.0),
                                 blurRadius: 3.0,
-                                color: Color.fromARGB(125, 0, 0, 255),
+                                color: Color.fromARGB(0, 0, 0, 255),
                               ),
                               ],color: Colors.white, fontSize: 32, fontWeight: FontWeight.bold),),
                             ),
@@ -165,17 +166,19 @@ class _LevelTileState extends State<LevelTile> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Quizpage(country: country,subject: "Geography",getDone: getDone, setDone: setDone,)),
-                        );
+                          PageTransition(child: Quizpage(country: country,subject: "Geography",getDone: getDone, setDone: setDone,), type: PageTransitionType.bottomToTop,
+                          duration: const Duration(milliseconds: 400),
+                        ),);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromARGB(255, 102, 102, 255),
                       ),
                       child: const Text("Play", style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 35
-                                    )),
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 35
+                        )
+                      ),
                     ),
                   ),
                 ),
@@ -191,11 +194,12 @@ class _LevelTileState extends State<LevelTile> {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Quizpage(country: country,subject: "History",getDone: getDone, setDone: setDone,)),
-                        );
+                          PageTransition(child: Quizpage(country: country,subject: "History",getDone: getDone, setDone: setDone,), type: PageTransitionType.bottomToTop,
+                          duration: const Duration(milliseconds: 400),
+                        ),);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(255, 102, 102, 255),
+                        backgroundColor:const Color.fromARGB(255, 102, 102, 255),
                       ),
                       child: const Text("Play", style: TextStyle(
                                     color: Colors.white,

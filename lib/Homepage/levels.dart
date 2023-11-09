@@ -191,7 +191,7 @@ class _LevelsState extends State<Levels> {
             SliverToBoxAdapter(
               child: Column(
                 children: [
-                  const SizedBox(height: 12,),
+                  const SizedBox(height: 90),
                     Row(children: [
                       const SizedBox(width: 12,),
                       Lottie.network('https://lottie.host/491f2840-4c44-425a-924e-4fbc86237dfc/s8x6EccXsD.json', frameRate: FrameRate.max, height: 100),
