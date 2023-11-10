@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:patrocle_education/Components/level_tile.dart';
 import 'package:patrocle_education/Components/trophie_tile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Trophies extends StatefulWidget {
   const Trophies({super.key});
@@ -12,8 +12,31 @@ class Trophies extends StatefulWidget {
 
 class _TrophiesState extends State<Trophies> {
 
+  int? geographerTrophy = 0, historianTrophy = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+    if(geographerTrophy! >= 3){
+      trophiesName.remove("Locked");
+      trophiesName.add("Geographer");
+      print("da");
+    }else{
+      trophiesName.add("Locked");
+      print("nu");
+    }
+  }
+
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    if(geographerTrophy == null && historianTrophy == null){pref.setInt("Geographer", 0);}
+    geographerTrophy = pref.getInt('Geographer');
+    historianTrophy = pref.getInt('Historian');
+  }
+
   List<String> trophiesName = [
-    "Geographer", "Historian", "Curious", "Knowledgeable", "Expert", "Champion", "Legend", "Untouchable","Locked",
+    "Historian", "Curious", "Knowledgeable", "Expert", "Champion", "Untouchable", "Legend","Historian",
   ];
 
   List<Color> trophiesColor1 = [

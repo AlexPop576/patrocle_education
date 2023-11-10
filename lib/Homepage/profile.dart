@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:patrocle_education/Themes/theme_provider.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Components/trophie_tile.dart';
 
 class Profile extends StatefulWidget {
@@ -12,10 +12,40 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String username = "Username";
+  String? username;
   Color backgroundColor = Colors.blue;
-  int iq = 576, trophies = 4, selectedProfile = 0;
+  int? iq = 576, trophies = 4, selectedProfile = 0, color=0;
   final usernameController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
+  Future<void> saveNameColor(name, color) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('name', name);
+    pref.setInt('color', color);
+  }
+
+  Future<void> saveMode(mode) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString('mode', mode);
+  }
+
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    username = pref.getString('name');
+    color = pref.getInt('color');
+    iq = pref.getInt('iq');
+    trophies = pref.getInt('trophies');
+    if(iq==null && trophies == null){pref.setInt('iq', 0);pref.setInt('trophies', 0);}
+    if(color==0) {backgroundColor = Colors.blue;}
+    else if(color==1) {backgroundColor = Colors.red;}
+    else if(color==2) {backgroundColor = Colors.green;}
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +82,7 @@ class _ProfileState extends State<Profile> {
                           const SizedBox(height: 12,),
                           Row(
                             children: [
-                              Text(username, style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 30, fontWeight: FontWeight.bold),),
+                              Text(username == null ? 'Username' : username!, style: TextStyle(color: Theme.of(context).colorScheme.tertiary, fontSize: 30, fontWeight: FontWeight.bold),),
                               const Spacer(),
                               TextButton(
                                 child: Text("Edit profile", style: TextStyle(color: Theme.of(context).colorScheme.primary, fontSize: 20, fontWeight: FontWeight.w400),),
@@ -168,17 +198,14 @@ class _ProfileState extends State<Profile> {
                                                   borderRadius: const BorderRadius.all(Radius.circular(15)),
                                                   child: ElevatedButton(
                                                     onPressed: () {
+                                                      Navigator.pop(context);
                                                       setState(() {
                                                         username = usernameController.text;
-                                                        if(selectedProfile == 0){
-                                                          backgroundColor = Colors.blue;
-                                                        }else if(selectedProfile == 1){
-                                                          backgroundColor = Colors.red;
-                                                        }else if(selectedProfile == 2){
-                                                          backgroundColor = Colors.green;
-                                                        }
-                                                      });
-                                                      Navigator.pop(context);
+                                                        saveNameColor(usernameController.text, selectedProfile);
+                                                        if(selectedProfile==0){backgroundColor = Colors.blue;}
+                                                        else if(selectedProfile==1){backgroundColor = Colors.red;}
+                                                        else if(selectedProfile==2){backgroundColor = Colors.green;}
+                                                      });                      
                                                     },
                                                     style: ElevatedButton.styleFrom(
                                                       backgroundColor: const Color.fromARGB(255, 102, 102, 255),
@@ -382,6 +409,7 @@ class _ProfileState extends State<Profile> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
+                                  saveMode("dark");
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Theme.of(context).colorScheme.primary,

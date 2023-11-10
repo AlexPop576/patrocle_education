@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:patrocle_education/Quizpage/lesson.dart';
 import 'package:patrocle_education/Quizpage/test.dart';
 import 'package:patrocle_education/Quizpage/test2.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Quizpage extends StatefulWidget {
   final Function getDone;
@@ -24,7 +25,34 @@ class _QuizpageState extends State<Quizpage> {
   String? subject;
   _QuizpageState({this.country, this.subject, required this.getDone, required this.setDone, this.continent});
   int pageIndex = 0, correctAnswers = 0;
-  int? givenAnswer = 1;
+  int? givenAnswer = 1, iq = 0, trophies = 0;
+  int? geographerTrophy = 0, historianTrophy = 0;
+
+  @override
+  void initState(){
+    super.initState();
+    getData();
+  }
+
+  Future<void> saveTrophiesAndIQ(trophies, iq) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setInt('trophies', trophies);
+    pref.setInt('iq', iq);
+  }
+
+  Future<void> saveTrophyData(historianTrophy, geographerTrophy) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setInt('Historian', historianTrophy);
+    pref.setInt('Geographer', geographerTrophy);
+  }
+
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    iq = pref.getInt('iq');
+    historianTrophy = pref.getInt('Historian');
+    geographerTrophy = pref.getInt('Geographer');
+    setState(() {});
+  }
 
   getAnswer(int answer){
     setState(() {
@@ -465,8 +493,11 @@ class _QuizpageState extends State<Quizpage> {
                     });
                   }else if(pageIndex==11){
                     Navigator.pop(context);
-                    if(subject == "Geography"){getDone(true, false); setDone(continent,country,"geoDone",true);};
-                    if(subject == "History"){getDone(false, true); setDone(continent,country,"geoDone",true);};
+                    saveTrophiesAndIQ(trophies,  iq! + correctAnswers*10);
+                    if(subject == "Geography"&&correctAnswers>=5){getDone(true, false); setDone(continent,country,"geoDone",true);}
+                    if(subject == "History"&&correctAnswers>=5){getDone(false, true); setDone(continent,country,"geoDone",true);}
+                    if(subject == "Geography"&&correctAnswers==10){saveTrophyData(historianTrophy, geographerTrophy!+1);}
+                    if(subject == "History"&&correctAnswers==10){saveTrophyData(historianTrophy!+1, geographerTrophy);}
                   }
                 },
                 style: ElevatedButton.styleFrom(
