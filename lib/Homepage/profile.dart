@@ -29,11 +29,6 @@ class _ProfileState extends State<Profile> {
     pref.setInt('color', color);
   }
 
-  Future<void> saveMode(mode) async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString('mode', mode);
-  }
-
   void getData() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     username = pref.getString('name');
@@ -126,7 +121,7 @@ class _ProfileState extends State<Profile> {
                                                       borderSide: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1.0),
                                                     ),
                                                     labelText: 'New username',
-                                                    labelStyle: const TextStyle(color: Colors.white),
+                                                    labelStyle: TextStyle(color: Theme.of(context).colorScheme.primary),
                                                     counterText: '',
                                                   ),
                                                 ),
@@ -409,7 +404,6 @@ class _ProfileState extends State<Profile> {
                               child: ElevatedButton(
                                 onPressed: () {
                                   Provider.of<ThemeProvider>(context, listen: false).toggleTheme();
-                                  saveMode("dark");
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Theme.of(context).colorScheme.primary,

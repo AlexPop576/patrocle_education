@@ -41,33 +41,35 @@ class _TestState extends State<Test> {
               const SizedBox(height: 12),
               Divider(color: Theme.of(context).colorScheme.primary, thickness: 3),
               const SizedBox(height: 24),
-              SizedBox(
-                height: 58,
-                width: double.infinity,
-                child: ClipRRect(
-                  borderRadius: const BorderRadius.all(Radius.circular(15)),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      setState(() {
-                        getAnswerFunction(1);
-                        selected = 1;
-                      });
-                    },
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15),
+              Column(
+                children: [
+                  SizedBox(
+                  height: 58,
+                  width: double.infinity,
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(15)),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          getAnswerFunction(1);
+                          selected = 1;
+                        });
+                      },
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        side: selected == 1 ? const BorderSide(color: Color.fromARGB(255, 102, 102, 255), width: 3) : BorderSide(color: Theme.of(context).colorScheme.primary, width: 3),
                       ),
-                      backgroundColor: Theme.of(context).colorScheme.primary,
-                      side: selected == 1 ? const BorderSide(color: Color.fromARGB(255, 102, 102, 255), width: 3) : BorderSide(color: Theme.of(context).colorScheme.primary, width: 3),
+                      child: Center(child: Text(answer1.toString(), style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30
+                        ))),
                     ),
-                    child: Center(child: Text(answer1.toString(), style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 30
-                      ))),
                   ),
                 ),
-              ),
               const SizedBox(height: 12,),
               SizedBox(
                 height: 58,
@@ -152,7 +154,9 @@ class _TestState extends State<Test> {
                   ),
                 ),
               ),
-              const SizedBox(height: 12,),      
+              const SizedBox(height: 12,),    
+              ]
+              ),  
             ],
           ),
         ),

@@ -13,30 +13,32 @@ class Trophies extends StatefulWidget {
 class _TrophiesState extends State<Trophies> {
 
   int? geographerTrophy = 0, historianTrophy = 0;
+  bool? Geographer, Historian, Curious, Knowledgeable, Expert, Champion, Untouchable, Legend;
+  List<String> trophiesName = [];
 
   @override
   void initState() {
     super.initState();
     getData();
-    if(geographerTrophy! >= 3){
-      trophiesName.remove("Locked");
-      trophiesName.add("Geographer");
-      print("da");
-    }else{
-      trophiesName.add("Locked");
-      print("nu");
-    }
   }
 
   void getData() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
-    if(geographerTrophy == null && historianTrophy == null){pref.setInt("Geographer", 0);}
-    geographerTrophy = pref.getInt('Geographer');
-    historianTrophy = pref.getInt('Historian');
+    trophiesName = pref.getStringList('trophyList')!;
   }
 
-  List<String> trophiesName = [
-    "Historian", "Curious", "Knowledgeable", "Expert", "Champion", "Untouchable", "Legend","Historian",
+  // void loadTrophies() async {
+  //   final SharedPreferences pref = await SharedPreferences.getInstance();
+  //   for(int index = 0; index<trophiesList.length;index++){
+  //     bool? isTrophy = pref.getBool(trophiesList[index]);
+  //     if(isTrophy == true){
+  //       trophiesName.add(trophiesList[index]);
+  //     }
+  //   }
+  // }
+
+  List<String> trophiesList = [
+    "Geographer", "Historian", "Curious", "Knowledgeable", "Expert", "Champion", "Untouchable", "Legend",
   ];
 
   List<Color> trophiesColor1 = [
@@ -44,7 +46,6 @@ class _TrophiesState extends State<Trophies> {
   const Color.fromARGB(255, 255, 0, 0),const Color.fromARGB(255, 255, 200, 0),
   const Color.fromARGB(255, 157, 0, 255),const Color.fromARGB(255, 0, 55, 255),
   const Color.fromARGB(255, 255, 132, 0), const Color.fromARGB(255, 255, 0, 234),
-  const Color.fromARGB(255, 129, 129, 129),
   ];
 
   List<Color> trophiesColor2 = [
@@ -52,7 +53,6 @@ class _TrophiesState extends State<Trophies> {
   const Color.fromARGB(120, 255, 0, 0),const Color.fromARGB(120, 255, 200, 0),
   const Color.fromARGB(120, 157, 0, 255),const Color.fromARGB(120, 0, 55, 255),
   const Color.fromARGB(120, 255, 132, 0), const Color.fromARGB(120, 255, 0, 234),
-  const Color.fromARGB(120, 129, 129, 129),
   ];
   
   @override
@@ -89,12 +89,12 @@ class _TrophiesState extends State<Trophies> {
                   return Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      TrophieTile(trophy: trophiesName[newIndex], color1: trophiesColor1[newIndex],color2: trophiesColor2[newIndex]),
-                      index < trophiesName.length~/2 ? TrophieTile(trophy: trophiesName[newIndex+1], color1: trophiesColor1[newIndex+1],color2: trophiesColor2[newIndex+1]) : Container(),
+                      TrophieTile(trophy: newIndex < trophiesName.length ? trophiesName[newIndex] : "Locked", color1: newIndex + 1< trophiesName.length ? trophiesColor1[newIndex] : const Color.fromARGB(255, 129, 129, 129),color2: newIndex + 1 < trophiesName.length ? trophiesColor2[newIndex] : const Color.fromARGB(120, 129, 129, 129)),
+                      TrophieTile(trophy: newIndex+1 < trophiesName.length ? trophiesName[newIndex+1] : "Locked", color1: newIndex + 2< trophiesName.length ? trophiesColor1[newIndex+1] : const Color.fromARGB(255, 129, 129, 129),color2: newIndex + 2 < trophiesName.length ? trophiesColor2[newIndex+1] : const Color.fromARGB(120, 129, 129, 129)),
                     ],
                   );
                 },
-                childCount: trophiesName.length ~/ 2 + trophiesName.length%2,
+                childCount: 4
                 ),
               ),
               const SliverToBoxAdapter(
