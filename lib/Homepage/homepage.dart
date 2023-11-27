@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'levels.dart';
 import 'trophies.dart';
@@ -38,11 +37,11 @@ class _HomepageState extends State<Homepage> {
         child: ClipRect(
           child: BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: 10.0,
-              sigmaY: 10.0,
+              sigmaX: 25.0,
+              sigmaY: 25.0,
             ),
             child: Opacity(
-              opacity: 0.9,
+              opacity: 0.7,
               child: AppBar(
                 flexibleSpace: Container(color: Colors.transparent),
                 backgroundColor: Theme.of(context).colorScheme.primary,
@@ -62,23 +61,23 @@ class _HomepageState extends State<Homepage> {
       ),
       body: pages[selectedIndex],
       bottomNavigationBar: SizedBox(
-        height: 70,
+        height: 68,
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(0), topRight: Radius.circular(0)),
           child: BackdropFilter(
             filter: ImageFilter.blur(
-              sigmaX: 10.0,
-              sigmaY: 10.0,
+              sigmaX: 25.0,
+              sigmaY: 25.0,
             ),
             child: Opacity(
-              opacity: 0.9,
+              opacity: 0.7,
               child: BottomNavigationBar(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   type: BottomNavigationBarType.fixed,
                   currentIndex: selectedIndex,
                   onTap: navigate,
-                  unselectedItemColor: Colors.white,
+                  unselectedItemColor: const Color.fromARGB(160, 255, 255, 255),
                   selectedItemColor: const Color.fromARGB(255, 102, 102, 255),
                   showUnselectedLabels: false,
                   items: [

@@ -5,13 +5,12 @@ import 'package:patrocle_education/Quizpage/lesson.dart';
 import 'package:patrocle_education/Quizpage/test.dart';
 import 'package:patrocle_education/Quizpage/test2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+//import 'package:audioplayers/audioplayers.dart';
 
+// ignore: must_be_immutable
 class Quizpage extends StatefulWidget {
-  final Function getDone;
-  final Function setDone;
-  String? continent;
-  String? country;
-  String? subject;
+  final Function getDone, setDone;
+  String? continent, country, subject;
   Quizpage(
       {super.key,
       this.country,
@@ -21,6 +20,7 @@ class Quizpage extends StatefulWidget {
       this.continent});
 
   @override
+  // ignore: no_logic_in_create_state
   State<Quizpage> createState() => _QuizpageState(
       country: country,
       subject: subject,
@@ -30,29 +30,30 @@ class Quizpage extends StatefulWidget {
 }
 
 class _QuizpageState extends State<Quizpage> {
-  final Function getDone;
-  final Function setDone;
-  String? continent;
-  String? country;
-  String? subject;
+  final Function getDone, setDone;
+  String? continent, country, subject;
+  int pageIndex = 0, correctAnswers = 0;
+  int? givenAnswer = 1,
+      iq = 0,
+      trophies = 0,
+      geographerTrophy = 0,
+      historianTrophy = 0;
+  List<String> trophyList = [];
+  //final player = AudioPlayer();
+
   _QuizpageState(
       {this.country,
       this.subject,
       required this.getDone,
       required this.setDone,
       this.continent});
-  int pageIndex = 0, correctAnswers = 0;
-  int? givenAnswer = 1, iq = 0, trophies = 0;
-  int? geographerTrophy = 0, historianTrophy = 0;
-
-  List<String> trophyList = [];
 
   @override
   void initState() {
     super.initState();
     getData();
   }
-
+  
   Future<void> saveTrophiesAndIQ(trophies, iq) async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setInt('trophies', trophies);
@@ -214,10 +215,10 @@ class _QuizpageState extends State<Quizpage> {
                         context: context,
                         builder: (BuildContext context) {
                           return Container(
-                            height: MediaQuery.of(context).size.height * 0.49,
+                            height: 700,
                             decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.background,
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                     topLeft: Radius.circular(25),
                                     topRight: Radius.circular(25))),
                             child: Padding(
@@ -498,8 +499,10 @@ class _QuizpageState extends State<Quizpage> {
                               givenAnswer) {
                             correct();
                             correctAnswers++;
+                            //player.play(AssetSource('correct_sfx.mp3'));
                           } else {
                             wrong();
+                            //player.play(AssetSource('incorrect_sfx.mp3'));
                           }
                         }
                         setState(() {

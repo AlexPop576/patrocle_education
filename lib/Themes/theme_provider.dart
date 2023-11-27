@@ -9,7 +9,7 @@ class ThemeProvider with ChangeNotifier {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     mode = pref.getString('name');
   }
-  
+
   ThemeData _themeData = darkMode;
 
   ThemeData get themeData => _themeData;
@@ -24,10 +24,10 @@ class ThemeProvider with ChangeNotifier {
     pref.setString('mode', mode);
   }
 
-  int getTheme(){
+  int getTheme() {
     if (_themeData == lightMode) {
       return 0;
-    }else{
+    } else {
       return 1;
     }
   }
@@ -36,7 +36,7 @@ class ThemeProvider with ChangeNotifier {
     if (_themeData == lightMode) {
       themeData = darkMode;
       saveMode("dark");
-    }else{
+    } else {
       themeData = lightMode;
       saveMode("light");
     }

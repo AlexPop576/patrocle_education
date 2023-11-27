@@ -6,12 +6,14 @@ class LevelDivider extends StatefulWidget {
   LevelDivider({super.key, this.continent});
 
   @override
+  // ignore: no_logic_in_create_state
   State<LevelDivider> createState() => _LevelDividerState(continent: continent);
 }
 
 class _LevelDividerState extends State<LevelDivider> {
   String? continent;
   _LevelDividerState({this.continent});
+  
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
