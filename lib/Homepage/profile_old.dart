@@ -14,8 +14,6 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   String? username, language = "English";
   Color backgroundColor = Colors.blue;
-  List<String> geography = [];
-  List<String> history = [];
   int? iq = 0,
       trophies = 0,
       selectedProfile = 0,
@@ -61,7 +59,6 @@ class _ProfileState extends State<Profile> {
       extendBody: true,
       backgroundColor: Theme.of(context).colorScheme.background,
       body: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
         slivers: [
           SliverToBoxAdapter(
             child: Column(
@@ -456,7 +453,7 @@ class _ProfileState extends State<Profile> {
                               "Statistics",
                               style: TextStyle(
                                   color: Theme.of(context).colorScheme.tertiary,
-                                  fontSize: 30,
+                                  fontSize: 27,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -490,7 +487,6 @@ class _ProfileState extends State<Profile> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            iq == 0 ? '0 IQ' :
                                             "$iq IQ",
                                             style: const TextStyle(
                                                 color: Color.fromARGB(
@@ -538,7 +534,6 @@ class _ProfileState extends State<Profile> {
                                       child: Column(
                                         children: [
                                           Text(
-                                            trophies == 0 ? '0/6' :
                                             '$trophies/6',
                                             style: const TextStyle(
                                                 color: Color.fromARGB(
@@ -574,118 +569,125 @@ class _ProfileState extends State<Profile> {
                         const SizedBox(
                           height: 8,
                         ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          Center(
-                              child: Text(
-                            "Geography",
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .tertiary,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w500),
-                          )
-                          ),
-                        ],
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Column(
-                        children: [
-                          Center(
-                              child: Text(
-                            "History",
-                            style: TextStyle(
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .tertiary,
-                                fontSize: 30,
-                                fontWeight: FontWeight.w500),
-                          )
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-              ],
-            ),
-          ),
-          geography.length + history.length == 0 ? SliverToBoxAdapter(
-            child: Center(child: Column(
-              children: [
-                const SizedBox(height: 20),
-                Text("No level has been completed yet...", style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
-                const SizedBox(height: 5),
-              ],
-            )),
-          ): SliverToBoxAdapter(child: Container(),),
-          SliverList(
-              delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                return Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 70.0, vertical: 7),
-                        child: Center(
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                                  Radius.circular(15)),
-                            child: geography.length > index ? Image.asset(
-                                    "assets/flags/${geography[index]}.png", height: 57) : Container(),
-                          ),
+                        //end
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Center(
+                                      child: Text(
+                                    "Geography",
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
+                                        fontSize: 27,
+                                        fontWeight: FontWeight.w500),
+                                  )),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Center(
+                                      child: Text(
+                                    "History",
+                                    style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
+                                        fontSize: 27,
+                                        fontWeight: FontWeight.w500),
+                                  )),
+                                  //ListView.builder(itemCount: 10,itemBuilder: (BuildContext context, int index){
+
+                                  //})
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 70.0, vertical: 7),
-                        child: Center(
-                          child: ClipRRect(
-                            borderRadius: const BorderRadius.all(
-                                  Radius.circular(15)),
-                            child: history.length > index ? Image.asset(
-                                    "assets/flags/${history[index]}.png", height: 57) : Container(),
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 70.0, vertical: 20),
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10)),
+                                        child: Center(
+                                            child: Image.asset(
+                                                "assets/flags/Romania.png"))),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 70.0, vertical: 20),
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10)),
+                                        child: Center(
+                                            child: Image.asset(
+                                                "assets/flags/Romania.png"))),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ),
-                  ],
-                );
-              },
-              childCount: geography.length>history.length ? geography.length : history.length),
-          ),
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                Padding(padding: EdgeInsets.symmetric(horizontal: 17.0),
-                  child: Center(
-                    child: Column(
-                      children: [
+                        Row(
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 70.0, vertical: 20),
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10)),
+                                        child: Center(
+                                            child: Image.asset(
+                                                "assets/flags/Spain.png"))),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 70.0, vertical: 5),
+                                    child: ClipRRect(
+                                        borderRadius: const BorderRadius.all(
+                                            Radius.circular(10)),
+                                        child: Center(
+                                            child: Image.asset(
+                                                "assets/flags/Germany.png"))),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        //End the sliver list here and start a new one
                         const SizedBox(
                           height: 8,
                         ),
@@ -702,7 +704,7 @@ class _ProfileState extends State<Profile> {
                               "Settings",
                               style: TextStyle(
                                   color: Theme.of(context).colorScheme.tertiary,
-                                  fontSize: 30,
+                                  fontSize: 27,
                                   fontWeight: FontWeight.w500),
                             ),
                           ],
@@ -759,7 +761,7 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         const SizedBox(
-                          height: 10,
+                          height: 12,
                         ),
                         SizedBox(
                           height: 58,
@@ -1127,16 +1129,16 @@ class _ProfileState extends State<Profile> {
                           ),
                         ),
                         const SizedBox(
-                          height: 90,
+                          height: 12,
                         ),
                       ],
                     ),
                   ),
-                )
-              ]
+                ),
+              ],
             ),
           ),
-        ]
+        ],
       ),
     );
   }

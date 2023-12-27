@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:patrocle_education/Components/level_divider.dart';
 import 'package:patrocle_education/Components/level_tile.dart';
+import 'package:patrocle_education/Homepage/add_test.dart';
 
 bool selected = false;
 
@@ -424,7 +426,11 @@ class _LevelsState extends State<Levels> {
                                     const BorderRadius.all(Radius.circular(10)),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    
+                                    Navigator.push(context, PageTransition(
+                                      child: AddTest(),
+                                      type: PageTransitionType.bottomToTop,
+                                      duration: const Duration(milliseconds: 400),
+                                    ),);
                                   },
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor:

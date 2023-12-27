@@ -1,11 +1,12 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
+import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:patrocle_education/Quizpage/lesson.dart';
 import 'package:patrocle_education/Quizpage/test.dart';
 import 'package:patrocle_education/Quizpage/test2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:audioplayers/audioplayers.dart';
+
 
 // ignore: must_be_immutable
 class Quizpage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _QuizpageState extends State<Quizpage> {
       geographerTrophy = 0,
       historianTrophy = 0;
   List<String> trophyList = [];
-  //final player = AudioPlayer();
+  final player = AudioPlayer();
 
   _QuizpageState(
       {this.country,
@@ -53,7 +54,7 @@ class _QuizpageState extends State<Quizpage> {
     super.initState();
     getData();
   }
-  
+
   Future<void> saveTrophiesAndIQ(trophies, iq) async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setInt('trophies', trophies);
@@ -499,7 +500,7 @@ class _QuizpageState extends State<Quizpage> {
                               givenAnswer) {
                             correct();
                             correctAnswers++;
-                            //player.play(AssetSource('correct_sfx.mp3'));
+                            //player.play('correct_sfx.mp3');
                           } else {
                             wrong();
                             //player.play(AssetSource('incorrect_sfx.mp3'));
