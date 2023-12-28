@@ -1,12 +1,11 @@
 import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
 import 'package:lottie/lottie.dart';
 import 'package:patrocle_education/Quizpage/lesson.dart';
 import 'package:patrocle_education/Quizpage/test.dart';
 import 'package:patrocle_education/Quizpage/test2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
+import 'package:just_audio/just_audio.dart';
 
 // ignore: must_be_immutable
 class Quizpage extends StatefulWidget {
@@ -40,7 +39,8 @@ class _QuizpageState extends State<Quizpage> {
       geographerTrophy = 0,
       historianTrophy = 0;
   List<String> trophyList = [];
-  final player = AudioPlayer();
+  late AudioPlayer _correct;
+  late AudioPlayer _incorrect;
 
   _QuizpageState(
       {this.country,
@@ -53,6 +53,23 @@ class _QuizpageState extends State<Quizpage> {
   void initState() {
     super.initState();
     getData();
+    _correct = AudioPlayer();
+    _incorrect = AudioPlayer();
+    _loadSound();
+  }
+
+  void _loadSound() async {
+    _correct = AudioPlayer();
+    _incorrect = AudioPlayer();
+    await _correct.setAsset('assets/correct_sfx.mp3');
+    await _incorrect.setAsset('assets/incorrect_sfx.mp3');
+  }
+
+  @override
+  void dispose() {
+    _correct.dispose();
+    _incorrect.dispose();
+    super.dispose();
   }
 
   Future<void> saveTrophiesAndIQ(trophies, iq) async {
@@ -216,7 +233,7 @@ class _QuizpageState extends State<Quizpage> {
                         context: context,
                         builder: (BuildContext context) {
                           return Container(
-                            height: 700,
+                            height: double.infinity,
                             decoration: BoxDecoration(
                                 color: Theme.of(context).colorScheme.background,
                                 borderRadius: const BorderRadius.only(
@@ -225,89 +242,92 @@ class _QuizpageState extends State<Quizpage> {
                             child: Padding(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 17),
-                              child: Column(children: [
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Lottie.network(
-                                    'https://lottie.host/491f2840-4c44-425a-924e-4fbc86237dfc/s8x6EccXsD.json',
-                                    frameRate: FrameRate.max,
-                                    height: 100),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 40),
-                                  child: Text(
-                                    "Do you want to end your learning session? If you quit, you`ll lose your progress.",
-                                    style: TextStyle(
-                                      color: Theme.of(context)
-                                          .colorScheme
-                                          .tertiary,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20,
-                                    ),
-                                    textAlign: TextAlign.center,
+                              child: SingleChildScrollView(
+                                physics: const BouncingScrollPhysics(),
+                                child: Column(children: [
+                                  const SizedBox(
+                                    height: 20,
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 40,
-                                ),
-                                SizedBox(
-                                  height: 58,
-                                  width: double.infinity,
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(15)),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 102, 102, 255),
+                                  Lottie.network(
+                                      'https://lottie.host/491f2840-4c44-425a-924e-4fbc86237dfc/s8x6EccXsD.json',
+                                      frameRate: FrameRate.max,
+                                      height: 100),
+                                  const SizedBox(
+                                    height: 30,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40),
+                                    child: Text(
+                                      "Do you want to end your learning session? If you quit, you`ll lose your progress.",
+                                      style: TextStyle(
+                                        color: Theme.of(context)
+                                            .colorScheme
+                                            .tertiary,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
                                       ),
-                                      child: const Center(
-                                          child: Text("Continue",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 30))),
+                                      textAlign: TextAlign.center,
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 12,
-                                ),
-                                SizedBox(
-                                  height: 58,
-                                  width: double.infinity,
-                                  child: ClipRRect(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(15)),
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        Navigator.pop(context);
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color.fromARGB(
-                                            255, 219, 64, 64),
+                                  const SizedBox(
+                                    height: 40,
+                                  ),
+                                  SizedBox(
+                                    height: 58,
+                                    width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(15)),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 102, 102, 255),
+                                        ),
+                                        child: const Center(
+                                            child: Text("Continue",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 30))),
                                       ),
-                                      child: const Center(
-                                          child: Text("Quit",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 30))),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                              ]),
+                                  const SizedBox(
+                                    height: 12,
+                                  ),
+                                  SizedBox(
+                                    height: 58,
+                                    width: double.infinity,
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.all(
+                                          Radius.circular(15)),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                          Navigator.pop(context);
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color.fromARGB(
+                                              255, 219, 64, 64),
+                                        ),
+                                        child: const Center(
+                                            child: Text("Quit",
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 30))),
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                ]),
+                              ),
                             ),
                           );
                         });
@@ -493,17 +513,19 @@ class _QuizpageState extends State<Quizpage> {
                 child: ClipRRect(
                   borderRadius: const BorderRadius.all(Radius.circular(15)),
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       if (givenAnswer != 0 && pageIndex != 11) {
                         if (pageIndex > 0 && pageIndex < 11) {
                           if (answersQuiz[country]?[subject]?[pageIndex - 1] ==
                               givenAnswer) {
                             correct();
                             correctAnswers++;
-                            //player.play('correct_sfx.mp3');
+                            await _correct.seek(Duration.zero);
+                            await _correct.play();
                           } else {
                             wrong();
-                            //player.play(AssetSource('incorrect_sfx.mp3'));
+                            await _incorrect.seek(Duration.zero);
+                            await _incorrect.play();
                           }
                         }
                         setState(() {
@@ -575,7 +597,7 @@ class FinishPage extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.07,
           ),
           SizedBox(
-              height: 290,
+              height: 220,
               child: Lottie.network(
                   'https://lottie.host/491f2840-4c44-425a-924e-4fbc86237dfc/s8x6EccXsD.json',
                   frameRate: FrameRate.max,
@@ -587,7 +609,7 @@ class FinishPage extends StatelessWidget {
               ? const Text(
                   "Try again",
                   style: TextStyle(
-                    fontSize: 60,
+                    fontSize: 45,
                     fontWeight: FontWeight.w900,
                     color: Color.fromARGB(255, 219, 64, 64),
                   ),
@@ -596,7 +618,7 @@ class FinishPage extends StatelessWidget {
                   ? const Text(
                       "Almost there!",
                       style: TextStyle(
-                        fontSize: 60,
+                        fontSize: 45,
                         fontWeight: FontWeight.w900,
                         color: Color.fromARGB(255, 219, 121, 64),
                       ),
@@ -605,7 +627,7 @@ class FinishPage extends StatelessWidget {
                       ? const Text(
                           "Good job!",
                           style: TextStyle(
-                            fontSize: 60,
+                            fontSize: 45,
                             fontWeight: FontWeight.w900,
                             color: Color.fromARGB(255, 216, 219, 64),
                           ),
@@ -614,7 +636,7 @@ class FinishPage extends StatelessWidget {
                           ? const Text(
                               "Fantastic!",
                               style: TextStyle(
-                                fontSize: 60,
+                                fontSize: 45,
                                 fontWeight: FontWeight.w900,
                                 color: Color.fromARGB(255, 196, 219, 64),
                               ),
@@ -623,7 +645,7 @@ class FinishPage extends StatelessWidget {
                               ? const Text(
                                   "Almost perfect!",
                                   style: TextStyle(
-                                    fontSize: 60,
+                                    fontSize: 45,
                                     fontWeight: FontWeight.w900,
                                     color: Color.fromARGB(255, 131, 219, 64),
                                   ),
@@ -631,7 +653,7 @@ class FinishPage extends StatelessWidget {
                               : const Text(
                                   "Perfect!",
                                   style: TextStyle(
-                                    fontSize: 60,
+                                    fontSize: 45,
                                     fontWeight: FontWeight.w900,
                                     color: Color.fromARGB(255, 77, 219, 64),
                                   ),
@@ -640,8 +662,10 @@ class FinishPage extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "You`ve got $correctAnswers correct answers!",
-            style: TextStyle(fontSize: 30),
+            correctAnswers != 1
+                ? "You`ve got $correctAnswers correct answers!"
+                : "You`ve got 1 correct answer!",
+            style: TextStyle(fontSize: 23),
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.07,
@@ -656,13 +680,13 @@ class FinishPage extends StatelessWidget {
                     margin: const EdgeInsets.fromLTRB(0, 0, 8.3, 0),
                     //padding: const EdgeInsets.all(2.8),
                     decoration: const BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      borderRadius: BorderRadius.all(Radius.circular(15)),
                       color: Color.fromARGB(255, 102, 102, 255),
                     ),
                     child: Center(
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Text("TOTAL IQ",
@@ -685,7 +709,7 @@ class FinishPage extends StatelessWidget {
                                 child: Center(
                                     child: Text(
                                   "+${correctAnswers * 10} IQ",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       color: Color.fromARGB(255, 102, 102, 255),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 27),
@@ -709,7 +733,7 @@ class FinishPage extends StatelessWidget {
                       color: correctAnswers == 0 ||
                               correctAnswers == 1 ||
                               correctAnswers == 2
-                          ? Color.fromARGB(255, 219, 64, 64)
+                          ? const Color.fromARGB(255, 219, 64, 64)
                           : correctAnswers == 3 || correctAnswers == 4
                               ? const Color.fromARGB(255, 219, 121, 64)
                               : correctAnswers == 5 || correctAnswers == 6
@@ -725,7 +749,7 @@ class FinishPage extends StatelessWidget {
                     child: Center(
                       child: Column(
                         children: [
-                          SizedBox(
+                          const SizedBox(
                             height: 4,
                           ),
                           Text("SCORE",
@@ -752,7 +776,8 @@ class FinishPage extends StatelessWidget {
                                       color: correctAnswers == 0 ||
                                               correctAnswers == 1 ||
                                               correctAnswers == 2
-                                          ? Color.fromARGB(255, 219, 64, 64)
+                                          ? const Color.fromARGB(
+                                              255, 219, 64, 64)
                                           : correctAnswers == 3 ||
                                                   correctAnswers == 4
                                               ? const Color.fromARGB(

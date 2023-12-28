@@ -131,306 +131,309 @@ class _ProfileState extends State<Profile> {
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 17),
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            Text("Edit profile",
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .tertiary,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 30,
-                                                )),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Divider(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              thickness: 3,
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              child: TextField(
-                                                controller: usernameController,
-                                                cursorColor: Colors.white,
-                                                maxLength: 10,
-                                                decoration: InputDecoration(
-                                                  focusedBorder:
-                                                      const OutlineInputBorder(
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                15)),
-                                                    borderSide: BorderSide(
-                                                        color: Colors.white,
-                                                        width: 2.0),
-                                                  ),
-                                                  enabledBorder:
-                                                      OutlineInputBorder(
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(
-                                                                15)),
-                                                    borderSide: BorderSide(
+                                        child: SingleChildScrollView(
+                                          physics: const BouncingScrollPhysics(),
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text("Edit profile",
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .tertiary,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 30,
+                                                  )),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Divider(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                                thickness: 3,
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                child: TextField(
+                                                  controller: usernameController,
+                                                  cursorColor: Colors.white,
+                                                  maxLength: 10,
+                                                  decoration: InputDecoration(
+                                                    focusedBorder:
+                                                        const OutlineInputBorder(
+                                                      borderRadius:
+                                                          BorderRadius.all(
+                                                              Radius.circular(
+                                                                  15)),
+                                                      borderSide: BorderSide(
+                                                          color: Colors.white,
+                                                          width: 2.0),
+                                                    ),
+                                                    enabledBorder:
+                                                        OutlineInputBorder(
+                                                      borderRadius:
+                                                          const BorderRadius.all(
+                                                              Radius.circular(
+                                                                  15)),
+                                                      borderSide: BorderSide(
+                                                          color: Theme.of(context)
+                                                              .colorScheme
+                                                              .primary,
+                                                          width: 1.0),
+                                                    ),
+                                                    labelText: 'New username',
+                                                    labelStyle: TextStyle(
                                                         color: Theme.of(context)
                                                             .colorScheme
-                                                            .primary,
-                                                        width: 1.0),
+                                                            .primary),
+                                                    counterText: '',
                                                   ),
-                                                  labelText: 'New username',
-                                                  labelStyle: TextStyle(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .primary),
-                                                  counterText: '',
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Row(children: [
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 4),
-                                                child: SizedBox(
-                                                    height: 150,
-                                                    width: 130,
-                                                    child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
-                                                        ),
-                                                        backgroundColor:
-                                                            Colors.blue,
-                                                        side: selectedProfile ==
-                                                                0
-                                                            ? const BorderSide(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        102,
-                                                                        102,
-                                                                        255),
-                                                                width: 3)
-                                                            : const BorderSide(
-                                                                color:
-                                                                    Colors.blue,
-                                                                width: 3),
-                                                      ),
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          selectedProfile = 0;
-                                                        });
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .fromLTRB(
-                                                                0, 35, 0, 0),
-                                                        child: Image.asset(
-                                                            "assets/Face.png"),
-                                                      ),
-                                                    )),
+                                              const SizedBox(
+                                                height: 10,
                                               ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 4),
-                                                child: SizedBox(
-                                                    height: 150,
-                                                    width: 130,
-                                                    child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
+                                              Row(children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                          horizontal: 4),
+                                                  child: SizedBox(
+                                                      height: 150,
+                                                      width: 130,
+                                                      child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(15),
+                                                          ),
+                                                          backgroundColor:
+                                                              Colors.blue,
+                                                          side: selectedProfile ==
+                                                                  0
+                                                              ? const BorderSide(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          102,
+                                                                          102,
+                                                                          255),
+                                                                  width: 3)
+                                                              : const BorderSide(
+                                                                  color:
+                                                                      Colors.blue,
+                                                                  width: 3),
                                                         ),
-                                                        backgroundColor:
-                                                            Colors.red,
-                                                        side: selectedProfile ==
-                                                                1
-                                                            ? const BorderSide(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        102,
-                                                                        102,
-                                                                        255),
-                                                                width: 3)
-                                                            : const BorderSide(
-                                                                color:
-                                                                    Colors.red,
-                                                                width: 3),
-                                                      ),
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          selectedProfile = 1;
-                                                        });
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .fromLTRB(
-                                                                0, 35, 0, 0),
-                                                        child: Image.asset(
-                                                            "assets/Face.png"),
-                                                      ),
-                                                    )),
-                                              ),
-                                              Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 4),
-                                                child: SizedBox(
-                                                    height: 150,
-                                                    width: 130,
-                                                    child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(15),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            selectedProfile = 0;
+                                                          });
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
+                                                                  0, 35, 0, 0),
+                                                          child: Image.asset(
+                                                              "assets/Face.png"),
                                                         ),
-                                                        backgroundColor:
-                                                            Colors.green,
-                                                        side: selectedProfile ==
-                                                                2
-                                                            ? const BorderSide(
-                                                                color: Color
-                                                                    .fromARGB(
-                                                                        255,
-                                                                        102,
-                                                                        102,
-                                                                        255),
-                                                                width: 3)
-                                                            : const BorderSide(
-                                                                color: Colors
-                                                                    .green,
-                                                                width: 3),
-                                                      ),
-                                                      onPressed: () {
-                                                        setState(() {
-                                                          selectedProfile = 2;
-                                                        });
-                                                      },
-                                                      child: Padding(
-                                                        padding:
-                                                            const EdgeInsets
-                                                                    .fromLTRB(
-                                                                0, 35, 0, 0),
-                                                        child: Image.asset(
-                                                            "assets/Face.png"),
-                                                      ),
-                                                    )),
+                                                      )),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                          horizontal: 4),
+                                                  child: SizedBox(
+                                                      height: 150,
+                                                      width: 130,
+                                                      child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(15),
+                                                          ),
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          side: selectedProfile ==
+                                                                  1
+                                                              ? const BorderSide(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          102,
+                                                                          102,
+                                                                          255),
+                                                                  width: 3)
+                                                              : const BorderSide(
+                                                                  color:
+                                                                      Colors.red,
+                                                                  width: 3),
+                                                        ),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            selectedProfile = 1;
+                                                          });
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
+                                                                  0, 35, 0, 0),
+                                                          child: Image.asset(
+                                                              "assets/Face.png"),
+                                                        ),
+                                                      )),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.symmetric(
+                                                          horizontal: 4),
+                                                  child: SizedBox(
+                                                      height: 150,
+                                                      width: 130,
+                                                      child: ElevatedButton(
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(15),
+                                                          ),
+                                                          backgroundColor:
+                                                              Colors.green,
+                                                          side: selectedProfile ==
+                                                                  2
+                                                              ? const BorderSide(
+                                                                  color: Color
+                                                                      .fromARGB(
+                                                                          255,
+                                                                          102,
+                                                                          102,
+                                                                          255),
+                                                                  width: 3)
+                                                              : const BorderSide(
+                                                                  color: Colors
+                                                                      .green,
+                                                                  width: 3),
+                                                        ),
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            selectedProfile = 2;
+                                                          });
+                                                        },
+                                                        child: Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .fromLTRB(
+                                                                  0, 35, 0, 0),
+                                                          child: Image.asset(
+                                                              "assets/Face.png"),
+                                                        ),
+                                                      )),
+                                                ),
+                                              ]),
+                                              const SizedBox(
+                                                height: 30,
                                               ),
-                                            ]),
-                                            const SizedBox(
-                                              height: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(15)),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                    setState(() {
-                                                      username =
-                                                          usernameController
-                                                              .text;
-                                                      saveNameColor(
-                                                          usernameController
-                                                              .text,
-                                                          selectedProfile);
-                                                      if (selectedProfile ==
-                                                          0) {
-                                                        backgroundColor =
-                                                            Colors.blue;
-                                                      } else if (selectedProfile ==
-                                                          1) {
-                                                        backgroundColor =
-                                                            Colors.red;
-                                                      } else if (selectedProfile ==
-                                                          2) {
-                                                        backgroundColor =
-                                                            Colors.green;
-                                                      }
-                                                    });
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                            255, 102, 102, 255),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                      setState(() {
+                                                        username =
+                                                            usernameController
+                                                                .text;
+                                                        saveNameColor(
+                                                            usernameController
+                                                                .text,
+                                                            selectedProfile);
+                                                        if (selectedProfile ==
+                                                            0) {
+                                                          backgroundColor =
+                                                              Colors.blue;
+                                                        } else if (selectedProfile ==
+                                                            1) {
+                                                          backgroundColor =
+                                                              Colors.red;
+                                                        } else if (selectedProfile ==
+                                                            2) {
+                                                          backgroundColor =
+                                                              Colors.green;
+                                                        }
+                                                      });
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      backgroundColor:
+                                                          const Color.fromARGB(
+                                                              255, 102, 102, 255),
+                                                    ),
+                                                    child: const Center(
+                                                        child: Text("Save",
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              fontSize: 30,
+                                                            ))),
                                                   ),
-                                                  child: const Center(
-                                                      child: Text("Save",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 30,
-                                                          ))),
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 12,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(15)),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                            255, 219, 64, 64),
+                                              const SizedBox(
+                                                height: 12,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      backgroundColor:
+                                                          const Color.fromARGB(
+                                                              255, 219, 64, 64),
+                                                    ),
+                                                    child: const Center(
+                                                        child: Text("Cancel",
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              fontSize: 30,
+                                                            ))),
                                                   ),
-                                                  child: const Center(
-                                                      child: Text("Cancel",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 30,
-                                                          ))),
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                          ],
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     );
@@ -786,318 +789,321 @@ class _ProfileState extends State<Profile> {
                                       child: Padding(
                                         padding: const EdgeInsets.symmetric(
                                             horizontal: 17),
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                            Text("Select language",
-                                                style: TextStyle(
-                                                  color: Theme.of(context)
-                                                      .colorScheme
-                                                      .tertiary,
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 30,
-                                                )),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            Divider(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              thickness: 3,
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(15)),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      selectedLanguage = 1;
-                                                    });
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
-                                                    ),
-                                                    backgroundColor:
-                                                        Theme.of(context)
-                                                            .colorScheme
-                                                            .primary,
-                                                    side: selectedLanguage == 1
-                                                        ? const BorderSide(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    102,
-                                                                    102,
-                                                                    255),
-                                                            width: 3)
-                                                        : BorderSide(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .primary,
-                                                            width: 3),
-                                                  ),
-                                                  child: const Center(
-                                                      child: Text("English",
-                                                          style: TextStyle(
+                                        child: SingleChildScrollView(
+                                          physics: const BouncingScrollPhysics(),
+                                          child: Column(
+                                            children: [
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                              Text("Select language",
+                                                  style: TextStyle(
+                                                    color: Theme.of(context)
+                                                        .colorScheme
+                                                        .tertiary,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 30,
+                                                  )),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              Divider(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary,
+                                                thickness: 3,
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        selectedLanguage = 1;
+                                                      });
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15),
+                                                      ),
+                                                      backgroundColor:
+                                                          Theme.of(context)
+                                                              .colorScheme
+                                                              .primary,
+                                                      side: selectedLanguage == 1
+                                                          ? const BorderSide(
                                                               color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 30))),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(15)),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      selectedLanguage = 2;
-                                                    });
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      102,
+                                                                      102,
+                                                                      255),
+                                                              width: 3)
+                                                          : BorderSide(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                              width: 3),
                                                     ),
-                                                    backgroundColor:
-                                                        Theme.of(context)
-                                                            .colorScheme
-                                                            .primary,
-                                                    side: selectedLanguage == 2
-                                                        ? const BorderSide(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    102,
-                                                                    102,
-                                                                    255),
-                                                            width: 3)
-                                                        : BorderSide(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .primary,
-                                                            width: 3),
+                                                    child: const Center(
+                                                        child: Text("English",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 30))),
                                                   ),
-                                                  child: const Center(
-                                                      child: Text("Română",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 30))),
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(15)),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      selectedLanguage = 3;
-                                                    });
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        selectedLanguage = 2;
+                                                      });
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15),
+                                                      ),
+                                                      backgroundColor:
+                                                          Theme.of(context)
+                                                              .colorScheme
+                                                              .primary,
+                                                      side: selectedLanguage == 2
+                                                          ? const BorderSide(
+                                                              color:
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      102,
+                                                                      102,
+                                                                      255),
+                                                              width: 3)
+                                                          : BorderSide(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                              width: 3),
                                                     ),
-                                                    backgroundColor:
-                                                        Theme.of(context)
-                                                            .colorScheme
-                                                            .primary,
-                                                    side: selectedLanguage == 3
-                                                        ? const BorderSide(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    102,
-                                                                    102,
-                                                                    255),
-                                                            width: 3)
-                                                        : BorderSide(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .primary,
-                                                            width: 3),
+                                                    child: const Center(
+                                                        child: Text("Română",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 30))),
                                                   ),
-                                                  child: const Center(
-                                                      child: Text("Español",
-                                                          style: TextStyle(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 30))),
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 10,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(15)),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    setState(() {
-                                                      selectedLanguage = 4;
-                                                    });
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              15),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        selectedLanguage = 3;
+                                                      });
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15),
+                                                      ),
+                                                      backgroundColor:
+                                                          Theme.of(context)
+                                                              .colorScheme
+                                                              .primary,
+                                                      side: selectedLanguage == 3
+                                                          ? const BorderSide(
+                                                              color:
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      102,
+                                                                      102,
+                                                                      255),
+                                                              width: 3)
+                                                          : BorderSide(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                              width: 3),
                                                     ),
-                                                    backgroundColor:
-                                                        Theme.of(context)
-                                                            .colorScheme
-                                                            .primary,
-                                                    side: selectedLanguage == 4
-                                                        ? const BorderSide(
-                                                            color:
-                                                                Color.fromARGB(
-                                                                    255,
-                                                                    102,
-                                                                    102,
-                                                                    255),
-                                                            width: 3)
-                                                        : BorderSide(
-                                                            color: Theme.of(
-                                                                    context)
-                                                                .colorScheme
-                                                                .primary,
-                                                            width: 3),
+                                                    child: const Center(
+                                                        child: Text("Español",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 30))),
                                                   ),
-                                                  child: const Center(
-                                                      child: Text("Magyar",
-                                                          style: TextStyle(
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        selectedLanguage = 4;
+                                                      });
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15),
+                                                      ),
+                                                      backgroundColor:
+                                                          Theme.of(context)
+                                                              .colorScheme
+                                                              .primary,
+                                                      side: selectedLanguage == 4
+                                                          ? const BorderSide(
                                                               color:
-                                                                  Colors.white,
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      102,
+                                                                      102,
+                                                                      255),
+                                                              width: 3)
+                                                          : BorderSide(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                              width: 3),
+                                                    ),
+                                                    child: const Center(
+                                                        child: Text("Magyar",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 30))),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                height: 30,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      backgroundColor:
+                                                          const Color.fromARGB(
+                                                              255, 102, 102, 255),
+                                                    ),
+                                                    child: const Center(
+                                                        child: Text("Save",
+                                                            style: TextStyle(
+                                                              color: Colors.white,
                                                               fontWeight:
-                                                                  FontWeight
-                                                                      .bold,
-                                                              fontSize: 30))),
-                                                ),
-                                              ),
-                                            ),
-                                            const SizedBox(
-                                              height: 30,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(15)),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                            255, 102, 102, 255),
+                                                                  FontWeight.bold,
+                                                              fontSize: 30,
+                                                            ))),
                                                   ),
-                                                  child: const Center(
-                                                      child: Text("Save",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 30,
-                                                          ))),
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 12,
-                                            ),
-                                            SizedBox(
-                                              height: 58,
-                                              width: double.infinity,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    const BorderRadius.all(
-                                                        Radius.circular(15)),
-                                                child: ElevatedButton(
-                                                  onPressed: () {
-                                                    Navigator.pop(context);
-                                                  },
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    backgroundColor:
-                                                        const Color.fromARGB(
-                                                            255, 219, 64, 64),
+                                              const SizedBox(
+                                                height: 12,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      Navigator.pop(context);
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      backgroundColor:
+                                                          const Color.fromARGB(
+                                                              255, 219, 64, 64),
+                                                    ),
+                                                    child: const Center(
+                                                        child: Text("Cancel",
+                                                            style: TextStyle(
+                                                              color: Colors.white,
+                                                              fontWeight:
+                                                                  FontWeight.bold,
+                                                              fontSize: 30,
+                                                            ))),
                                                   ),
-                                                  child: const Center(
-                                                      child: Text("Cancel",
-                                                          style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight.bold,
-                                                            fontSize: 30,
-                                                          ))),
                                                 ),
                                               ),
-                                            ),
-                                            const SizedBox(
-                                              height: 20,
-                                            ),
-                                          ],
+                                              const SizedBox(
+                                                height: 20,
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     );

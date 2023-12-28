@@ -358,104 +358,111 @@ class _LevelsState extends State<Levels> {
             LevelDivider(continent: "Add test"),
             SliverToBoxAdapter(
               child: SizedBox(
-            height: 190,
-            width: double.infinity,
-            child: Container(
-              decoration: const BoxDecoration(
-                  color: Color.fromARGB(255, 79, 79, 79),
-                  borderRadius: 
-                    BorderRadius.all(Radius.circular(15))),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(15)),
-                                child: Image.asset(
-                                  'assets/Flags/addFlag.png',
-                                  height: 100,
-                                )),
-                            const SizedBox(
-                              height: 10,
+                height: 190,
+                width: double.infinity,
+                child: Container(
+                  decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 79, 79, 79),
+                      borderRadius: BorderRadius.all(Radius.circular(15))),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(15)),
+                                    child: Image.asset(
+                                      'assets/Flags/addFlag.png',
+                                      height: 100,
+                                    )),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                const Expanded(
+                                  child: Text(
+                                    "Create your test!",
+                                    style: TextStyle(
+                                        shadows: <Shadow>[
+                                          Shadow(
+                                            offset: Offset(3.0, 3.0),
+                                            blurRadius: 3.0,
+                                            color: Color.fromARGB(125, 0, 0, 0),
+                                          ),
+                                          Shadow(
+                                            offset: Offset(3.0, 3.0),
+                                            blurRadius: 3.0,
+                                            color: Color.fromARGB(0, 0, 0, 255),
+                                          ),
+                                        ],
+                                        color: Colors.white,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ],
                             ),
-                            const Expanded(
-                              child: Text(
-                                "Create your test!",
-                                style: TextStyle(
-                                    shadows: <Shadow>[
-                                      Shadow(
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 3.0,
-                                        color: Color.fromARGB(125, 0, 0, 0),
-                                      ),
-                                      Shadow(
-                                        offset: Offset(3.0, 3.0),
-                                        blurRadius: 3.0,
-                                        color: Color.fromARGB(0, 0, 0, 255),
-                                      ),
-                                    ],
-                                    color: Colors.white,
-                                    fontSize: 32,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      child: VerticalDivider(thickness: 3, color: Colors.white),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Padding(
-                        padding: const EdgeInsets.all(6.0),
-                        child: SizedBox(
-                            height: 160,
+                        const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 10),
+                          child: VerticalDivider(
+                              thickness: 3, color: Colors.white),
+                        ),
+                        Expanded(
+                          flex: 1,
+                          child: Padding(
+                            padding: const EdgeInsets.all(6.0),
+                            child: SizedBox(
+                              height: 160,
                               child: ClipRRect(
                                 borderRadius:
                                     const BorderRadius.all(Radius.circular(10)),
                                 child: ElevatedButton(
                                   onPressed: () {
-                                    Navigator.push(context, PageTransition(
-                                      child: AddTest(),
-                                      type: PageTransitionType.bottomToTop,
-                                      duration: const Duration(milliseconds: 400),
-                                    ),);
+                                    Navigator.push(
+                                      context,
+                                      PageTransition(
+                                        child: AddTest(),
+                                        type: PageTransitionType.bottomToTop,
+                                        duration:
+                                            const Duration(milliseconds: 400),
+                                      ),
+                                    );
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        const Color.fromARGB(255, 102, 102, 255),
+                                    backgroundColor: const Color.fromARGB(
+                                        255, 102, 102, 255),
                                   ),
                                   child: Center(
-                                      child:
-                                        Icon(Icons.add,
-                                          size: 50,
-                                          color: Colors.white,
-                                        ),
-                                    
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 50,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
                             ),
-                      ),
-                    )
-                  ],
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-            ),
-            SliverToBoxAdapter(child: SizedBox(height: 120,),)
+            const SliverToBoxAdapter(
+              child: SizedBox(
+                height: 100,
+              ),
+            )
           ],
         ),
       ),
