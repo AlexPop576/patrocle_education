@@ -4,16 +4,20 @@ import 'package:patrocle_education/Components/trophie_tile.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Trophies extends StatefulWidget {
-  const Trophies({super.key});
+  int? index;
+  Trophies({super.key, this.index});
 
   @override
-  State<Trophies> createState() => _TrophiesState();
+  // ignore: no_logic_in_create_state
+  State<Trophies> createState() => _TrophiesState(index: index);
 }
 
 class _TrophiesState extends State<Trophies> {
-  int? geographerTrophy = 0, historianTrophy = 0, c=0;
+  int? geographerTrophy = 0, historianTrophy = 0, c = 0;
   List<String> trophiesName = [];
   int? selectedLanguage = 1;
+  int? index;
+  _TrophiesState({this.index});
 
   @override
   void initState() {
@@ -28,6 +32,7 @@ class _TrophiesState extends State<Trophies> {
     //pref.setStringList('trophyList', trophiesList);
     trophiesName = pref.getStringList('trophyList')!;
     //if(pref.getInt('Geographer')==1){trophiesName.add("Geographer");}
+
     selectedLanguage = pref.getInt('language');
   }
 
@@ -48,53 +53,53 @@ class _TrophiesState extends State<Trophies> {
   ];
 
   Map<int, Map<String, String>> languageText = {
-    1 : {
-      "Your trophies" : "Your trophies",
-      "Locked" : "Locked",
-      "Geographer" : "Geographer",
-      "Historian" : "Historian",
-      "Curious" : "Curious",
-      "Knowledgeable" : "Knowledgeable",
-      "Expert" : "Expert",
-      "Champion" : "Champion",
-      "Untouchable" : "Untouchable",
-      "Legend" : "Legend",
+    1: {
+      "Your trophies": "Your trophies",
+      "Locked": "Locked",
+      "Geographer": "Geographer",
+      "Historian": "Historian",
+      "Curious": "Curious",
+      "Knowledgeable": "Knowledgeable",
+      "Expert": "Expert",
+      "Champion": "Champion",
+      "Untouchable": "Untouchable",
+      "Legend": "Legend",
     },
-    2 : {
-      "Your trophies" : "Trofeele tale",
-      "Locked" : "Blocat",
-      "Geographer" : "Geograf",
-      "Historian" : "Istoric",
-      "Curious" : "Curios",
-      "Knowledgeable" : "Cunoscător",
-      "Expert" : "Expert",
-      "Champion" : "Campion",
-      "Untouchable" : "De neatis",
-      "Legend" : "Legendă",
+    2: {
+      "Your trophies": "Trofeele tale",
+      "Locked": "Blocat",
+      "Geographer": "Geograf",
+      "Historian": "Istoric",
+      "Curious": "Curios",
+      "Knowledgeable": "Cunoscător",
+      "Expert": "Expert",
+      "Champion": "Campion",
+      "Untouchable": "De neatis",
+      "Legend": "Legendă",
     },
-    3 : {
-      "Your trophies" : "Your trophies",
-      "Locked" : "Locked",
-      "Geographer" : "Geographer",
-      "Historian" : "Historian",
-      "Curious" : "Curious",
-      "Knowledgeable" : "Knowledgeable",
-      "Expert" : "Expert",
-      "Champion" : "Champion",
-      "Untouchable" : "Untouchable",
-      "Legend" : "Legend",
+    3: {
+      "Your trophies": "Your trophies",
+      "Locked": "Locked",
+      "Geographer": "Geographer",
+      "Historian": "Historian",
+      "Curious": "Curious",
+      "Knowledgeable": "Knowledgeable",
+      "Expert": "Expert",
+      "Champion": "Champion",
+      "Untouchable": "Untouchable",
+      "Legend": "Legend",
     },
-    4 : {
-      "Your trophies" : "Your trophies",
-      "Locked" : "Locked",
-      "Geographer" : "Geographer",
-      "Historian" : "Historian",
-      "Curious" : "Curious",
-      "Knowledgeable" : "Knowledgeable",
-      "Expert" : "Expert",
-      "Champion" : "Champion",
-      "Untouchable" : "Untouchable",
-      "Legend" : "Legend",
+    4: {
+      "Your trophies": "Your trophies",
+      "Locked": "Locked",
+      "Geographer": "Geographer",
+      "Historian": "Historian",
+      "Curious": "Curious",
+      "Knowledgeable": "Knowledgeable",
+      "Expert": "Expert",
+      "Champion": "Champion",
+      "Untouchable": "Untouchable",
+      "Legend": "Legend",
     },
   };
 
@@ -146,13 +151,17 @@ class _TrophiesState extends State<Trophies> {
                     ),
                     Expanded(
                         child: Text(
-                      "Your trophies",
+                          languageText[selectedLanguage]!["Your trophies"]! ??
+                          "Your trophies",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
                           fontWeight: FontWeight.bold,
-                          fontSize: 40),
-                    ))
-                  ]),
+                          fontSize: 40
+                          ),
+                        )
+                      )
+                    ]
+                  ),
                   const SizedBox(
                     height: 40,
                   ),
@@ -204,14 +213,15 @@ class _TrophiesState extends State<Trophies> {
                   setState(() {
                     ask();
                   });
-                  c=c!+1;
+                  c = c! + 1;
                 },
                 icon: const Icon(Icons.abc))),
         const SliverToBoxAdapter(
           child: SizedBox(height: 100),
         ),
         SliverToBoxAdapter(
-          child: Text(c.toString()+trophiesName.toString()),//SizedBox(height: 100),
+          child: Text(
+              c.toString() + trophiesName.toString()), //SizedBox(height: 100),
         ),
         const SliverToBoxAdapter(
           child: SizedBox(height: 10000),

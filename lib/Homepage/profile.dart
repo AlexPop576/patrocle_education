@@ -94,7 +94,6 @@ class _ProfileState extends State<Profile> {
   void initState() {
     super.initState();
     getData();
-    saveLanguage(selectedLanguage);
   }
 
   Future<void> saveNameColor(name, color) async {
@@ -113,7 +112,11 @@ class _ProfileState extends State<Profile> {
     username = pref.getString('name');
     color = pref.getInt('color');
     iq = pref.getInt('iq');
-    //selectedLanguage = pref.getInt('language');
+    if(pref.getInt('language')!=null){
+      selectedLanguage = pref.getInt('language');
+    }else{
+      selectedLanguage = 1;
+    }
     trophies = pref.getInt('trophies');
     if (iq == null && trophies == null) {
       pref.setInt('iq', 0);
