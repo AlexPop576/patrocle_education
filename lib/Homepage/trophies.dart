@@ -101,6 +101,19 @@ class _TrophiesState extends State<Trophies> {
       "Untouchable" : "Neamhthocach",
       "Legend" : "Scealaí",
     },
+    5 : {
+      "Your trophies" : "Vos trophées",
+      "Locked" : "Verrouillé",
+      "Geographer" : "Géographe",
+      "Historian" : "Historien",
+      "Curious" : "Curieux",
+      "Knowledgeable" : "Savant",
+      "Expert" : "Expert",
+      "Champion" : "Champion",
+      "Untouchable" : "Intouchable",
+      "Legend" : "Légende",
+    },
+    
   };
 
   List<Color> trophiesColor1 = [

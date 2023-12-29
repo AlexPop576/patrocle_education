@@ -89,6 +89,22 @@ class _ProfileState extends State<Profile> {
       "Light mode" : "Világos mód",
       "Dark mode" : "Sötét mód",
     },
+    5 : {
+      "Edit profile " : "Modifier le profil",
+      "Statistics" : "Statistiques",
+      "New username" : "Nouveau nom d'utilisateur",
+      "Save" : "Sauvegarder",
+      "Cancel" : "Annuler",
+      "Total IQ" : "IQ total",
+      "Trophies" : "Trophées",
+      "Geography" : "Géographie",
+      "History" : "Histoire",
+      "No level" : "Aucun niveau n'a encore été complété...",
+      "Settings" : "Paramètres",
+      "Select language" : "Sélectionner la langue",
+      "Light mode" : "Mode clair",
+      "Dark mode" : "Mode sombre",
+    }
   };
 
   @override

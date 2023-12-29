@@ -42,6 +42,106 @@ class _QuizpageState extends State<Quizpage> {
   late AudioPlayer _correct;
   late AudioPlayer _incorrect;
 
+ Map<int,Map<String,String> > languageText = {
+    1 : {
+      "Play" : "Play",
+      "Continue" : "Continue",
+      "Check" : "Check",
+      "Quit" : "Quit",
+      "Wrong!" : "Wrong!",
+      "Well done!" : "Well done!",
+      "Do you want to end your learning session? If you quit, you`ll lose your progress." : "Do you want to end your learning session? If you quit, you`ll lose your progress.",
+      "Try again" : "Try again",
+      "Almost there!" : "Almost there!",
+      "Good job!" : "Good job!",
+      "Fantastic!" : "Fantastic!",
+      "Almost perfect!" : "Almost perfect!",
+      "Perfect!" : "Perfect!",
+      "You`ve got correct answers!" : "You`ve got correct answers!",
+      "You`ve got 1 correct answer!" : "You`ve got 1 correct answer!",
+      "TOTAL IQ" : "TOTAL IQ",
+      "SCORE" : "SCORE",
+
+    },
+    2 : {
+      "Play" : "Joacă",
+      "Continue" : "Continuă",
+      "Check" : "Verifică",
+      "Quit" : "Renunță",
+      "Wrong!" : "Greșit!",
+      "Well done!" : "Foarte bine!",
+      "Do you want to end your learning session? If you quit, you`ll lose your progress." : "Doriți să încheiați sesiunea de învățare? Dacă renunți, vei pierde progresul.",
+      "Try again" : "Încearcă din nou",
+      "Almost there!" : "Aproape!",
+      "Good job!" : "Bine!",
+      "Fantastic!" : "Fantastic!",
+      "Almost perfect!" : "Aproape perfect!",
+      "Perfect!" : "Perfect!",
+      "You`ve got correct answers!" : "Ai răspunsuri corecte!",
+      "You`ve got 1 correct answer!" : "Ai 1 răspuns corect!",
+      "TOTAL IQ" : "TOTAL IQ",
+      "SCORE" : "SCOR",
+    },
+    3 : {
+      "Play" : "Juega",
+      "Continue" : "Continuar",
+      "Check" : "Comprobar",
+      "Quit" : "Salir",
+      "Wrong!" : "Incorrecto!",
+      "Well done!" : "Bien hecho!",
+      "Do you want to end your learning session? If you quit, you`ll lose your progress." : "¿Quieres terminar tu sesión de aprendizaje? Si te rindes, perderás tu progreso.",
+      "Try again" : "Inténtalo de nuevo",
+      "Almost there!" : "Casi!",
+      "Good job!" : "Buen trabajo!",
+      "Fantastic!" : "Fantástico!",
+      "Almost perfect!" : "Casi perfecto!",
+      "Perfect!" : "Perfecto!",
+      "You`ve got correct answers!" : "Tienes respuestas correctas!",
+      "You`ve got 1 correct answer!" : "Tienes 1 respuesta correcta!",
+      "TOTAL IQ" : "IQ TOTAL",
+      "SCORE" : "PUNTUACIÓN",
+    },
+    4 : {
+      "Play" : "Imir",
+      "Continue" : "Leanúint",
+      "Check" : "Seiceáil",
+      "Quit" : "Fág",
+      "Wrong!" : "Mícheart!",
+      "Well done!" : "Maith thú!",
+      "Do you want to end your learning session? If you quit, you`ll lose your progress." : "An bhfuil ort do sheisiún foghlama a chríochnú? Má éiríonn tú as, caillfidh tú do chuid dul chun cinn.",
+      "Try again" : "Triail Arís",
+      "Almost there!" : "Gan iomlán!",
+      "Good job!" : "Obair maith!",
+      "Fantastic!" : "Fantaisc!",
+      "Almost perfect!" : "Gan iomlán!",
+      "Perfect!" : "Perfect!",
+      "You`ve got correct answers!" : "Tá freagra ceart agat!",
+      "You`ve got 1 correct answer!" : "Tá 1 freagra ceart agat!",
+      "TOTAL IQ" : "IQ IOMLÁN",
+      "SCORE" : "SCÓR",
+    },
+    5 : {
+      "Play" : "Jouer",
+      "Continue" : "Continuer",
+      "Check" : "Vérifier",
+      "Quit" : "Quitter",
+      "Wrong!" : "Faux!",
+      "Well done!" : "Bien joué!",
+      "Do you want to end your learning session? If you quit, you`ll lose your progress." : "Voulez-vous mettre fin à votre session d`apprentissage? Si vous abandonnez, vous perdrez votre progression.",
+      "Try again" : "Réessayer",
+      "Almost there!" : "Presque!",
+      "Good job!" : "Bon travail!",
+      "Fantastic!" : "Fantastique!",
+      "Almost perfect!" : "Presque parfait!",
+      "Perfect!" : "Parfait!",
+      "You`ve got correct answers!" : "Vous avez des réponses correctes!",
+      "You`ve got 1 correct answer!" : "Vous avez 1 bonne réponse!",
+      "TOTAL IQ" : "IQ TOTAL",
+      "SCORE" : "SCORE",
+  
+    }
+ };
+
   _QuizpageState(
       {this.country,
       this.subject,
@@ -259,6 +359,7 @@ class _QuizpageState extends State<Quizpage> {
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 40),
                                     child: Text(
+                                      languageText[1]!["Do you want to end your learning session? If you quit, you`ll lose your progress."]! ??
                                       "Do you want to end your learning session? If you quit, you`ll lose your progress.",
                                       style: TextStyle(
                                         color: Theme.of(context)
@@ -287,9 +388,11 @@ class _QuizpageState extends State<Quizpage> {
                                           backgroundColor: const Color.fromARGB(
                                               255, 102, 102, 255),
                                         ),
-                                        child: const Center(
-                                            child: Text("Continue",
-                                                style: TextStyle(
+                                        child: Center(
+                                            child: Text(
+                                               languageText[1]!["Continue"]! ??
+                                              "Continue",
+                                                style: const TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 30))),
@@ -314,9 +417,10 @@ class _QuizpageState extends State<Quizpage> {
                                           backgroundColor: const Color.fromARGB(
                                               255, 219, 64, 64),
                                         ),
-                                        child: const Center(
-                                            child: Text("Quit",
-                                                style: TextStyle(
+                                        child: Center(
+                                            child: Text( languageText[1]!["Quit"]! ??
+                                              "Quit",
+                                                style: const TextStyle(
                                                     color: Colors.white,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 30))),
@@ -494,7 +598,8 @@ class _QuizpageState extends State<Quizpage> {
                                                       )
                                                     : FinishPage(
                                                         correctAnswers:
-                                                            correctAnswers),
+                                                            correctAnswers,
+                                                            languageText: languageText),
       ),
       bottomNavigationBar: SizedBox(
         height: 100,
@@ -554,9 +659,10 @@ class _QuizpageState extends State<Quizpage> {
                                               children: [
                                                 Image.asset('assets/Correct.png', height: 30,),
                                                 const SizedBox(width: 15),
-                                                const Text(
+                                                 Text(
+                                                  languageText[1]!["Well done!"]! ??
                                                   "Well done!",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.green,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 30,
@@ -587,10 +693,11 @@ class _QuizpageState extends State<Quizpage> {
                                                     backgroundColor:
                                                         Colors.green,
                                                   ),
-                                                  child: const Center(
+                                                  child: Center(
                                                     child: Text(
+                                                      languageText[1]!["Continue"]! ??
                                                       "Continue",
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         color: Colors.white,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -647,9 +754,10 @@ class _QuizpageState extends State<Quizpage> {
                                               children: [
                                                 Image.asset('assets/Wrong.png', height: 30,),
                                                 const SizedBox(width: 15),
-                                                const Text(
+                                                 Text(
+                                                  languageText[1]!["Wrong!"]! ??
                                                   "Wrong!",
-                                                  style: TextStyle(
+                                                  style: const TextStyle(
                                                     color: Colors.red,
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 30,
@@ -680,10 +788,11 @@ class _QuizpageState extends State<Quizpage> {
                                                     backgroundColor:
                                                         Colors.red,
                                                   ),
-                                                  child: const Center(
+                                                  child:  Center(
                                                     child: Text(
+                                                      languageText[1]!["Continue"]! ??
                                                       "Continue",
-                                                      style: TextStyle(
+                                                      style: const TextStyle(
                                                         color: Colors.white,
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -739,8 +848,12 @@ class _QuizpageState extends State<Quizpage> {
                     ),
                     child: Text(
                         pageIndex == 0 || pageIndex == 11
-                            ? "Continue"
-                            : "Check",
+                            ? languageText[1]!["Continue"]! ??
+                                "Continue"
+
+                            : languageText[1]!["Check"]! ??
+                                "Check",
+
                         style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
@@ -758,9 +871,11 @@ class _QuizpageState extends State<Quizpage> {
 }
 
 class FinishPage extends StatelessWidget {
-  const FinishPage({
+  Map<int, Map<String, String>> languageText;
+  FinishPage({
     super.key,
     required this.correctAnswers,
+    required this.languageText,
   });
 
   final int correctAnswers;
@@ -784,53 +899,59 @@ class FinishPage extends StatelessWidget {
             height: MediaQuery.of(context).size.height * 0.06,
           ),
           correctAnswers == 0 || correctAnswers == 1 || correctAnswers == 2
-              ? const Text(
+              ? Text(
+                  languageText[1]!["Try again"]! ??
                   "Try again",
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 45,
                     fontWeight: FontWeight.w900,
                     color: Color.fromARGB(255, 219, 64, 64),
                   ),
                 )
               : correctAnswers == 3 || correctAnswers == 4
-                  ? const Text(
+                  ? Text(
+                     languageText[1]!["Almost there!"]! ??
                       "Almost there!",
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 45,
                         fontWeight: FontWeight.w900,
                         color: Color.fromARGB(255, 219, 121, 64),
                       ),
                     )
                   : correctAnswers == 5 || correctAnswers == 6
-                      ? const Text(
+                      ?  Text(
+                         languageText[1]!["Good job!"]! ??
                           "Good job!",
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 45,
                             fontWeight: FontWeight.w900,
                             color: Color.fromARGB(255, 216, 219, 64),
                           ),
                         )
                       : correctAnswers == 7 || correctAnswers == 8
-                          ? const Text(
+                          ?  Text(
+                             languageText[1]!["Fantastic!"]! ??
                               "Fantastic!",
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 45,
                                 fontWeight: FontWeight.w900,
                                 color: Color.fromARGB(255, 196, 219, 64),
                               ),
                             )
                           : correctAnswers == 9
-                              ? const Text(
+                              ? Text(
+                                  languageText[1]!["Almost perfect!"]! ??
                                   "Almost perfect!",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 45,
                                     fontWeight: FontWeight.w900,
                                     color: Color.fromARGB(255, 131, 219, 64),
                                   ),
                                 )
-                              : const Text(
+                              :  Text(
+                                  languageText[1]!["Perfect!"]! ??
                                   "Perfect!",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 45,
                                     fontWeight: FontWeight.w900,
                                     color: Color.fromARGB(255, 77, 219, 64),
@@ -864,10 +985,12 @@ class FinishPage extends StatelessWidget {
                     child: Center(
                       child: Column(
                         children: [
-                          const SizedBox(
+                           SizedBox(
                             height: 4,
                           ),
-                          Text("TOTAL IQ",
+                          Text(
+                            languageText[1]!["TOTAL IQ"]! ??
+                            "TOTAL IQ",
                               style: TextStyle(
                                   color:
                                       Theme.of(context).colorScheme.background,
@@ -927,10 +1050,11 @@ class FinishPage extends StatelessWidget {
                     child: Center(
                       child: Column(
                         children: [
-                          const SizedBox(
+                           SizedBox(
                             height: 4,
                           ),
-                          Text("SCORE",
+                          Text( languageText[1]!["SCORE"]! ??
+                            "SCORE",
                               style: TextStyle(
                                   color:
                                       Theme.of(context).colorScheme.background,
