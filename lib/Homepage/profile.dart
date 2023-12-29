@@ -20,7 +20,8 @@ class _ProfileState extends State<Profile> {
       trophies = 0,
       selectedProfile = 0,
       color = 0,
-      selectedLanguage = 1;
+      selectedLanguage = 1,
+      tempSelectedLanguage = 1;
   final usernameController = TextEditingController();
 
   Map<int?, Map<String, String>> languageText = {
@@ -111,16 +112,20 @@ class _ProfileState extends State<Profile> {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     username = pref.getString('name');
     color = pref.getInt('color');
-    iq = pref.getInt('iq');
+    if(pref.getInt('iq')!=null){
+      iq = pref.getInt('iq');
+    }else{
+      iq=0;
+    }
     if(pref.getInt('language')!=null){
       selectedLanguage = pref.getInt('language');
     }else{
       selectedLanguage = 1;
     }
+    if(pref.getInt('trophies')!=null){
     trophies = pref.getInt('trophies');
-    if (iq == null && trophies == null) {
-      pref.setInt('iq', 0);
-      pref.setInt('trophies', 0);
+    }else{
+      trophies = 0;
     }
     if (color == 0) {
       backgroundColor = Colors.blue;
@@ -903,7 +908,7 @@ class _ProfileState extends State<Profile> {
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       setState(() {
-                                                        selectedLanguage = 1;
+                                                        tempSelectedLanguage = 1;
                                                       });
                                                     },
                                                     style:
@@ -918,7 +923,7 @@ class _ProfileState extends State<Profile> {
                                                           Theme.of(context)
                                                               .colorScheme
                                                               .primary,
-                                                      side: selectedLanguage == 1
+                                                      side: tempSelectedLanguage == 1
                                                           ? const BorderSide(
                                                               color:
                                                                   Color.fromARGB(
@@ -959,7 +964,7 @@ class _ProfileState extends State<Profile> {
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       setState(() {
-                                                        selectedLanguage = 2;
+                                                        tempSelectedLanguage = 2;
                                                       });
                                                     },
                                                     style:
@@ -974,7 +979,7 @@ class _ProfileState extends State<Profile> {
                                                           Theme.of(context)
                                                               .colorScheme
                                                               .primary,
-                                                      side: selectedLanguage == 2
+                                                      side: tempSelectedLanguage == 2
                                                           ? const BorderSide(
                                                               color:
                                                                   Color.fromARGB(
@@ -1015,7 +1020,7 @@ class _ProfileState extends State<Profile> {
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       setState(() {
-                                                        selectedLanguage = 3;
+                                                        tempSelectedLanguage = 3;
                                                       });
                                                     },
                                                     style:
@@ -1030,7 +1035,7 @@ class _ProfileState extends State<Profile> {
                                                           Theme.of(context)
                                                               .colorScheme
                                                               .primary,
-                                                      side: selectedLanguage == 3
+                                                      side: tempSelectedLanguage == 3
                                                           ? const BorderSide(
                                                               color:
                                                                   Color.fromARGB(
@@ -1071,7 +1076,7 @@ class _ProfileState extends State<Profile> {
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       setState(() {
-                                                        selectedLanguage = 4;
+                                                        tempSelectedLanguage = 4;
                                                       });
                                                     },
                                                     style:
@@ -1086,7 +1091,7 @@ class _ProfileState extends State<Profile> {
                                                           Theme.of(context)
                                                               .colorScheme
                                                               .primary,
-                                                      side: selectedLanguage == 4
+                                                      side: tempSelectedLanguage == 4
                                                           ? const BorderSide(
                                                               color:
                                                                   Color.fromARGB(
@@ -1115,6 +1120,62 @@ class _ProfileState extends State<Profile> {
                                                 ),
                                               ),
                                               const SizedBox(
+                                                height: 10,
+                                              ),
+                                              SizedBox(
+                                                height: 58,
+                                                width: double.infinity,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(15)),
+                                                  child: ElevatedButton(
+                                                    onPressed: () {
+                                                      setState(() {
+                                                        tempSelectedLanguage = 4;
+                                                      });
+                                                    },
+                                                    style:
+                                                        ElevatedButton.styleFrom(
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                                15),
+                                                      ),
+                                                      backgroundColor:
+                                                          Theme.of(context)
+                                                              .colorScheme
+                                                              .primary,
+                                                      side: tempSelectedLanguage == 5
+                                                          ? const BorderSide(
+                                                              color:
+                                                                  Color.fromARGB(
+                                                                      255,
+                                                                      102,
+                                                                      102,
+                                                                      255),
+                                                              width: 3)
+                                                          : BorderSide(
+                                                              color: Theme.of(
+                                                                      context)
+                                                                  .colorScheme
+                                                                  .primary,
+                                                              width: 3),
+                                                    ),
+                                                    child: const Center(
+                                                        child: Text("Française",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    Colors.white,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                                fontSize: 30))),
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
                                                 height: 30,
                                               ),
                                               SizedBox(
@@ -1128,6 +1189,7 @@ class _ProfileState extends State<Profile> {
                                                     onPressed: () {
                                                       Navigator.pop(context);
                                                       setState(() {
+                                                        selectedLanguage = tempSelectedLanguage;
                                                         saveLanguage(selectedLanguage);
                                                       });
                                                     },
