@@ -520,16 +520,194 @@ class _QuizpageState extends State<Quizpage> {
                               givenAnswer) {
                             correct();
                             correctAnswers++;
+                            showModalBottomSheet(
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              isScrollControlled: true,
+                              isDismissible: false,
+                              enableDrag: false, // Disable dragging
+                              builder: (BuildContext context) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Do nothing on tap outside
+                                  },
+                                  child: Container(
+                                    height: 170,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(25),
+                                        topRight: Radius.circular(25),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 17),
+                                      child: SingleChildScrollView(
+                                        physics: const BouncingScrollPhysics(),
+                                        child: Column(
+                                          children: [
+                                            const SizedBox(height: 15),
+                                            Row(
+                                              children: [
+                                                Image.asset('assets/Correct.png', height: 30,),
+                                                const SizedBox(width: 15),
+                                                const Text(
+                                                  "Well done!",
+                                                  style: TextStyle(
+                                                    color: Colors.green,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 30,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 20),
+                                            SizedBox(
+                                              height: 58,
+                                              width: double.infinity,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(15)),
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                    setState(() {
+                                                      if (pageIndex < 11) {
+                                                        pageIndex++;
+                                                        givenAnswer = 0;
+                                                      }
+                                                    });
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.green,
+                                                  ),
+                                                  child: const Center(
+                                                    child: Text(
+                                                      "Continue",
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
                             await _correct.seek(Duration.zero);
                             await _correct.play();
                           } else {
                             wrong();
+                            showModalBottomSheet(
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              isScrollControlled: true,
+                              isDismissible: false,
+                              enableDrag: false, // Disable dragging
+                              builder: (BuildContext context) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    // Do nothing on tap outside
+                                  },
+                                  child: Container(
+                                    height: 170,
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(context)
+                                          .colorScheme
+                                          .background,
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(25),
+                                        topRight: Radius.circular(25),
+                                      ),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 17),
+                                      child: SingleChildScrollView(
+                                        physics: const BouncingScrollPhysics(),
+                                        child: Column(
+                                          children: [
+                                            const SizedBox(height: 15),
+                                            Row(
+                                              children: [
+                                                Image.asset('assets/Wrong.png', height: 30,),
+                                                const SizedBox(width: 15),
+                                                const Text(
+                                                  "Wrong!",
+                                                  style: TextStyle(
+                                                    color: Colors.red,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 30,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 20),
+                                            SizedBox(
+                                              height: 58,
+                                              width: double.infinity,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    const BorderRadius.all(
+                                                        Radius.circular(15)),
+                                                child: ElevatedButton(
+                                                  onPressed: () {
+                                                    Navigator.pop(context);
+                                                    setState(() {
+                                                      if (pageIndex < 11) {
+                                                        pageIndex++;
+                                                        givenAnswer = 0;
+                                                      }
+                                                    });
+                                                  },
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        Colors.red,
+                                                  ),
+                                                  child: const Center(
+                                                    child: Text(
+                                                      "Continue",
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 30,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
                             await _incorrect.seek(Duration.zero);
                             await _incorrect.play();
                           }
                         }
                         setState(() {
-                          if (pageIndex < 11) {
+                          if (pageIndex < 1) {
                             pageIndex++;
                             givenAnswer = 0;
                           }

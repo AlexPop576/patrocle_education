@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'levels.dart';
 import 'trophies.dart';
 import 'profile.dart';
@@ -13,6 +14,41 @@ class Homepage extends StatefulWidget {
 
 class _HomepageState extends State<Homepage> {
   int selectedIndex = 0;
+  int? selectedLanguage = 1;
+
+  Map<int, Map<String, String>> languageText = {
+    1 : {
+      "Trophies" : "Trophies",
+      "Levels" : "Levels",
+      "Profile" : "Profile",
+    },
+    2 : {
+      "Trophies" : "Trofee",
+      "Levels" : "Nivele",
+      "Profile" : "Profil",
+    },
+    3 : {
+      "Trophies" : "Trophies",
+      "Levels" : "Levels",
+      "Profile" : "Profile",
+    },
+    4 : {
+      "Trophies" : "Trophies",
+      "Levels" : "Levels",
+      "Profile" : "Profile",
+    },
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    //getData();
+  }
+
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    selectedLanguage = pref.getInt('language');
+  }
 
   void navigate(int index) {
     setState(() {
@@ -20,10 +56,10 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
-  final List<Widget> pages = [
-    const Trophies(),
-    const Levels(),
-    const Profile(),
+  List<Widget> pages = [
+    Trophies(),
+    Levels(),
+    Profile(),
   ];
 
   @override
@@ -87,21 +123,21 @@ class _HomepageState extends State<Homepage> {
                             color: selectedIndex == 0
                                 ? const Color.fromARGB(255, 102, 102, 255)
                                 : Colors.white),
-                        label: "Trophies"),
+                        label: languageText[selectedLanguage]!["Trophies"] ?? "Trophies"),
                     BottomNavigationBarItem(
                         icon: Image.asset("assets/HouseIcon.png",
                             height: 35,
                             color: selectedIndex == 1
                                 ? const Color.fromARGB(255, 102, 102, 255)
                                 : Colors.white),
-                        label: "Levels"),
+                        label: languageText[selectedLanguage]!["Levels"] ?? "Levels"),
                     BottomNavigationBarItem(
                         icon: Image.asset("assets/ProfileIcon.png",
                             height: 35,
                             color: selectedIndex == 2
                                 ? const Color.fromARGB(255, 102, 102, 255)
                                 : Colors.white),
-                        label: "Profile"),
+                        label: languageText[selectedLanguage]!["Profile"] ?? "Profile"),
                   ]),
             ),
           ),

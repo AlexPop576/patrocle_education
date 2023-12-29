@@ -308,8 +308,11 @@ class _NewQuestionState extends State<NewQuestion> {
         Textfield(height: 58, text: "Question"),
         const SizedBox(height: 20),
         Textfield(height: 58, text: "Answer 1"),
+        const SizedBox(height: 10),
         Textfield(height: 58, text: "Answer 2"),
+        const SizedBox(height: 10),
         Textfield(height: 58, text: "Answer 3"),
+        const SizedBox(height: 10),
         Textfield(height: 58, text: "Answer 4"),
         const SizedBox(height: 15),
         SizedBox(

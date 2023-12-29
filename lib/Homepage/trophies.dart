@@ -13,6 +13,7 @@ class Trophies extends StatefulWidget {
 class _TrophiesState extends State<Trophies> {
   int? geographerTrophy = 0, historianTrophy = 0, c=0;
   List<String> trophiesName = [];
+  int? selectedLanguage = 1;
 
   @override
   void initState() {
@@ -27,6 +28,7 @@ class _TrophiesState extends State<Trophies> {
     //pref.setStringList('trophyList', trophiesList);
     trophiesName = pref.getStringList('trophyList')!;
     //if(pref.getInt('Geographer')==1){trophiesName.add("Geographer");}
+    selectedLanguage = pref.getInt('language');
   }
 
   void ask() async {
@@ -44,6 +46,57 @@ class _TrophiesState extends State<Trophies> {
     "Untouchable",
     "Legend",
   ];
+
+  Map<int, Map<String, String>> languageText = {
+    1 : {
+      "Your trophies" : "Your trophies",
+      "Locked" : "Locked",
+      "Geographer" : "Geographer",
+      "Historian" : "Historian",
+      "Curious" : "Curious",
+      "Knowledgeable" : "Knowledgeable",
+      "Expert" : "Expert",
+      "Champion" : "Champion",
+      "Untouchable" : "Untouchable",
+      "Legend" : "Legend",
+    },
+    2 : {
+      "Your trophies" : "Trofeele tale",
+      "Locked" : "Blocat",
+      "Geographer" : "Geograf",
+      "Historian" : "Istoric",
+      "Curious" : "Curios",
+      "Knowledgeable" : "Cunoscător",
+      "Expert" : "Expert",
+      "Champion" : "Campion",
+      "Untouchable" : "De neatis",
+      "Legend" : "Legendă",
+    },
+    3 : {
+      "Your trophies" : "Your trophies",
+      "Locked" : "Locked",
+      "Geographer" : "Geographer",
+      "Historian" : "Historian",
+      "Curious" : "Curious",
+      "Knowledgeable" : "Knowledgeable",
+      "Expert" : "Expert",
+      "Champion" : "Champion",
+      "Untouchable" : "Untouchable",
+      "Legend" : "Legend",
+    },
+    4 : {
+      "Your trophies" : "Your trophies",
+      "Locked" : "Locked",
+      "Geographer" : "Geographer",
+      "Historian" : "Historian",
+      "Curious" : "Curious",
+      "Knowledgeable" : "Knowledgeable",
+      "Expert" : "Expert",
+      "Champion" : "Champion",
+      "Untouchable" : "Untouchable",
+      "Legend" : "Legend",
+    },
+  };
 
   List<Color> trophiesColor1 = [
     const Color.fromARGB(255, 0, 255, 132),
@@ -121,7 +174,7 @@ class _TrophiesState extends State<Trophies> {
                 TrophieTile(
                     trophy: newIndex < trophiesName.length
                         ? trophiesName[newIndex]
-                        : "Locked",
+                        : languageText[selectedLanguage]!["Locked"] ?? "Locked",
                     color1: newIndex + 1 < trophiesName.length
                         ? trophiesColor1[newIndex]
                         : const Color.fromARGB(255, 129, 129, 129),
@@ -131,7 +184,7 @@ class _TrophiesState extends State<Trophies> {
                 TrophieTile(
                     trophy: newIndex + 1 < trophiesName.length
                         ? trophiesName[newIndex + 1]
-                        : "Locked",
+                        : languageText[selectedLanguage]!["Locked"] ?? "Locked",
                     color1: newIndex + 2 < trophiesName.length
                         ? trophiesColor1[newIndex + 1]
                         : const Color.fromARGB(255, 129, 129, 129),
@@ -153,14 +206,14 @@ class _TrophiesState extends State<Trophies> {
                   });
                   c=c!+1;
                 },
-                icon: Icon(Icons.abc))),
-        SliverToBoxAdapter(
+                icon: const Icon(Icons.abc))),
+        const SliverToBoxAdapter(
           child: SizedBox(height: 100),
         ),
         SliverToBoxAdapter(
           child: Text(c.toString()+trophiesName.toString()),//SizedBox(height: 100),
         ),
-        SliverToBoxAdapter(
+        const SliverToBoxAdapter(
           child: SizedBox(height: 10000),
         ),
       ]),

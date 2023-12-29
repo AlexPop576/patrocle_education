@@ -14,8 +14,8 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   String? username, language = "English";
   Color backgroundColor = Colors.blue;
-  List<String> geography = [];
-  List<String> history = [];
+  List<String> geography = ["Argentina", "Romania", "Spain"];
+  List<String> history = ["Canada"];
   int? iq = 0,
       trophies = 0,
       selectedProfile = 0,
@@ -23,10 +23,78 @@ class _ProfileState extends State<Profile> {
       selectedLanguage = 1;
   final usernameController = TextEditingController();
 
+  Map<int?, Map<String, String>> languageText = {
+    1 : {
+      "Edit profile" : "Edit profile",
+      "Statistics" : "Statistics",
+      "New username" : "New username",
+      "Save" : "Save",
+      "Cancel" : "Cancel",
+      "Total IQ" : "Total IQ",
+      "Trophies" : "Trophies",
+      "Geography" : "Geography",
+      "History" : "History",
+      "No level" : "No level has been completed yet...",
+      "Settings" : "Settings",
+      "Select language" : "Select language",
+      "Light mode" : "Light mode",
+      "Dark mode" : "Dark mode",
+    },
+    2 : {
+      "Edit profile" : "Editare profil",
+      "Statistics" : "Statistici",
+      "New username" : "Nume de utilizator nou",
+      "Save" : "Salvare",
+      "Cancel" : "Anulare",
+      "Total IQ" : "IQ total",
+      "Trophies" : "Trofee",
+      "Geography" : "Geografie",
+      "History" : "Istorie",
+      "No level" : "Niciun nivel nu a fost completat încă...",
+      "Settings" : "Setări",
+      "Select language" : "Selecteaza limba",
+      "Light mode" : "Mod luminos",
+      "Dark mode" : "Mod întunecat",
+    },
+    3 : {
+      "Edit profile" : "Editar perfil",
+      "Statistics" : "Statistics",
+      "New username" : "New username",
+      "Save" : "Save",
+      "Cancel" : "Cancel",
+      "Total IQ" : "Total IQ",
+      "Trophies" : "Trophies",
+      "Geography" : "Geography",
+      "History" : "History",
+      "No level" : "No level has been completed yet...",
+      "Settings" : "Settings",
+      "Select language" : "Select language",
+      "Light mode" : "Light mode",
+      "Dark mode" : "Dark mode",
+    },
+    4 : {
+      "Edit profile" : "Edit profile",
+      "Statistics" : "Statistics",
+      "New username" : "New username",
+      "Save" : "Save",
+      "Cancel" : "Cancel",
+      "Total IQ" : "Total IQ",
+      "Trophies" : "Trophies",
+      "Geography" : "Geography",
+      "History" : "History",
+      "No level" : "No level has been completed yet...",
+      "Settings" : "Settings",
+      "Select language" : "Select language",
+      "Light mode" : "Light mode",
+      "Dark mode" : "Dark mode",
+    },
+  };
+
   @override
   void initState() {
     super.initState();
     getData();
+    saveLanguage(selectedLanguage);
   }
 
   Future<void> saveNameColor(name, color) async {
@@ -35,11 +103,17 @@ class _ProfileState extends State<Profile> {
     pref.setInt('color', color);
   }
 
+  Future<void> saveLanguage(language) async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setInt('language', language);
+  }
+
   void getData() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     username = pref.getString('name');
     color = pref.getInt('color');
     iq = pref.getInt('iq');
+    //selectedLanguage = pref.getInt('language');
     trophies = pref.getInt('trophies');
     if (iq == null && trophies == null) {
       pref.setInt('iq', 0);
@@ -106,7 +180,7 @@ class _ProfileState extends State<Profile> {
                             const Spacer(),
                             TextButton(
                               child: Text(
-                                "Edit profile",
+                                languageText[selectedLanguage]!["Edit profile"] ?? "Edit profile",
                                 style: TextStyle(
                                     color:
                                         Theme.of(context).colorScheme.primary,
@@ -138,7 +212,7 @@ class _ProfileState extends State<Profile> {
                                               const SizedBox(
                                                 height: 20,
                                               ),
-                                              Text("Edit profile",
+                                              Text(languageText[selectedLanguage]!["Edit profile"] ?? "Edit profile",
                                                   style: TextStyle(
                                                     color: Theme.of(context)
                                                         .colorScheme
@@ -187,7 +261,7 @@ class _ProfileState extends State<Profile> {
                                                               .primary,
                                                           width: 1.0),
                                                     ),
-                                                    labelText: 'New username',
+                                                    labelText: languageText[selectedLanguage]!["New username"] ??'New username',
                                                     labelStyle: TextStyle(
                                                         color: Theme.of(context)
                                                             .colorScheme
@@ -387,9 +461,9 @@ class _ProfileState extends State<Profile> {
                                                           const Color.fromARGB(
                                                               255, 102, 102, 255),
                                                     ),
-                                                    child: const Center(
-                                                        child: Text("Save",
-                                                            style: TextStyle(
+                                                    child: Center(
+                                                        child: Text(languageText[selectedLanguage]!["Save"] ?? "Save",
+                                                            style: const TextStyle(
                                                               color: Colors.white,
                                                               fontWeight:
                                                                   FontWeight.bold,
@@ -418,9 +492,9 @@ class _ProfileState extends State<Profile> {
                                                           const Color.fromARGB(
                                                               255, 219, 64, 64),
                                                     ),
-                                                    child: const Center(
-                                                        child: Text("Cancel",
-                                                            style: TextStyle(
+                                                    child: Center(
+                                                        child: Text(languageText[selectedLanguage]!["Cancel"] ?? "Cancel",
+                                                            style: const TextStyle(
                                                               color: Colors.white,
                                                               fontWeight:
                                                                   FontWeight.bold,
@@ -456,7 +530,7 @@ class _ProfileState extends State<Profile> {
                         Row(
                           children: [
                             Text(
-                              "Statistics",
+                              languageText[selectedLanguage]!["Statistics"] ?? "Statistics",
                               style: TextStyle(
                                   color: Theme.of(context).colorScheme.tertiary,
                                   fontSize: 30,
@@ -502,7 +576,7 @@ class _ProfileState extends State<Profile> {
                                                 fontSize: 27),
                                           ),
                                           Text(
-                                            'Total IQ',
+                                            languageText[selectedLanguage]!["Total IQ"] ?? 'Total IQ',
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .colorScheme
@@ -550,7 +624,7 @@ class _ProfileState extends State<Profile> {
                                                 fontSize: 27),
                                           ),
                                           Text(
-                                            'Trophies',
+                                            languageText[selectedLanguage]!["Trophies"] ??'Trophies',
                                             style: TextStyle(
                                                 color: Theme.of(context)
                                                     .colorScheme
@@ -595,7 +669,7 @@ class _ProfileState extends State<Profile> {
                         children: [
                           Center(
                               child: Text(
-                            "Geography",
+                            languageText[selectedLanguage]!["Geography"] ?? "Geography",
                             style: TextStyle(
                                 color: Theme.of(context)
                                     .colorScheme
@@ -613,7 +687,7 @@ class _ProfileState extends State<Profile> {
                         children: [
                           Center(
                               child: Text(
-                            "History",
+                            languageText[selectedLanguage]!["History"] ?? "History",
                             style: TextStyle(
                                 color: Theme.of(context)
                                     .colorScheme
@@ -637,7 +711,7 @@ class _ProfileState extends State<Profile> {
             child: Center(child: Column(
               children: [
                 const SizedBox(height: 20),
-                Text("No level has been completed yet...", style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
+                Text(languageText[selectedLanguage]!["No level"] ?? "No level has been completed yet...", style: TextStyle(fontSize: 20, color: Theme.of(context).colorScheme.primary, fontWeight: FontWeight.bold)),
                 const SizedBox(height: 5),
               ],
             )),
@@ -685,7 +759,7 @@ class _ProfileState extends State<Profile> {
           SliverToBoxAdapter(
             child: Column(
               children: [
-                Padding(padding: EdgeInsets.symmetric(horizontal: 17.0),
+                Padding(padding: const EdgeInsets.symmetric(horizontal: 17.0),
                   child: Center(
                     child: Column(
                       children: [
@@ -702,7 +776,7 @@ class _ProfileState extends State<Profile> {
                         Row(
                           children: [
                             Text(
-                              "Settings",
+                              languageText[selectedLanguage]!["Settings"] ?? "Settings",
                               style: TextStyle(
                                   color: Theme.of(context).colorScheme.tertiary,
                                   fontSize: 30,
@@ -738,8 +812,8 @@ class _ProfileState extends State<Profile> {
                                                       listen: false)
                                                   .getTheme() ==
                                               1
-                                          ? "Light mode"
-                                          : "Dark mode",
+                                          ? languageText[selectedLanguage]!["Light mode"] ?? "Light mode"
+                                          : languageText[selectedLanguage]!["Dark mode"] ?? "Dark mode",
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
@@ -796,7 +870,7 @@ class _ProfileState extends State<Profile> {
                                               const SizedBox(
                                                 height: 20,
                                               ),
-                                              Text("Select language",
+                                              Text(languageText[selectedLanguage]!["Select language"] ?? "Select language",
                                                   style: TextStyle(
                                                     color: Theme.of(context)
                                                         .colorScheme
@@ -1050,6 +1124,9 @@ class _ProfileState extends State<Profile> {
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       Navigator.pop(context);
+                                                      setState(() {
+                                                        saveLanguage(selectedLanguage);
+                                                      });
                                                     },
                                                     style:
                                                         ElevatedButton.styleFrom(
@@ -1057,9 +1134,9 @@ class _ProfileState extends State<Profile> {
                                                           const Color.fromARGB(
                                                               255, 102, 102, 255),
                                                     ),
-                                                    child: const Center(
-                                                        child: Text("Save",
-                                                            style: TextStyle(
+                                                    child: Center(
+                                                        child: Text(languageText[selectedLanguage]!["Save"] ?? "Save",
+                                                            style: const TextStyle(
                                                               color: Colors.white,
                                                               fontWeight:
                                                                   FontWeight.bold,
@@ -1088,9 +1165,9 @@ class _ProfileState extends State<Profile> {
                                                           const Color.fromARGB(
                                                               255, 219, 64, 64),
                                                     ),
-                                                    child: const Center(
-                                                        child: Text("Cancel",
-                                                            style: TextStyle(
+                                                    child: Center(
+                                                        child: Text(languageText[selectedLanguage]!["Cancel"] ?? "Cancel",
+                                                            style: const TextStyle(
                                                               color: Colors.white,
                                                               fontWeight:
                                                                   FontWeight.bold,
