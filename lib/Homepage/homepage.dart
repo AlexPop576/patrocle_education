@@ -15,6 +15,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
   int selectedIndex = 0;
   int? selectedLanguage = 1;
+  int a = 1;
 
   Map<int, Map<String, String>> languageText = {
     1 : {
@@ -56,12 +57,6 @@ class _HomepageState extends State<Homepage> {
     });
   }
 
-  List<Widget> pages = [
-    Trophies(),
-    Levels(),
-    Profile(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,7 +90,7 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       ),
-      body: pages[selectedIndex],
+      body: selectedIndex == 0 ? Trophies(index: selectedIndex,) : selectedIndex == 1 ? Levels() : Profile(),
       bottomNavigationBar: SizedBox(
         height: 68,
         child: ClipRRect(
