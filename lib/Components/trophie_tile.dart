@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // ignore: must_be_immutable
 class TrophieTile extends StatefulWidget {
@@ -19,8 +20,83 @@ class TrophieTile extends StatefulWidget {
 class _TrophieTileState extends State<TrophieTile> {
   String? trophy;
   Color color1 = Colors.white, color2 = const Color.fromARGB(255, 255, 255, 255);
+  int? selectedLanguage = 1;
   _TrophieTileState(
       {required this.trophy, required this.color1, required this.color2});
+
+  Map<int, Map<String, String>> languageText = {
+    1 : {
+      "Locked" : "Locked",
+      "Geographer": "Geographer",
+      "Historian": "Historian",
+      "Curious": "Curious",
+      "Knowledgeable": "Knowledgeable",
+      "Expert": "Expert",
+      "Champion": "Champion",
+      "Untouchable": "Untouchable",
+      "Legend": "Legend",
+    },
+    2 : {
+      "Locked": "Blocat",
+      "Geographer": "Geograf",
+      "Historian": "Istoric",
+      "Curious": "Curios",
+      "Knowledgeable": "Cunoscător",
+      "Expert": "Expert",
+      "Champion": "Campion",
+      "Untouchable": "De neatis",
+      "Legend": "Legendă",
+    },
+    3 : {
+      "Locked" : "Bloqueado",
+      "Geographer" : "Geógrafo",
+      "Historian" : "Historiador",
+      "Curious" : "Curioso",
+      "Knowledgeable" : "Conocedor",
+      "Expert" : "Experto",
+      "Champion" : "Campeón",
+      "Untouchable" : "Intocable",
+      "Legend" : "Leyenda",
+    },
+    4 : {
+      "Locked" : "Zárva",
+      "Geographer" : "Geagrafaí",
+      "Historian" : "Staraí",
+      "Curious" : "Fiosrach",
+      "Knowledgeable" : "Eolach",
+      "Expert" : "Eispéireas",
+      "Champion" : "Craobh",
+      "Untouchable" : "Neamhthocach",
+      "Legend" : "Scealaí",
+    },
+    5 : {
+      "Locked" : "Verrouillé",
+      "Geographer" : "Géographe",
+      "Historian" : "Historien",
+      "Curious" : "Curieux",
+      "Knowledgeable" : "Savant",
+      "Expert" : "Expert",
+      "Champion" : "Champion",
+      "Untouchable" : "Intouchable",
+      "Legend" : "Légende",
+    }
+  };
+
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getInt('language')!=null){
+      selectedLanguage = pref.getInt('language');
+    }else{
+      selectedLanguage = 1;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +125,7 @@ class _TrophieTileState extends State<TrophieTile> {
                   "assets/$trophy.png",
                 )),
             const SizedBox(height: 20),
-            Text(trophy.toString(),
+            Text(languageText[selectedLanguage]![trophy] ?? trophy.toString(),
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: MediaQuery.of(context).size.width * 0.054 < 25

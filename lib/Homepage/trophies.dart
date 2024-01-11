@@ -14,31 +14,36 @@ class Trophies extends StatefulWidget {
 
 class _TrophiesState extends State<Trophies> {
   int? geographerTrophy = 0, historianTrophy = 0, c = 0;
-  List<String> trophiesName = [];
-  int? selectedLanguage = 1;
-  int? index;
+  List<String> trophiesName = ["Geographer",
+    "Historian",
+    "Curious",
+    "Knowledgeable",
+    "Expert",
+    "Champion",
+    "Untouchable",
+    "Legend",];
+  int? selectedLanguage = 1, index;
   _TrophiesState({this.index});
-
-  @override
-  void initState() {
-    super.initState();
-    ask();
-    getData();
-    //trophiesName = trophiesList;
-  }
-
-  void getData() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    //pref.setStringList('trophyList', trophiesList);
-    trophiesName = pref.getStringList('trophyList')!;
-    //if(pref.getInt('Geographer')==1){trophiesName.add("Geographer");}
-
-    selectedLanguage = pref.getInt('language');
-  }
 
   void ask() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
     pref.setStringList('trophyList', trophiesList);
+  }
+
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getInt('language')!=null){
+      selectedLanguage = pref.getInt('language');
+    }else{
+      selectedLanguage = 1;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   List<String> trophiesList = [
@@ -55,15 +60,6 @@ class _TrophiesState extends State<Trophies> {
   Map<int, Map<String, String>> languageText = {
     1: {
       "Your trophies": "Your trophies",
-      "Locked": "Locked",
-      "Geographer": "Geographer",
-      "Historian": "Historian",
-      "Curious": "Curious",
-      "Knowledgeable": "Knowledgeable",
-      "Expert": "Expert",
-      "Champion": "Champion",
-      "Untouchable": "Untouchable",
-      "Legend": "Legend",
     },
     2: {
       "Your trophies": "Trofeele tale",
@@ -196,7 +192,7 @@ class _TrophiesState extends State<Trophies> {
                 TrophieTile(
                     trophy: newIndex < trophiesName.length
                         ? trophiesName[newIndex]
-                        : languageText[selectedLanguage]!["Locked"] ?? "Locked",
+                        : "Locked",
                     color1: newIndex + 1 < trophiesName.length
                         ? trophiesColor1[newIndex]
                         : const Color.fromARGB(255, 129, 129, 129),
@@ -206,7 +202,7 @@ class _TrophiesState extends State<Trophies> {
                 TrophieTile(
                     trophy: newIndex + 1 < trophiesName.length
                         ? trophiesName[newIndex + 1]
-                        : languageText[selectedLanguage]!["Locked"] ?? "Locked",
+                        : "Locked",
                     color1: newIndex + 2 < trophiesName.length
                         ? trophiesColor1[newIndex + 1]
                         : const Color.fromARGB(255, 129, 129, 129),

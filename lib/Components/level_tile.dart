@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:patrocle_education/Quizpage/quizpage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../Homepage/levels.dart';
 
 // ignore: must_be_immutable
@@ -19,7 +20,7 @@ class LevelTile extends StatefulWidget {
       required this.geoDone,
       required this.hstDone,
       required this.setDone,
-      this.continent});
+      this.continent,});
 
   @override
   // ignore: no_logic_in_create_state
@@ -40,6 +41,7 @@ class _LevelTileState extends State<LevelTile> {
   bool? geoDone = false, hstDone = false;
   bool playButtonGeo = false, playButtonHst = false, found = false;
   Map<String, bool>? playButtons;
+  int? selectedLanguage = 1;
 
   _LevelTileState(
       {this.country,
@@ -50,6 +52,128 @@ class _LevelTileState extends State<LevelTile> {
       required this.setDone,
       this.continent});
 
+  Map<int, Map<String, String>> languageText = {
+    1 : {
+      "Play" : "Play",
+      "Argentina" : "Argentina",
+      "Australia" : "Australia",
+      "Brazil" : "Brazil",
+      "Canada" : "Canada",
+      "China" : "China",
+      "Egypt" : "Egypt",
+      "France" : "France",
+      "Germany" : "Germany",
+      "Greece" : "Greece",
+      "Israel" : "Israel",
+      "Italy" : "Italy",
+      "Japan" : "Japan",
+      "Mexico" : "Mexico",
+      "New Zealand" : "New Zealand",
+      "Romania" : "Romania",
+      "Russia" : "Russia",
+      "South Africa" : "South Africa",
+      "Spain" : "Spain",
+      "UK" : "UK",
+      "Ukraine" : "Ukraine",
+      "USA" : "USA",
+    },
+    2 : {
+      "Play" : "Joacă",
+      "Argentina" : "Argentina",
+      "Australia" : "Australia",
+      "Brazil" : "Brazilia",
+      "Canada" : "Canada",
+      "China" : "China",
+      "Egypt" : "Egipt",
+      "France" : "Franța",
+      "Germany" : "Germania",
+      "Greece" : "Grecia",
+      "Israel" : "Israel",
+      "Italy" : "Italia",
+      "Japan" : "Japonia",
+      "Mexico" : "Mexic",
+      "New Zealand" : "Noua Zeelandă",
+      "Romania" : "România",
+      "Russia" : "Rusia",
+      "South Africa" : "Africa de Sud",
+      "Spain" : "Spania",
+      "UK" : "Marea Britanie",
+      "Ukraine" : "Ucraina",
+      "USA" : "SUA",
+    },
+    3 : {
+      "Play" : "Jugar",
+      "Argentina" : "Argentina",
+      "Australia" : "Australia",
+      "Brazil" :"Brasil",
+      "Canada" : "Canadá",
+      "China" : "China",
+      "Egypt" : "Egipto",
+      "France" : "Francia",
+      "Germany" : "Alemania",
+      "Greece" : "Grecia",
+      "Israel" : "Israel",
+      "Italy" : "Italia",
+      "Japan" : "Japón",
+      "Mexico" : "México",
+      "New Zealand" : "Nueva Zelanda",
+      "Romania" : "Rumania",
+      "Russia" : "Rusia",
+      "South Africa" : "Sudáfrica",
+      "Spain" : "España",
+      "UK" : "Reino Unido",
+      "Ukraine" : "Ucrania",
+      "USA" : "EE.UU.",
+    },
+    4 : {
+      "Play" : "Játék",
+      "Argentina" : "Argentína",
+      "Australia" : "Ausztrália",
+      "Brazil" : "Brazília",
+      "Canada" : "Kanada",
+      "China" : "Kína",
+      "Egypt" : "Egyiptom",
+      "France" : "Franciaország",
+      "Germany" : "Németország",
+      "Greece" : "Görögország",
+      "Israel" : "Izrael",
+      "Italy" : "Olaszország",
+      "Japan" : "Japán",
+      "Mexico" : "Mexikó",
+      "New Zealand" : "Új-Zéland",
+      "Romania" : "Románia",
+      "Russia" : "Oroszország",
+      "South Africa" : "Dél-afrika",
+      "Spain" : "Spanyolország",
+      "UK" : "Nagy-Britannia",
+      "Ukraine" : "Ukrajna",
+      "USA" : "Egyesült Államok",
+    },
+    5 : {
+      "Play" : "Jouer",
+      "Argentina" : "Argentine",
+      "Australia" : "Australie",
+      "Brazil" : "Brésil",
+      "Canada" : "Canada",
+      "China" : "Chine",
+      "Egypt" : "Égypte",
+      "France" : "France",
+      "Germany" : "Allemagne",
+      "Greece": "Grèce",
+      "Israel" : "Israël",
+      "Italy" : "Italie",
+      "Japan" : "Japon",
+      "Mexico" : "Mexique",
+      "New Zealand" : "Nouvelle-Zélande",
+      "Romania" : "Roumanie",
+      "Russia" : "Russie",
+      "South Africa" : "Afrique du Sud",
+      "Spain" : "Espagne",
+      "UK" : "Royaume-Uni",
+      "Ukraine" : "Ukraine",
+      "USA" : "États-Unis",
+    },
+  };
 
   getDone(bool geo, bool hst) {
     setState(() {
@@ -77,6 +201,22 @@ class _LevelTileState extends State<LevelTile> {
       playButtonGeo = false;
       playButtonHst = false;
     });
+  }
+
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getInt('language')!=null){
+      selectedLanguage = pref.getInt('language');
+    }else{
+      selectedLanguage = 1;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
   }
 
   @override
@@ -124,7 +264,7 @@ class _LevelTileState extends State<LevelTile> {
                             ),
                             Expanded(
                               child: Text(
-                                country.toString(),
+                                languageText[selectedLanguage]![country] ?? "country.toString()",
                                 style: const TextStyle(
                                     shadows: <Shadow>[
                                       Shadow(
@@ -162,8 +302,9 @@ class _LevelTileState extends State<LevelTile> {
                                 onPressed: () {
                                   setState(() {
                                     if (playButtonGeo == false) {
-                                      if (playButtonHst == true)
+                                      if (playButtonHst == true) {
                                         playButtonHst = false;
+                                      }
                                       playButtonGeo = true;
                                     } else {
                                       playButtonGeo = false;
@@ -188,8 +329,9 @@ class _LevelTileState extends State<LevelTile> {
                                   setState(() {
                                     if (selected == false) {
                                       if (playButtonHst == false) {
-                                        if (playButtonGeo == true)
+                                        if (playButtonGeo == true) {
                                           playButtonGeo = false;
+                                        }
                                         playButtonHst = true;
                                       } else {
                                         playButtonHst = false;
@@ -198,8 +340,9 @@ class _LevelTileState extends State<LevelTile> {
                                     } else {
                                       selected = false;
                                       if (playButtonHst == false) {
-                                        if (playButtonGeo == true)
+                                        if (playButtonGeo == true) {
                                           playButtonGeo = false;
+                                        }
                                         playButtonHst = true;
                                       } else {
                                         playButtonHst = false;
@@ -253,8 +396,8 @@ class _LevelTileState extends State<LevelTile> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color.fromARGB(255, 102, 102, 255),
                   ),
-                  child: const Text("Play",
-                      style: TextStyle(
+                  child: Text(languageText[selectedLanguage]!["Play"] ?? "Play",
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 35)),
@@ -290,8 +433,8 @@ class _LevelTileState extends State<LevelTile> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromARGB(255, 102, 102, 255),
                   ),
-                  child: const Text("Play",
-                      style: TextStyle(
+                  child: Text(languageText[selectedLanguage]!["Play"] ?? "Play",
+                      style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                           fontSize: 35)),

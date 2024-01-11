@@ -14,7 +14,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   String? username, language = "English";
   Color backgroundColor = Colors.blue;
-  List<String> geography = ["Argentina", "Romania", "Spain"];
+  List<String> geography = ["Argentina", "Romania", "Spain", "France"];
   List<String> history = ["Canada"];
   int? iq = 0,
       trophies = 0,
@@ -90,7 +90,7 @@ class _ProfileState extends State<Profile> {
       "Dark mode" : "Sötét mód",
     },
     5 : {
-      "Edit profile " : "Modifier le profil",
+      "Edit profile" : "Modifier le profil",
       "Statistics" : "Statistiques",
       "New username" : "Nouveau nom d'utilisateur",
       "Save" : "Sauvegarder",
@@ -875,7 +875,7 @@ class _ProfileState extends State<Profile> {
                                   context: context,
                                   builder: (BuildContext context) {
                                     return Container(
-                                      height: 650,
+                                      height: 680,
                                       decoration: BoxDecoration(
                                         color: Theme.of(context)
                                             .colorScheme
@@ -1148,7 +1148,7 @@ class _ProfileState extends State<Profile> {
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       setState(() {
-                                                        tempSelectedLanguage = 4;
+                                                        tempSelectedLanguage = 5;
                                                       });
                                                     },
                                                     style:
@@ -1280,7 +1280,7 @@ class _ProfileState extends State<Profile> {
                                             ? "Română"
                                             : selectedLanguage == 3
                                                 ? "Español"
-                                                : "Magyar",
+                                                : selectedLanguage == 4 ? "Magyar" : "Française",
                                     style: const TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,

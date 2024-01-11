@@ -29,26 +29,36 @@ class _HomepageState extends State<Homepage> {
       "Profile" : "Profil",
     },
     3 : {
-      "Trophies" : "Trophies",
-      "Levels" : "Levels",
-      "Profile" : "Profile",
+      "Trophies" : "Trofeos",
+      "Levels" : "Niveles",
+      "Profile" : "Perfil",
     },
     4 : {
-      "Trophies" : "Trophies",
-      "Levels" : "Levels",
-      "Profile" : "Profile",
+      "Trophies" : "Trófeák",
+      "Levels" : "Szintek",
+      "Profile" : "Profil",
+    },
+    5 : {
+      "Trophies" : "Trophées",
+      "Levels" : "Niveaux",
+      "Profile" : "Profil",
     },
   };
+
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getInt('language')!=null){
+      selectedLanguage = pref.getInt('language');
+    }else{
+      selectedLanguage = 1;
+    }
+    setState(() {});
+  }
 
   @override
   void initState() {
     super.initState();
-    //getData();
-  }
-
-  void getData() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    selectedLanguage = pref.getInt('language');
+    getData();
   }
 
   void navigate(int index) {
