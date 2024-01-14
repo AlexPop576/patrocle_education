@@ -3,6 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:patrocle_education/Components/level_divider.dart';
 import 'package:patrocle_education/Components/level_tile.dart';
+import 'package:patrocle_education/Database/country.dart';
 import 'package:patrocle_education/Homepage/add_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -19,7 +20,7 @@ class _LevelsState extends State<Levels> {
   int color = 0;
   int? selectedLanguage = 1;
   
-   Map<int, Map<String, String>> languageText = {
+  Map<int, Map<String, String>> languageText = {
     1 : {
       "Levels" : "Levels",
       "Add test" : "Add test",
@@ -264,6 +265,27 @@ class _LevelsState extends State<Levels> {
               ),
             ),
             LevelDivider(continent: "Europe"),
+            SliverToBoxAdapter(
+              child: FutureBuilder<List<Country>>(
+                future: DatabaseHelper.instance.getCountries(),
+                builder: (BuildContext context, AsyncSnapshot<List<Country>> snapshot) {
+                  if (!snapshot.hasData) {
+                    return const Center(child: Text('Loading...'));
+                  }
+                  return snapshot.data!.isEmpty
+                    ? const Center(child: Text('No countries in list.'))
+                    : ListView(
+                    children: snapshot.data!.map((countries) {
+                      return Center(
+                        child: ListTile(
+                          title: Text(countries.name),
+                        )
+                      );
+                    }).toList(),
+                  );
+                }
+              ),
+            ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {

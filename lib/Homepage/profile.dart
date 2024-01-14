@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:patrocle_education/Themes/theme_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Components/trophie_tile.dart';
+import 'homepage.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -1204,6 +1205,9 @@ class _ProfileState extends State<Profile> {
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       Navigator.pop(context);
+                                                      Navigator.push(
+                                                        context,  MaterialPageRoute(builder: (context) => Homepage(selectedIndex: 2)),
+                                                      );
                                                       setState(() {
                                                         selectedLanguage = tempSelectedLanguage;
                                                         saveLanguage(selectedLanguage);

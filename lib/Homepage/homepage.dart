@@ -1,21 +1,25 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:patrocle_education/Homepage/test_page.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'levels.dart';
 import 'trophies.dart';
 import 'profile.dart';
 
 class Homepage extends StatefulWidget {
-  const Homepage({super.key});
+  int? selectedIndex = 0;
+  Homepage({super.key, required this.selectedIndex});
 
   @override
-  State<Homepage> createState() => _HomepageState();
+  State<Homepage> createState() => _HomepageState(selectedIndex: selectedIndex);
 }
 
 class _HomepageState extends State<Homepage> {
-  int selectedIndex = 0;
+  int? selectedIndex = 0;
   int? selectedLanguage = 1;
   int a = 1;
+
+  _HomepageState({required this.selectedIndex});
 
   Map<int, Map<String, String>> languageText = {
     1 : {
@@ -100,7 +104,7 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       ),
-      body: selectedIndex == 0 ? Trophies(index: selectedIndex,) : selectedIndex == 1 ? Levels() : Profile(),
+      body: selectedIndex == 0 ? Trophies(index: selectedIndex,) : selectedIndex == 1 ? Levels() : TestPage(),
       bottomNavigationBar: SizedBox(
         height: 68,
         child: ClipRRect(
@@ -116,7 +120,7 @@ class _HomepageState extends State<Homepage> {
               child: BottomNavigationBar(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   type: BottomNavigationBarType.fixed,
-                  currentIndex: selectedIndex,
+                  currentIndex: selectedIndex!.toInt(),
                   onTap: navigate,
                   unselectedItemColor: const Color.fromARGB(160, 255, 255, 255),
                   selectedItemColor: const Color.fromARGB(255, 102, 102, 255),
