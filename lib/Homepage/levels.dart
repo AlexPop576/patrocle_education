@@ -3,9 +3,7 @@ import 'package:lottie/lottie.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:patrocle_education/Components/level_divider.dart';
 import 'package:patrocle_education/Components/level_tile.dart';
-import 'package:patrocle_education/Database/country.dart';
 import 'package:patrocle_education/Homepage/add_test.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 bool selected = false;
 
@@ -18,36 +16,103 @@ class Levels extends StatefulWidget {
 
 class _LevelsState extends State<Levels> {
   int color = 0;
-  int? selectedLanguage = 1;
   
-  Map<int, Map<String, String>> languageText = {
+   Map<int, Map<String, String>> languageText = {
     1 : {
-      "Levels" : "Levels",
-      "Add test" : "Add test",
-      "Create" : "Create your test!",
+      "Argentina" : "Argentina",
+      "Australia" : "Australia",
+      "Brazil" : "Brazil",
+      "Canada" : "Canada",
+      "China" : "China",
+      "Egypt" : "Egypt",
+      "France" : "France",
+      "Germany" : "Germany",
+      "Greece" : "Greece",
+      "Israel" : "Israel",
+      "Italy" : "Italy",
+      "Japan" : "Japan",
+      "Mexico" : "Mexico",
+      "New Zealand" : "New Zealand",
+      "Romania" : "Romania",
+      "Russia" : "Russia",
+      "South Africa" : "South Africa",
+      "Spain" : "Spain",
+      "UK" : "UK",
+      "Ukraine" : "Ukraine",
+      "USA" : "USA",
     },
     2 : {
-      "Levels" : "Niveluri",
-      "Add test" : "Adaugă test",
-      "Create" : "Creați-vă testul!",
+      "Argentina" : "Argentina",
+      "Australia" : "Australia",
+      "Brazil" : "Brazilia",
+      "Canada" : "Canada",
+      "China" : "China",
+      "Egypt" : "Egipt",
+      "France" : "Franța",
+      "Germany" : "Germania",
+      "Greece" : "Grecia",
+      "Israel" : "Israel",
+      "Italy" : "Italia",
+      "Japan" : "Japonia",
+      "Mexico" : "Mexic",
+      "New Zealand" : "Noua Zeelandă",
+      "Romania" : "România",
+      "Russia" : "Rusia",
+      "South Africa" : "Africa de Sud",
+      "Spain" : "Spania",
+      "UK" : "Marea Britanie",
+      "Ukraine" : "Ucraina",
+      "USA" : "SUA",
     },
     3 : {
-      "Levels" : "Niveles",
-      "Add test" : "Añadir test",
-      "Create" : "Crea tu test!",
+      "Argentina" : "Argentina",
+      "Australia" : "Australia",
+      "Brazil" :"Brasil",
+      "Canada" : "Canadá",
+      "China" : "China",
+      "Egypt" : "Egipto",
+      "France" : "Francia",
+      "Germany" : "Alemania",
+      "Greece" : "Grecia",
+      "Israel" : "Israel",
+      "Italy" : "Italia",
+      "Japan" : "Japón",
+      "Mexico" : "México",
+      "New Zealand" : "Nueva Zelanda",
+      "Romania" : "Rumania",
+      "Russia" : "Rusia",
+      "South Africa" : "Sudáfrica",
+      "Spain" : "España",
+      "UK" : "Reino Unido",
+      "Ukraine" : "Ucrania",
+      "USA" : "EE.UU.",
     },
     4 : {
-      "Levels" : "Szinteket",
-      "Add test" : "Teszt hozzáadása",
-      "Create" : "Hozza létre a tesztet!",
+      "Argentina" : "Argentína",
+      "Australia" : "Ausztrália",
+      "Brazil" : "Brazília",
+      "Canada" : "Kanada",
+      "China" : "Kína",
+      "Egypt" : "Egyiptom",
+      "France" : "Franciaország",
+      "Germany" : "Németország",
+      "Greece" : "Görögország",
+      "Israel" : "Izrael",
+      "Italy" : "Olaszország",
+      "Japan" : "Japán",
+      "Mexico" : "Mexikó",
+      "New Zealand" : "Új-Zéland",
+      "Romania" : "Románia",
+      "Russia" : "Oroszország",
+      "South Africa" : "Dél-afrikai Köztársaság",
+      "Spain" : "Spanyolország",
+      "UK" : "Egyesült Királyság",
+      "Ukraine" : "Ukrajna",
+      "USA" : "Egyesült Államok",
     },
-    5 : {
-      "Levels" : "Niveaux",
-      "Add test" : "Ajouter un test",
-      "Create" : "Créez votre test!",
-    },
-  };
+    
 
+  };
   Map<String, bool> countries = {
     "Argentina": false,
     "Australia": false,
@@ -211,22 +276,6 @@ class _LevelsState extends State<Levels> {
     });
   }
 
-  void getData() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    if(pref.getInt('language')!=null){
-      selectedLanguage = pref.getInt('language');
-    }else{
-      selectedLanguage = 1;
-    }
-    setState(() {});
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getData();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -253,7 +302,7 @@ class _LevelsState extends State<Levels> {
                     ),
                     Expanded(
                         child: Text(
-                      languageText[selectedLanguage]!["Levels"] ?? "Levels",
+                      "Levels",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
                           fontWeight: FontWeight.bold,
@@ -265,27 +314,6 @@ class _LevelsState extends State<Levels> {
               ),
             ),
             LevelDivider(continent: "Europe"),
-            SliverToBoxAdapter(
-              child: FutureBuilder<List<Country>>(
-                future: DatabaseHelper.instance.getCountries(),
-                builder: (BuildContext context, AsyncSnapshot<List<Country>> snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(child: Text('Loading...'));
-                  }
-                  return snapshot.data!.isEmpty
-                    ? const Center(child: Text('No countries in list.'))
-                    : ListView(
-                    children: snapshot.data!.map((countries) {
-                      return Center(
-                        child: ListTile(
-                          title: Text(countries.name),
-                        )
-                      );
-                    }).toList(),
-                  );
-                }
-              ),
-            ),
             SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
@@ -453,10 +481,10 @@ class _LevelsState extends State<Levels> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text(
-                                    languageText[selectedLanguage]!["Create"] ?? "Create your test!",
-                                    style: const TextStyle(
+                                    "Create your test!",
+                                    style: TextStyle(
                                         shadows: <Shadow>[
                                           Shadow(
                                             offset: Offset(3.0, 3.0),
@@ -497,7 +525,7 @@ class _LevelsState extends State<Levels> {
                                     Navigator.push(
                                       context,
                                       PageTransition(
-                                        child: const AddTest(),
+                                        child: AddTest(),
                                         type: PageTransitionType.bottomToTop,
                                         duration:
                                             const Duration(milliseconds: 400),
@@ -508,7 +536,7 @@ class _LevelsState extends State<Levels> {
                                     backgroundColor: const Color.fromARGB(
                                         255, 102, 102, 255),
                                   ),
-                                  child: const Center(
+                                  child: Center(
                                     child: Icon(
                                       Icons.add,
                                       size: 50,

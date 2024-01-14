@@ -42,22 +42,39 @@ class DatabaseHelper {
 
   Future _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE country(
+      CREATE TABLE countries(
         id INTEGER PRIMARY KEY,
         name TEXT
       )
     ''');
+    print('Countries table created.');
   }
 
   Future<List<Country>> getCountries() async {
+  try {
     Database db = await instance.database;
     var countries = await db.query('countries', orderBy: 'name');
-    List<Country> countryList = countries.isNotEmpty ? countries.map((c) => Country.fromMap(c)).toList() : [];
+    List<Country> countryList = countries.isNotEmpty 
+      ? countries.map((c) => Country.fromMap(c)).toList() 
+      : [];
     return countryList;
+  } catch (e) {
+    print('Error getting countries: $e');
+    return [];
   }
+}
 
   Future<int> add(Country country) async {
+  try {
     Database db = await instance.database;
     return await db.insert('countries', country.toMap());
+  } catch (e) {
+    print('Error adding country: $e');
+    return -1;
   }
+}
+  Future<int> remove(int id) async {
+    Database db = await instance.database;
+    return await db.delete('countries', where: 'id = ?', whereArgs: [id]);
+}
 }

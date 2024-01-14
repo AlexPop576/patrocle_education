@@ -10,6 +10,7 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
+   int _rebuildCounter = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,29 +21,39 @@ class _TestPageState extends State<TestPage> {
             const Text("TestPage"),
             const SizedBox(height: 30,),
             FutureBuilder<List<Country>>(
-                future: DatabaseHelper.instance.getCountries(),
-                builder: (BuildContext context, AsyncSnapshot<List<Country>> snapshot) {
-                  if (!snapshot.hasData) {
-                    return const Center(child: Text('Loading...'));
-                  }
-                  return snapshot.data!.isEmpty
-                    ? const Center(child: Text('No countries in list.'))
-                    : ListView(
-                    children: snapshot.data!.map((countries) {
-                      return Center(
-                        child: ListTile(
-                          title: Text(countries.name),
-                        )
-                      );
-                    }).toList(),
-                  );
-                }
-              ),
+  key: ValueKey(_rebuildCounter), // This forces the FutureBuilder to rebuild
+  future: DatabaseHelper.instance.getCountries(),
+  builder: (BuildContext context, AsyncSnapshot<List<Country>> snapshot) {
+    if (!snapshot.hasData) {
+      return const Center(child: Text('Loading...'));
+    }
+    return snapshot.data!.isEmpty
+      ? Center(child: Text('No countries in list.'))
+      : ListView(
+          children: snapshot.data!.map((country) {
+            return Center(
+              child: ListTile(
+                title: Text(country.name),
+                onLongPress: () {
+                  setState(() {
+                    DatabaseHelper.instance.remove(country.id!);
+                  });
+                },
+              )
+            );
+          }).toList(),
+        );
+  }
+),
               const SizedBox(height: 80,),
               FloatingActionButton(onPressed: () async {
-                await DatabaseHelper.instance.add(
+               int id = await DatabaseHelper.instance.add(
                         Country(name: "Romania"),
                       );
+                      print ("Country added with id: $id");
+                      setState(() {
+                         _rebuildCounter++;
+  });
                 } 
               )
           ],
