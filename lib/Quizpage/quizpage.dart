@@ -185,9 +185,16 @@ class _QuizpageState extends State<Quizpage> {
 
   void getData() async {
     final SharedPreferences pref = await SharedPreferences.getInstance();
-    iq = pref.getInt('iq');
-    //historianTrophy = pref.getInt('Historian');
-    //geographerTrophy = pref.getInt('Geographer');
+    if(pref.getInt('iq')!=null){
+      iq = pref.getInt('iq');
+    }else{
+      iq=0;
+    }
+    if(pref.getInt('trophies')!=null){
+    trophies = pref.getInt('trophies');
+    }else{
+      trophies = 0;
+    }
     if(pref.getInt('language')!=null){
       selectedLanguage = pref.getInt('language');
     }else{
@@ -227,6 +234,100 @@ class _QuizpageState extends State<Quizpage> {
       "Geography": [1, 2, 3, 4, 1, 2, 3, 4, 1, 2],
       "History": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4]
     },
+    "Greece": {
+      "Geography": [2,2,1,4,2,4,4,1,4,4],
+      "History": [3,4,2,3,1,2,2,3,3,3]
+    },
+  };
+
+  Map<String, Map<String, Map<String, String>>> allAnswersQuiz = {
+    "Greece": {
+      "Geography": {
+        "Answer11": "Deșerturi extinse",
+        "Answer12": "Munți înalți, cum ar fi Pindus",
+        "Answer13": "Câmpii întinse",
+        "Answer14": "Stepă bogată în resurse",
+        "Answer21": "Marea Adriatică",
+        "Answer22": "Marea Egee",
+        "Answer23": "Marea Neagră",
+        "Answer24": "Marea Caspică",
+        "Answer31": "Creta",
+        "Answer32": "Santorini",
+        "Answer33": "Rodos",
+        "Answer34": "Corfu",
+        "Answer41": "În Cipru",
+        "Answer42": "În Grecia continentală",
+        "Answer43": "Pe insula Creta",
+        "Answer44": "În nordul Greciei",
+        "Answer51": "Salonic",
+        "Answer52": "Atena",
+        "Answer53": "Corint",
+        "Answer54": "Delphi",
+        "Answer61": "Tisa",
+        "Answer62": "Danubiu",
+        "Answer63": "Pindus",
+        "Answer64": "Ahaia",
+        "Answer71": "Golful Patras",
+        "Answer72": "Golful Corint",
+        "Answer73": "Golful Salonic",
+        "Answer74": "Golful Corintului",
+        "Answer81": "Rodos ",
+        "Answer82": "Creta",
+        "Answer83": "Santorini",
+        "Answer84": "Mykonos",
+        "Answer91": "Păduri întinse",
+        "Answer92": "Delta râului",
+        "Answer93": "Insule izolate",
+        "Answer94": "Mări accesibile",
+        "Answer101": "În insula Creta",
+        "Answer102": "Pe malurile râului Acheron",
+        "Answer103": "În Munții Pindus",
+        "Answer104": "În regiunea centrală a Greciei",
+      },
+      "History": {
+        "Answer11": "Secolul al IV-lea î.Hr.",
+        "Answer12": "Secolul al III-lea î.Hr.",
+        "Answer13": "Secolul al V-lea î.Hr.",
+        "Answer14": "Secolul al II-lea î.Hr.",
+        "Answer21": "Poseidon",
+        "Answer22": "Ares",
+        "Answer23": "Hades",
+        "Answer24": "Zeus",
+        "Answer31": "În anul 500 î.Hr.",
+        "Answer32": "În anul 776 î.Hr.",
+        "Answer33": "În anul 300 î.Hr.",
+        "Answer34": "În anul 1000 î.Hr.",
+        "Answer41": "Aristotel",
+        "Answer42": "Platon",
+        "Answer43": "Socrate ",
+        "Answer44": "Herodot",
+        "Answer51": "Anul 490 î.Hr.",
+        "Answer52": "Anul 300 î.Hr.",
+        "Answer53": "Anul 200 î.Hr.",
+        "Answer54": "Anul 100 î.Hr.",
+        "Answer61": "Socrate",
+        "Answer62": "Alexandru cel Mare",
+        "Answer63": "Pericle",
+        "Answer64": "Leonidas",
+        "Answer71": "Atena",
+        "Answer72": "Olimpia",
+        "Answer73": "Delphi",
+        "Answer74": "Sparta",
+        "Answer81": "Secolul al VI-lea î.Hr.",
+        "Answer82": "Secolul al V-lea î.Hr.",
+        "Answer83": "Secolul al IV-lea î.Hr. ",
+        "Answer84": "Secolul al III-lea î.Hr.",
+        "Answer91": "Hera",
+        "Answer92": "Demeter",
+        "Answer93": "Atena",
+        "Answer94": "Artemis",
+        "Answer101": "Egiptul",
+        "Answer102": "Imperiul Roman",
+        "Answer103": "Persia",
+        "Answer104": "Babilonul",
+      },
+    },
+    
   };
 
   Map<String, Map<String, Map<String, String>>> countryQuiz = {
@@ -313,6 +414,58 @@ class _QuizpageState extends State<Quizpage> {
         "Question8": "Spain8",
         "Question9": "Spain9",
         "Question10": "Spain10",
+      },
+    },
+    "Greece": {
+      "Geography": {
+        "Lesson": '''
+        În inima Mării Mediterane și Mării Egee, Grecia dezvăluia un peisaj desprins din mituri, în care munții înalți, văile adânci și insulele fermecătoare se contopeau într-un tablou geografic de o frumusețe rară. Între aceste meleaguri, Muntele Olimp, cu vârfurile sale mărețe, se înălța ca un tron al zeilor, veghind asupra întregii țări.
+
+        La nord, Munții Pindus se întindeau ca o spina dorsală, oferind nu doar priveliști spectaculoase, ci și văi fertile unde râurile curgeau cu o adiere de fertilitate. Aceste văi erau adesea locul de naștere al unor orașe-stat puternice, unde comunitățile grecilor antici prosperau datorită resurselor naturale generoase.
+
+        Pe coasta de sud, Marea Mediterană își dezvăluia apele sale senine, îmbrățișând cu afecțiune orașele-port precum Atena și Corint. Erau puncte de întâlnire a comerțului, culturii și istoriei, plasate strategic pentru a facilita interacțiunile cu alte civilizații antice.
+
+        Și totuși, adevărata magie a Greciei se desfășura pe marea Egee, unde insulele păreau să plutească ca petalele unei flori pe apele albastre. Creta, insula legendară asociată cu mitul Minotaurului, se ridica cu mândrie din Marea Egee, amintind oamenilor de legătura lor cu mitologia și istoria bogată.
+
+        La sud-est, Delos și Rhodos erau perle în coroana Greciei, fiecare cu povestea sa unică. Rhodos, cunoscută pentru Colosul său, strălucea sub soarele generos, iar Delos, insula sacrală, găzduia templul lui Apollo și oracolul care atrăgea călători din toate colțurile lumii antice.
+
+        Între aceste frumuseți geografice, Grecia nu era doar o țară, ci un teatru magic în care se desfășurau legende și descoperiri. Fiecare colțișor al ei păstra o bucată din istoria sa, contribuind la fascinanta ei moștenire culturală. ''',
+        "Question1": "Care este principala caracteristică geografică a Greciei care a influențat dezvoltarea sa?",
+        "Question2": "Care dintre aceste mări înconjoară Grecia la sud?",
+        "Question3": "Care insulă grecească este asociată cu legenda Minotaurului?",
+        "Question4": "Unde se află Muntele Olimp, considerat reședința zeilor în mitologia greacă?",
+        "Question5": "Care oraș-port este cunoscut pentru Partenonul său și pentru fiind centrul istoric și cultural al Greciei antice?",
+        "Question6": "Ce râu celebru curge prin văile fertile ale Greciei?",
+        "Question7": "În ce golful grecesc se afla orașul-port Corint?",
+        "Question8": "Care insulă grecească este recunoscută pentru Colosul său?",
+        "Question9": "Ce caracteristică naturală a contribuit la apariția unor orașe-state puternice în Grecia antică?",
+        "Question10": "Unde se afla orașul antic Delphi, cunoscut pentru oracolul său?"
+      },
+      "History": {
+        "Lesson": '''
+        Cu mult timp în urmă, în anii 2000 î.Hr., o țară frumoasă numită Grecia strălucea sub privirea zeilor Olimpului. Zeus, regele cerului, domnea peste această lume plină de mituri și legendele înfiorătoare ale titanilor.
+        
+        În orașul Atena, în anii 400 î.Hr., s-a înălțat un templu măreț numit Partenonul, dedicat zeiței înțelepciunii, Atena. Legenda spunea că Atena îi învățase pe oameni să planteze semințele și să-și clădească casele, oferindu-le darul înțelepciunii.
+        
+        În aceste vremuri, în jurul anilor 400-300 î.Hr., marii filozofi precum Socrate, Platon și Aristotel călătoreau pe meleagurile Greciei, împărtășind înțelepciunea lor prin dialoguri și scrieri care au rezistat timpului.
+        
+        La fiecare patru ani, în anii 776 î.Hr., grecii se adunau la Olimpia pentru Jocurile Olimpice, un festival dedicat zeilor. Aici, atleții se întreceau în diverse discipline, etalându-și abilitățile în numele divinităților.
+        
+        În anii 490 î.Hr., Grecia a fost amenințată de marele Imperiu Persan. În Bătălia de la Maraton, grecii au arătat curaj și hotărâre, obținând o victorie neașteptată și marcând astfel un moment de glorie în istoria lor.
+        
+        Cu trecerea timpului, în anii 300 î.Hr., Grecia a intrat în perioada elenistică, sub influența lui Alexandru cel Mare. Călătorind peste hotare, cultura și cunoștințele grecilor s-au răspândit pe întreg mapamondul.
+        
+        Astfel, Grecia a fost martora unei istorii bogate, cuprinzând epoci clasice, filozofie înțeleaptă și momente de eroism înfruntate cu curaj. O istorie care a modelat lumea antichității și care continuă să inspire și astăzi.''',
+        "Question1": "În ce secol a fost construit Partenonul din Atena?",
+        "Question2": "Cine a fost regele zeilor în mitologia greacă?",
+        "Question3": "Când au avut loc primele Jocuri Olimpice în Grecia antică?",
+        "Question4": "Care filozof grec este cunoscut pentru metoda sa de a pune întrebări pentru a stimula gândirea critică?",
+        "Question5": "În ce an a avut loc Bătălia de la Maraton, unde grecii au obținut o victorie notabilă?",
+        "Question6": "Cine a fost cunoscut ca cel Mare și a influențat perioada elenistică a Greciei?",
+        "Question7": "Unde se desfășurau Jocurile Olimpice în Grecia antică?",
+        "Question8": "În ce secol a trăit filozoful Aristotel?",
+        "Question9": "Cine a fost zeița înțelepciunii în mitologia greacă, căreia i-a fost dedicat Partenonul?",
+        "Question10": "Cine a fost adversarul Greciei în timpul Războaielor Persane?"
       },
     },
   };
@@ -488,10 +641,10 @@ class _QuizpageState extends State<Quizpage> {
                     selected: 0,
                     questionText: countryQuiz["$country"]?["$subject"]
                         ?["Question1"],
-                    answer1: "1",
-                    answer2: "2",
-                    answer3: "14",
-                    answer4: "100",
+                    answer1: allAnswersQuiz[country]?[subject]?["Answer11"],
+                    answer2: allAnswersQuiz[country]?[subject]?["Answer12"],
+                    answer3: allAnswersQuiz[country]?[subject]?["Answer13"],
+                    answer4: allAnswersQuiz[country]?[subject]?["Answer14"],
                   )
                 : pageIndex == 2
                     ? Test2(
@@ -499,10 +652,10 @@ class _QuizpageState extends State<Quizpage> {
                         selected: 0,
                         questionText: countryQuiz["$country"]?["$subject"]
                             ?["Question2"],
-                        answer1: "Rau",
-                        answer2: "Potrivit",
-                        answer3: "Decent",
-                        answer4: "Bine",
+                        answer1: allAnswersQuiz[country]?[subject]?["Answer21"],
+                        answer2: allAnswersQuiz[country]?[subject]?["Answer22"],
+                        answer3: allAnswersQuiz[country]?[subject]?["Answer23"],
+                        answer4: allAnswersQuiz[country]?[subject]?["Answer24"],
                       )
                     : pageIndex == 3
                         ? Test(
@@ -510,10 +663,10 @@ class _QuizpageState extends State<Quizpage> {
                             selected: 0,
                             questionText: countryQuiz["$country"]?["$subject"]
                                 ?["Question3"],
-                            answer1: "1",
-                            answer2: "2",
-                            answer3: "14",
-                            answer4: "100",
+                            answer1: allAnswersQuiz[country]?[subject]?["Answer31"],
+                            answer2: allAnswersQuiz[country]?[subject]?["Answer32"],
+                            answer3: allAnswersQuiz[country]?[subject]?["Answer33"],
+                            answer4: allAnswersQuiz[country]?[subject]?["Answer34"],
                           )
                         : pageIndex == 4
                             ? Test2(
@@ -521,10 +674,10 @@ class _QuizpageState extends State<Quizpage> {
                                 selected: 0,
                                 questionText: countryQuiz["$country"]
                                     ?["$subject"]?["Question4"],
-                                answer1: "Meh",
-                                answer2: "Nu prea",
-                                answer3: "Nu",
-                                answer4: "Normal",
+                                answer1: allAnswersQuiz[country]?[subject]?["Answer41"],
+                                answer2: allAnswersQuiz[country]?[subject]?["Answer42"],
+                                answer3: allAnswersQuiz[country]?[subject]?["Answer43"],
+                                answer4: allAnswersQuiz[country]?[subject]?["Answer44"],
                               )
                             : pageIndex == 5
                                 ? Test(
@@ -532,10 +685,10 @@ class _QuizpageState extends State<Quizpage> {
                                     selected: 0,
                                     questionText: countryQuiz["$country"]
                                         ?["$subject"]?["Question5"],
-                                    answer1: "Flexaton",
-                                    answer2: "Chitara",
-                                    answer3: "Flaut",
-                                    answer4: "Pian",
+                                    answer1: allAnswersQuiz[country]?[subject]?["Answer51"],
+                                    answer2: allAnswersQuiz[country]?[subject]?["Answer52"],
+                                    answer3: allAnswersQuiz[country]?[subject]?["Answer53"],
+                                    answer4: allAnswersQuiz[country]?[subject]?["Answer54"],
                                   )
                                 : pageIndex == 6
                                     ? Test2(
@@ -543,10 +696,10 @@ class _QuizpageState extends State<Quizpage> {
                                         selected: 0,
                                         questionText: countryQuiz["$country"]
                                             ?["$subject"]?["Question6"],
-                                        answer1: "Veverita",
-                                        answer2: "Caine",
-                                        answer3: "Pinguin",
-                                        answer4: "Girafa",
+                                        answer1: allAnswersQuiz[country]?[subject]?["Answer61"],
+                                        answer2: allAnswersQuiz[country]?[subject]?["Answer62"],
+                                        answer3: allAnswersQuiz[country]?[subject]?["Answer63"],
+                                        answer4: allAnswersQuiz[country]?[subject]?["Answer64"],
                                       )
                                     : pageIndex == 7
                                         ? Test(
@@ -555,10 +708,10 @@ class _QuizpageState extends State<Quizpage> {
                                             questionText:
                                                 countryQuiz["$country"]
                                                     ?["$subject"]?["Question7"],
-                                            answer1: "1/10",
-                                            answer2: "7/10",
-                                            answer3: "10/10",
-                                            answer4: "4/10",
+                                            answer1: allAnswersQuiz[country]?[subject]?["Answer71"],
+                                            answer2: allAnswersQuiz[country]?[subject]?["Answer72"],
+                                            answer3: allAnswersQuiz[country]?[subject]?["Answer73"],
+                                            answer4: allAnswersQuiz[country]?[subject]?["Answer74"],
                                           )
                                         : pageIndex == 8
                                             ? Test2(
@@ -568,10 +721,10 @@ class _QuizpageState extends State<Quizpage> {
                                                     countryQuiz["$country"]
                                                             ?["$subject"]
                                                         ?["Question8"],
-                                                answer1: "Rosu",
-                                                answer2: "Verde",
-                                                answer3: "Alb",
-                                                answer4: "NEGRU",
+                                                answer1: allAnswersQuiz[country]?[subject]?["Answer81"],
+                                                answer2: allAnswersQuiz[country]?[subject]?["Answer82"],
+                                                answer3: allAnswersQuiz[country]?[subject]?["Answer83"],
+                                                answer4: allAnswersQuiz[country]?[subject]?["Answer84"],
                                               )
                                             : pageIndex == 9
                                                 ? Test(
@@ -582,10 +735,10 @@ class _QuizpageState extends State<Quizpage> {
                                                         countryQuiz["$country"]
                                                                 ?["$subject"]
                                                             ?["Question9"],
-                                                    answer1: "1",
-                                                    answer2: "385",
-                                                    answer3: "2",
-                                                    answer4: "100",
+                                                    answer1: allAnswersQuiz[country]?[subject]?["Answer91"],
+                                                    answer2: allAnswersQuiz[country]?[subject]?["Answer92"],
+                                                    answer3: allAnswersQuiz[country]?[subject]?["Answer93"],
+                                                    answer4: allAnswersQuiz[country]?[subject]?["Answer94"],
                                                   )
                                                 : pageIndex == 10
                                                     ? Test2(
@@ -596,10 +749,10 @@ class _QuizpageState extends State<Quizpage> {
                                                                     "$country"]
                                                                 ?["$subject"]
                                                             ?["Question10"],
-                                                        answer1: "1",
-                                                        answer2: "385",
-                                                        answer3: "2",
-                                                        answer4: "100",
+                                                        answer1: allAnswersQuiz[country]?[subject]?["Answer101"],
+                                                        answer2: allAnswersQuiz[country]?[subject]?["Answer102"],
+                                                        answer3: allAnswersQuiz[country]?[subject]?["Answer103"],
+                                                        answer4: allAnswersQuiz[country]?[subject]?["Answer104"],
                                                       )
                                                     : FinishPage(
                                                         correctAnswers:

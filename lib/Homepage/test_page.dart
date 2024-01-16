@@ -1,64 +1,53 @@
 import 'package:flutter/material.dart';
-
-import '../Database/country.dart';
+import 'package:patrocle_education/Database/database_helper.dart';
 
 class TestPage extends StatefulWidget {
-  const TestPage({super.key});
-
   @override
-  State<TestPage> createState() => _TestPageState();
+  _TestPageState createState() => _TestPageState();
 }
 
 class _TestPageState extends State<TestPage> {
-   int _rebuildCounter = 0;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Column(
-          children: [
-            const SizedBox(height: 80,),
-            const Text("TestPage"),
-            const SizedBox(height: 30,),
-            FutureBuilder<List<Country>>(
-  key: ValueKey(_rebuildCounter), // This forces the FutureBuilder to rebuild
-  future: DatabaseHelper.instance.getCountries(),
-  builder: (BuildContext context, AsyncSnapshot<List<Country>> snapshot) {
-    if (!snapshot.hasData) {
-      return const Center(child: Text('Loading...'));
-    }
-    return snapshot.data!.isEmpty
-      ? Center(child: Text('No countries in list.'))
-      : ListView(
-          children: snapshot.data!.map((country) {
-            return Center(
-              child: ListTile(
-                title: Text(country.name),
-                onLongPress: () {
-                  setState(() {
-                    DatabaseHelper.instance.remove(country.id!);
-                  });
-                },
-              )
-            );
-          }).toList(),
-        );
-  }
-),
-              const SizedBox(height: 80,),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 10,
+              ),
+              const Text("TestPage"),
+              const SizedBox(
+                height: 40,
+              ),
               FloatingActionButton(onPressed: () async {
-               int id = await DatabaseHelper.instance.add(
-                        Country(name: "Romania"),
-                      );
-                      print ("Country added with id: $id");
-                      setState(() {
-                         _rebuildCounter++;
-  });
-                } 
-              )
-          ],
-        )
-      )
+                int i = await DataBaseHelper.instance.insert({
+                  DataBaseHelper.columnName : "Romania"
+                });
+                print('the inserted id is $i');
+              }, child: Text('insert'), backgroundColor: Colors.yellow[400],),
+              FloatingActionButton(onPressed: () async{
+                List<Map<String,dynamic>> queryRows = await DataBaseHelper.instance.queryAll();
+                print(queryRows);
+                Text(queryRows.toString());
+              }, child: Text('query'), backgroundColor: Colors.green[400],),
+              FloatingActionButton(onPressed: (){}, child: Text('update'), backgroundColor: Colors.blue[400],),
+              FloatingActionButton(onPressed: (){}, child: Text('delete'), backgroundColor: Colors.red[400],),
+              const SizedBox(
+                height: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
+

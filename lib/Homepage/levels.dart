@@ -4,6 +4,7 @@ import 'package:page_transition/page_transition.dart';
 import 'package:patrocle_education/Components/level_divider.dart';
 import 'package:patrocle_education/Components/level_tile.dart';
 import 'package:patrocle_education/Homepage/add_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 bool selected = false;
 
@@ -16,6 +17,7 @@ class Levels extends StatefulWidget {
 
 class _LevelsState extends State<Levels> {
   int color = 0;
+  int? selectedLanguage = 1;
   
    Map<int, Map<String, String>> languageText = {
     1 : {
@@ -40,6 +42,9 @@ class _LevelsState extends State<Levels> {
       "UK" : "UK",
       "Ukraine" : "Ukraine",
       "USA" : "USA",
+      "Levels" : "Levels",
+      "Add test" : "Add test",
+      "Create" : "Create your test!",
     },
     2 : {
       "Argentina" : "Argentina",
@@ -63,6 +68,9 @@ class _LevelsState extends State<Levels> {
       "UK" : "Marea Britanie",
       "Ukraine" : "Ucraina",
       "USA" : "SUA",
+      "Levels" : "Niveluri",
+      "Add test" : "Adaugă test",
+      "Create" : "Creați-vă testul!",
     },
     3 : {
       "Argentina" : "Argentina",
@@ -86,6 +94,9 @@ class _LevelsState extends State<Levels> {
       "UK" : "Reino Unido",
       "Ukraine" : "Ucrania",
       "USA" : "EE.UU.",
+      "Levels" : "Niveles",
+      "Add test" : "Añadir test",
+      "Create" : "Crea tu test!",
     },
     4 : {
       "Argentina" : "Argentína",
@@ -109,9 +120,15 @@ class _LevelsState extends State<Levels> {
       "UK" : "Egyesült Királyság",
       "Ukraine" : "Ukrajna",
       "USA" : "Egyesült Államok",
+      "Levels" : "Szinteket",
+      "Add test" : "Teszt hozzáadása",
+      "Create" : "Hozza létre a tesztet!",
     },
-    
-
+    5 : {
+      "Levels" : "Niveaux",
+      "Add test" : "Ajouter un test",
+      "Create" : "Créez votre test!",
+    },
   };
   Map<String, bool> countries = {
     "Argentina": false,
@@ -270,6 +287,22 @@ class _LevelsState extends State<Levels> {
     "New Zealand",
   ];
 
+  void getData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref.getInt('language')!=null){
+      selectedLanguage = pref.getInt('language');
+    }else{
+      selectedLanguage = 1;
+    }
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getData();
+  }
+
   void setDone(String? continent, String? country, String done, bool value) {
     setState(() {
       countriesList[continent]?[country]?[done] = value;
@@ -302,7 +335,7 @@ class _LevelsState extends State<Levels> {
                     ),
                     Expanded(
                         child: Text(
-                      "Levels",
+                      languageText[selectedLanguage]!["Levels"] ?? "Levels",
                       style: TextStyle(
                           color: Theme.of(context).colorScheme.tertiary,
                           fontWeight: FontWeight.bold,
@@ -481,10 +514,10 @@ class _LevelsState extends State<Levels> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Expanded(
+                                Expanded(
                                   child: Text(
-                                    "Create your test!",
-                                    style: TextStyle(
+                                     languageText[selectedLanguage]!["Create"] ?? "Create your test!",
+                                    style: const TextStyle(
                                         shadows: <Shadow>[
                                           Shadow(
                                             offset: Offset(3.0, 3.0),
@@ -536,7 +569,7 @@ class _LevelsState extends State<Levels> {
                                     backgroundColor: const Color.fromARGB(
                                         255, 102, 102, 255),
                                   ),
-                                  child: Center(
+                                  child: const Center(
                                     child: Icon(
                                       Icons.add,
                                       size: 50,

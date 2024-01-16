@@ -8,9 +8,9 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  WidgetsFlutterBinding.ensureInitialized();
+  //WidgetsFlutterBinding.ensureInitialized();
   runApp(ChangeNotifierProvider(create: (context) => ThemeProvider(),
-  child: const MyApp(),
+  child: MyApp(),
   ));
 }
 
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Homepage(selectedIndex: 2),
+      home: Homepage(selectedIndex: 1),
       theme: Provider.of<ThemeProvider>(context).themeData,
     );
   }

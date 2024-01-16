@@ -104,7 +104,7 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       ),
-      body: selectedIndex == 0 ? Trophies(index: selectedIndex,) : selectedIndex == 1 ? Levels() : TestPage(),
+      body: selectedIndex == 0 ? Trophies(index: selectedIndex,) : selectedIndex == 1 ? Levels() : Profile(),
       bottomNavigationBar: SizedBox(
         height: 68,
         child: ClipRRect(
