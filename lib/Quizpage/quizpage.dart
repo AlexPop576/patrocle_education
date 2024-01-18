@@ -891,7 +891,7 @@ class _QuizpageState extends State<Quizpage> {
                                     // Do nothing on tap outside
                                   },
                                   child: Container(
-                                    height: 170,
+                                    height: 190,
                                     decoration: BoxDecoration(
                                       color: Theme.of(context)
                                           .colorScheme
@@ -921,6 +921,17 @@ class _QuizpageState extends State<Quizpage> {
                                                     fontWeight: FontWeight.bold,
                                                     fontSize: 30,
                                                   ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(height: 20),
+                                            Row(
+                                              children: [
+                                                Expanded(
+                                                  child: Text("Correct answer: ${allAnswersQuiz[country]![subject]!["Answer$pageIndex${answersQuiz[country]![subject]![pageIndex-1]}"]}",
+                                                  style: const TextStyle(
+                                                    fontSize: 20,
+                                                  ),),
                                                 ),
                                               ],
                                             ),

@@ -279,7 +279,7 @@ class _LevelTileState extends State<LevelTile> {
                                       ),
                                     ],
                                     color: Colors.white,
-                                    fontSize: 32,
+                                    fontSize: 27,
                                     fontWeight: FontWeight.bold),
                               ),
                             ),
@@ -394,7 +394,7 @@ class _LevelTileState extends State<LevelTile> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 102, 102, 255),
+                    backgroundColor: const Color.fromARGB(255, 102, 102, 255),
                   ),
                   child: Text(languageText[selectedLanguage]!["Play"] ?? "Play",
                       style: const TextStyle(

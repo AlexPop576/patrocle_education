@@ -299,149 +299,155 @@ class _ProfileState extends State<Profile> {
                                                 height: 10,
                                               ),
                                               Row(children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                          horizontal: 4),
-                                                  child: SizedBox(
-                                                      height: 150,
-                                                      width: 130,
-                                                      child: ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(15),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                            horizontal: 4),
+                                                    child: SizedBox(
+                                                        height: 150,
+                                                        width: 130,
+                                                        child: ElevatedButton(
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(15),
+                                                            ),
+                                                            backgroundColor:
+                                                                Colors.blue,
+                                                            side: selectedProfile ==
+                                                                    0
+                                                                ? const BorderSide(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            102,
+                                                                            102,
+                                                                            255),
+                                                                    width: 3)
+                                                                : const BorderSide(
+                                                                    color:
+                                                                        Colors.blue,
+                                                                    width: 3),
                                                           ),
-                                                          backgroundColor:
-                                                              Colors.blue,
-                                                          side: selectedProfile ==
-                                                                  0
-                                                              ? const BorderSide(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          102,
-                                                                          102,
-                                                                          255),
-                                                                  width: 3)
-                                                              : const BorderSide(
-                                                                  color:
-                                                                      Colors.blue,
-                                                                  width: 3),
-                                                        ),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            selectedProfile = 0;
-                                                          });
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .fromLTRB(
-                                                                  0, 35, 0, 0),
-                                                          child: Image.asset(
-                                                              "assets/Face.png"),
-                                                        ),
-                                                      )),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              selectedProfile = 0;
+                                                            });
+                                                          },
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .fromLTRB(
+                                                                    0, 35, 0, 0),
+                                                            child: Image.asset(
+                                                                "assets/Face.png"),
+                                                          ),
+                                                        )),
+                                                  ),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                          horizontal: 4),
-                                                  child: SizedBox(
-                                                      height: 150,
-                                                      width: 130,
-                                                      child: ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(15),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                            horizontal: 4),
+                                                    child: SizedBox(
+                                                        height: 150,
+                                                        width: 130,
+                                                        child: ElevatedButton(
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(15),
+                                                            ),
+                                                            backgroundColor:
+                                                                Colors.red,
+                                                            side: selectedProfile ==
+                                                                    1
+                                                                ? const BorderSide(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            102,
+                                                                            102,
+                                                                            255),
+                                                                    width: 3)
+                                                                : const BorderSide(
+                                                                    color:
+                                                                        Colors.red,
+                                                                    width: 3),
                                                           ),
-                                                          backgroundColor:
-                                                              Colors.red,
-                                                          side: selectedProfile ==
-                                                                  1
-                                                              ? const BorderSide(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          102,
-                                                                          102,
-                                                                          255),
-                                                                  width: 3)
-                                                              : const BorderSide(
-                                                                  color:
-                                                                      Colors.red,
-                                                                  width: 3),
-                                                        ),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            selectedProfile = 1;
-                                                          });
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .fromLTRB(
-                                                                  0, 35, 0, 0),
-                                                          child: Image.asset(
-                                                              "assets/Face.png"),
-                                                        ),
-                                                      )),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              selectedProfile = 1;
+                                                            });
+                                                          },
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .fromLTRB(
+                                                                    0, 35, 0, 0),
+                                                            child: Image.asset(
+                                                                "assets/Face.png"),
+                                                          ),
+                                                        )),
+                                                  ),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(
-                                                          horizontal: 4),
-                                                  child: SizedBox(
-                                                      height: 150,
-                                                      width: 130,
-                                                      child: ElevatedButton(
-                                                        style: ElevatedButton
-                                                            .styleFrom(
-                                                          shape:
-                                                              RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(15),
+                                                Expanded(
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.symmetric(
+                                                            horizontal: 4),
+                                                    child: SizedBox(
+                                                        height: 150,
+                                                        width: 130,
+                                                        child: ElevatedButton(
+                                                          style: ElevatedButton
+                                                              .styleFrom(
+                                                            shape:
+                                                                RoundedRectangleBorder(
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(15),
+                                                            ),
+                                                            backgroundColor:
+                                                                Colors.green,
+                                                            side: selectedProfile ==
+                                                                    2
+                                                                ? const BorderSide(
+                                                                    color: Color
+                                                                        .fromARGB(
+                                                                            255,
+                                                                            102,
+                                                                            102,
+                                                                            255),
+                                                                    width: 3)
+                                                                : const BorderSide(
+                                                                    color: Colors
+                                                                        .green,
+                                                                    width: 3),
                                                           ),
-                                                          backgroundColor:
-                                                              Colors.green,
-                                                          side: selectedProfile ==
-                                                                  2
-                                                              ? const BorderSide(
-                                                                  color: Color
-                                                                      .fromARGB(
-                                                                          255,
-                                                                          102,
-                                                                          102,
-                                                                          255),
-                                                                  width: 3)
-                                                              : const BorderSide(
-                                                                  color: Colors
-                                                                      .green,
-                                                                  width: 3),
-                                                        ),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            selectedProfile = 2;
-                                                          });
-                                                        },
-                                                        child: Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .fromLTRB(
-                                                                  0, 35, 0, 0),
-                                                          child: Image.asset(
-                                                              "assets/Face.png"),
-                                                        ),
-                                                      )),
+                                                          onPressed: () {
+                                                            setState(() {
+                                                              selectedProfile = 2;
+                                                            });
+                                                          },
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .fromLTRB(
+                                                                    0, 35, 0, 0),
+                                                            child: Image.asset(
+                                                                "assets/Face.png"),
+                                                          ),
+                                                        )),
+                                                  ),
                                                 ),
                                               ]),
                                               const SizedBox(
