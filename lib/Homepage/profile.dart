@@ -1211,7 +1211,7 @@ class _ProfileState extends State<Profile> {
                                                   child: ElevatedButton(
                                                     onPressed: () {
                                                       Navigator.pop(context);
-                                                      Navigator.push(
+                                                      Navigator.pushReplacement(
                                                         context,  MaterialPageRoute(builder: (context) => Homepage(selectedIndex: 2)),
                                                       );
                                                       setState(() {
