@@ -104,7 +104,7 @@ class _HomepageState extends State<Homepage> {
           ),
         ),
       ),
-      body: selectedIndex == 0 ? Trophies(index: selectedIndex,) : selectedIndex == 1 ? Levels() : Profile(),
+      body: selectedIndex == 0 ? Trophies(index: selectedIndex,) : selectedIndex == 1 ? Levels() :TestPage(),
       bottomNavigationBar: SizedBox(
         height: 68,
         child: ClipRRect(
@@ -120,7 +120,7 @@ class _HomepageState extends State<Homepage> {
               child: BottomNavigationBar(
                   backgroundColor: Theme.of(context).colorScheme.primary,
                   type: BottomNavigationBarType.fixed,
-                  currentIndex: selectedIndex!.toInt(),
+                  currentIndex: (selectedIndex ?? 0).toInt(),
                   onTap: navigate,
                   unselectedItemColor: const Color.fromARGB(160, 255, 255, 255),
                   selectedItemColor: const Color.fromARGB(255, 102, 102, 255),

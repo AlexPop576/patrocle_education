@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:patrocle_education/Database/country_dao.dart';
 import 'package:patrocle_education/Database/database_helper.dart';
+import 'package:patrocle_education/Models/country_model.dart';
 
 class TestPage extends StatefulWidget {
   @override
@@ -7,46 +9,65 @@ class TestPage extends StatefulWidget {
 }
 
 class _TestPageState extends State<TestPage> {
-
+final controller = TextEditingController();
+List<CountryModel> countries = [];
+final dao = CountryDao();
   @override
   void initState() {
-    super.initState();
-  }
 
+    super.initState();
+    dao.readAll().then((value){
+      setState(() {
+        countries = value;
+      });
+    });
+  }
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              const Text("TestPage"),
-              const SizedBox(
-                height: 40,
-              ),
-              FloatingActionButton(onPressed: () async {
-                int i = await DataBaseHelper.instance.insert({
-                  DataBaseHelper.columnName : "Romania"
-                });
-                print('the inserted id is $i');
-              }, child: Text('insert'), backgroundColor: Colors.yellow[400],),
-              FloatingActionButton(onPressed: () async{
-                List<Map<String,dynamic>> queryRows = await DataBaseHelper.instance.queryAll();
-                print(queryRows);
-                Text(queryRows.toString());
-              }, child: Text('query'), backgroundColor: Colors.green[400],),
-              FloatingActionButton(onPressed: (){}, child: Text('update'), backgroundColor: Colors.blue[400],),
-              FloatingActionButton(onPressed: (){}, child: Text('delete'), backgroundColor: Colors.red[400],),
-              const SizedBox(
-                height: 20,
-              ),
-            ],
+      body: SafeArea(child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(children: [
+              Expanded(child: TextField(controller:controller)),
+          ElevatedButton(onPressed: ()async{
+            final name = controller.text;
+            CountryModel country = CountryModel(name: name);
+            final id = await dao.insert(country);
+            country = country.copyWith(id: id);
+            controller.clear();
+            setState(() {
+              countries.add(country);
+            });
+          }, child: const Text('Create Country'))
+          ],),
           ),
-        ),
-      ),
+          ListView.builder(
+           primary: false,
+           shrinkWrap: true,
+           itemCount: countries.length,
+           itemBuilder: (ctx, index){
+            final country = countries[index];
+            return ListTile(
+              leading: Text('${country.id}'),
+              title: Text(country.name),
+              trailing: IconButton(onPressed: ()async {
+                await dao.delete(country);
+                setState(() {
+                  countries.removeWhere((element) => element.id == country.id);
+                });
+              }, icon: const Icon(Icons.delete,color: Colors.red,)),
+            );
+           }
+          )
+        ],
+      ))
     );
   }
 }
