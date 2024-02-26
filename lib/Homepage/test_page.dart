@@ -45,7 +45,16 @@ final dao = CountryDao();
             setState(() {
               countries.add(country);
             });
-          }, child: const Text('Create Country'))
+          }, child: const Text('Create Country')),
+           ElevatedButton(
+    onPressed: () async {
+      await DatabaseHelper.instance.clearTableAndResetId();
+      setState(() {
+      countries.clear();
+    });
+    },
+    child: Text('Delete All'),
+  )
           ],),
           ),
           ListView.builder(
@@ -59,6 +68,9 @@ final dao = CountryDao();
               title: Text(country.name),
               trailing: IconButton(onPressed: ()async {
                 await dao.delete(country);
+                if(country.id== countries.last.id){
+                  await DatabaseHelper.instance.decreaseMaxId(); 
+                }
                 setState(() {
                   countries.removeWhere((element) => element.id == country.id);
                 });
